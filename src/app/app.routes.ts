@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
+import { RegisterOperatorComponent } from './pages/register-operator/register-operator.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: HomeComponent,
-        title: 'Home Page',
-      },
+        component: RegisterOperatorComponent,
+        title: 'Register Page',
+    },
 ];
