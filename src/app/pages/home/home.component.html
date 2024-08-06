@@ -1,1 +1,25 @@
-<p>home works!</p>
+
+<div class="container">
+    <table class="table">
+        <thead> 
+            <tr class="">
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col" >Email</th>
+              </tr>
+
+        </thead>
+          
+        <tbody class="">
+            @for(operator of operators; track operator.id){
+                <tr class="">
+                    <th>{{ operator.id }}</th>
+                    <td>{{ operator.name }}</td>
+                    <td>{{ operator.surname }}</td>
+                    <td>{{ operator.email }}</td>
+                  </tr>
+            }
+        </tbody>
+      </table>
+</div>

@@ -8,4 +8,9 @@ export const routes: Routes = [
         component: RegisterOperatorComponent,
         title: 'Register Page',
     },
+    {
+        path: 'dashboard-home',
+        component: HomeComponent,
+        title: 'Dashboard-Home Page',
+    },
 ];

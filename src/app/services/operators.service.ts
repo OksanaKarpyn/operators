@@ -15,8 +15,8 @@ export class OperatorsService {
   getOperators():Observable<Array<Operator>>{
     return this.http.get<Array<Operator>>(this.url);
   }
-  createUser(operator: Operator): Observable<Operator> {
+  createOperator(operator: Operator): Observable<Operator> {
     return this.http.post<Operator>(this.url, operator);
   }
-  
+
 }

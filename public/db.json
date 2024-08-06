@@ -1,3 +1,11 @@
 {
-    "operators":[]
+  "operators": [
+    {
+      "id": "fd83",
+      "name": "francesa",
+      "surname": "rossi",
+      "email": "okssna@hello.com",
+      "password": "password"
+    }
+  ]
 }
