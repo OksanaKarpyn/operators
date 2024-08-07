@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { OperatorsService } from '../../services/operators.service';
-
+import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, JsonPipe } from '@angular/common';
+import { Operator } from '../../models/operator';
 @Component({
   selector: 'app-register-operator',
   standalone: true,
   imports: [ 
   ReactiveFormsModule,
   JsonPipe,
-  CommonModule
+  CommonModule,
+  RouterLink
   ],
   templateUrl: './register-operator.component.html',
   styleUrl: './register-operator.component.scss'
@@ -41,16 +43,22 @@ export class RegisterOperatorComponent {
 
   //--------------------------------------------------------------
 
-  submit(){
-    if(this.form.invalid){
-      return;
+  submit(): void {
+    if (this.form.valid) {
+      const { name, surname, email, password } = this.form.value;
+      const newOperator: Operator = { name, surname, email, password };
+
+      this.operatorService.createOperator(newOperator).subscribe(operator => {
+        if (operator) {
+          // Dopo la creazione dell'operatore, lo salviamo nel local storage e reindirizziamo alla dashboard
+          localStorage.setItem('currentOperator', JSON.stringify(operator.id));
+          this.router.navigate([`/dashboard/${operator.id}`]);
+        } else {
+          // Se c'è un problema nella creazione, mostriamo un messaggio di errore
+          alert('Si è verificato un errore durante la registrazione. Riprovare.');
+        }
+      });
     }
-    this.operatorService.createOperator(this.form.value).subscribe({
-      next: (dataOperator) =>{
-        console.log(dataOperator);
-        this.router.navigate(['/dashboard-home'])
-      }
-    })
   }
 
 }

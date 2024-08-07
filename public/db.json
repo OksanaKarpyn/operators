@@ -6,6 +6,34 @@
       "surname": "rossi",
       "email": "okssna@hello.com",
       "password": "password"
+    },
+    {
+      "id": "c331",
+      "name": "oksana",
+      "surname": "pippo",
+      "email": "oksana@test.it",
+      "password": "password"
+    },
+    {
+      "id": "681a",
+      "name": "lidia",
+      "surname": "pippo",
+      "email": "lidia@test.it",
+      "password": "password"
+    },
+    {
+      "id": "22a3",
+      "name": "lidia",
+      "surname": "pippo",
+      "email": "lidia@test.it",
+      "password": "password"
+    },
+    {
+      "id": "1754",
+      "name": "romana",
+      "surname": "pippo",
+      "email": "romana@test.it",
+      "password": "password"
     }
   ]
 }

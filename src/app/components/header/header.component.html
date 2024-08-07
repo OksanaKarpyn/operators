@@ -1,11 +1,23 @@
-<ul class="nav justify-content-center">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Active</a>
+<ul class="nav justify-content-between">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['']">Home</a>
+  </li>
+
+  <div class="d-flex ml-auto">
+    <!-- Mostra i bottoni di registrazione e login se l'utente non è autenticato -->
+    <li class="nav-item" *ngIf="!isAuthenticated">
+      <a class="nav-link btn btn-primary mr-2" [routerLink]="['register']">Register</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+    <li class="nav-item" *ngIf="!isAuthenticated">
+      <a class="nav-link btn btn-primary" [routerLink]="['login']">Login</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+
+    <!-- Mostra i bottoni di dashboard e logout se l'utente è autenticato -->
+    <li class="nav-item" *ngIf="isAuthenticated">
+      <a class="nav-link btn btn-primary mr-2" [routerLink]="['dashboard/:id']">Dashboard</a>
     </li>
-  </ul>
+    <li class="nav-item" *ngIf="isAuthenticated">
+      <button class="nav-link btn btn-danger" (click)="logout()">Logout</button>
+    </li>
+  </div>
+</ul>
