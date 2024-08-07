@@ -4,17 +4,14 @@
   </li>
 
   <div class="d-flex ml-auto">
-    <!-- Mostra i bottoni di registrazione e login se l'utente non è autenticato -->
     <li class="nav-item" *ngIf="!isAuthenticated">
       <a class="nav-link btn btn-primary mr-2" [routerLink]="['register']">Register</a>
     </li>
     <li class="nav-item" *ngIf="!isAuthenticated">
       <a class="nav-link btn btn-primary" [routerLink]="['login']">Login</a>
     </li>
-
-    <!-- Mostra i bottoni di dashboard e logout se l'utente è autenticato -->
     <li class="nav-item" *ngIf="isAuthenticated">
-      <a class="nav-link btn btn-primary mr-2" [routerLink]="['dashboard/:id']">Dashboard</a>
+      <a class="nav-link btn btn-primary mr-2" [routerLink]="['/dashboard']">Dashboard</a>
     </li>
     <li class="nav-item" *ngIf="isAuthenticated">
       <button class="nav-link btn btn-danger" (click)="logout()">Logout</button>

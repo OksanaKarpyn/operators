@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { Operator } from '../models/operator';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
@@ -10,6 +10,9 @@ import { map, catchError } from 'rxjs/operators';
 export class OperatorsService {
   readonly url = 'http://localhost:3000/operators';
   private currentOperatorKey = 'currentOperator';
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
+
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -32,6 +35,7 @@ export class OperatorsService {
       map(operator => {
         if (operator) {
           localStorage.setItem(this.currentOperatorKey, JSON.stringify(operator));
+          this.isAuthenticatedSubject.next(true);
           return true;
         }
         return false;
@@ -41,6 +45,7 @@ export class OperatorsService {
 
   logout(): void {
     localStorage.removeItem(this.currentOperatorKey);
+    this.isAuthenticatedSubject.next(false);
   }
 
   getCurrentOperator(): Operator | null {

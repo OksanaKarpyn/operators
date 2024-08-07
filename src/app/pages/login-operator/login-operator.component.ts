@@ -38,9 +38,10 @@ export class LoginOperatorComponent {
       this.operatorsService.login(email, password).subscribe(success => {
         if (success) {
           const operator = this.operatorsService.getCurrentOperator();
-          if (operator) {
-            // Operatore trovato e autenticato, redirigi alla dashboard personale
-            this.router.navigate([`/dashboard/${operator.id}`]);
+          if (operator && operator.id) {
+            console.log(operator.id);
+            // Naviga alla dashboard dell'operatore
+            this.router.navigate([`/dashboard`, operator.id]);
           } else {
             // Questo caso non dovrebbe accadere, ma è meglio gestirlo
             alert('Si è verificato un errore durante il login. Riprovare.');

@@ -11,8 +11,10 @@ import { OperatorsService } from '../../services/operators.service';
 })
 export class HeaderComponent {
   isAuthenticated = false;
-
+  currentOperatorId: string | null = null;
+  
   constructor(private operatorsService:OperatorsService,private router: Router){}
+  
   
   ngOnInit():void{
     this.isAuthenticated= this.operatorsService.isAuthenticated();
