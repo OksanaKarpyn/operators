@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { OperatorsService } from '../../services/operators.service';
-import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { OperatorsService } from '../../services/operators.service';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-login-operator',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    JsonPipe,
     CommonModule,
-    RouterLink
+    RouterModule
   ],
   templateUrl: './login-operator.component.html',
   styleUrls: ['./login-operator.component.scss']
@@ -23,7 +23,7 @@ export class LoginOperatorComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private operatorsService: OperatorsService
+    private operatorsService: OperatorsService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -34,18 +34,14 @@ export class LoginOperatorComponent {
   submit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
+      this.operatorsService.login(email, password).subscribe(response => {
+        if (response != null && response.accessToken) {
+              // Salva il token 
+           this.operatorsService.saveToken(response.accessToken);
+        // Reindirizza l'utente alla dashboard
+        this.router.navigate(['/dashboard']);
 
-      this.operatorsService.login(email, password).subscribe(success => {
-        if (success) {
-          const operator = this.operatorsService.getCurrentOperator();
-          if (operator && operator.id) {
-            console.log(operator.id);
-            // Naviga alla dashboard dell'operatore
-            this.router.navigate([`/dashboard`, operator.id]);
-          } else {
-            // Questo caso non dovrebbe accadere, ma è meglio gestirlo
-            alert('Si è verificato un errore durante il login. Riprovare.');
-          }
+          
         } else {
           // Operatore non trovato o credenziali errate
           alert('Email o password errati');

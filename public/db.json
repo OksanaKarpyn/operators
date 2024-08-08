@@ -8,25 +8,8 @@
       "password": "password"
     },
     {
-      "id": "c331",
-      "name": "oksana",
-      "surname": "pippo",
       "email": "oksana@test.it",
-      "password": "password"
-    },
-    {
-      "id": "3ebb",
-      "name": "lidia",
-      "surname": "rossi",
-      "email": "lidia@test.it",
-      "password": "password"
-    },
-    {
-      "id": "1414",
-      "name": "romana",
-      "surname": "rossi",
-      "email": "romana@test.it",
-      "password": "password"
+      "password": "$2a$08$7KDW1IQlmeHixtYV7eRpI.g/A7BrCHtRJKZP6DLYWSWRb0Er8endC"
     }
   ]
 }

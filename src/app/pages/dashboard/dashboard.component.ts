@@ -17,14 +17,14 @@ export class DashboardComponent {
 
   constructor(private route: ActivatedRoute,private router: Router , private operatorsService: OperatorsService) {}
 
-  ngOnInit(): void {
-    const operatorId = this.route.snapshot.paramMap.get('id');
-    if (operatorId) {
-      this.operatorsService.getOperatorById(operatorId).subscribe(operator => {
-        this.operator = operator;
-      });
-    }
-  }
+  // ngOnInit(): void {
+  //   const operatorId = this.route.snapshot.paramMap.get('id');
+  //   if (operatorId) {
+  //     this.operatorsService.getOperatorById(operatorId).subscribe(operator => {
+  //       this.operator = operator;
+  //     });
+  //   }
+  // }
 
   logout(): void {
     this.operatorsService.logout();
