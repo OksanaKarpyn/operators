@@ -1,34 +1,27 @@
-import { Component} from '@angular/core';
-import { Operator } from '../../models/operator';
-import { JsonPipe } from '@angular/common';
-import { ActivatedRoute, RouterLink ,Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { OperatorsService } from '../../services/operators.service';
-
+import { Operator } from '../../models/operator';
+import { CommonModule } from '@angular/common';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [JsonPipe,RouterLink],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss'],
+  imports: [
+    
+    CommonModule,
+
+  ],
 })
-export class DashboardComponent {
-  
-  operator: Operator | null = null; 
+export class DashboardComponent implements OnInit {
+  operator: Operator | null = null;
 
-  constructor(private route: ActivatedRoute,private router: Router , private operatorsService: OperatorsService) {}
+  constructor(private operatorsService: OperatorsService) {}
 
-  // ngOnInit(): void {
-  //   const operatorId = this.route.snapshot.paramMap.get('id');
-  //   if (operatorId) {
-  //     this.operatorsService.getOperatorById(operatorId).subscribe(operator => {
-  //       this.operator = operator;
-  //     });
-  //   }
-  // }
-
-  logout(): void {
-    this.operatorsService.logout();
-    this.router.navigate(['/login']);
+  ngOnInit(): void {
+    this.operatorsService.getCurrentOperator().subscribe(operator => {
+      this.operator = operator;
+    });
   }
-
 }

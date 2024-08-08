@@ -15,6 +15,38 @@ const middlewares = jsonServer.defaults();
 const SECRET_KEY = 'your_secret_key';
 const expiresIn = '1h';
 
+const { v4: uuidv4 } = require('uuid');
+
+function generateId() {
+  return uuidv4();
+}
+
+
+function readDatabase() {
+    try {
+      // Legge il contenuto del file
+      const fileContent = fs.readFileSync(dbPath, 'UTF-8');
+      
+      // Parsea il contenuto JSON
+      return JSON.parse(fileContent);
+    } catch (error) {
+      console.error('Errore nella lettura del database:', error);
+      throw new Error('Impossibile leggere il database.');
+    }
+  }
+
+  function writeDatabase(data) {
+    try {
+      // Converte i dati in una stringa JSON
+      const jsonData = JSON.stringify(data, null, 2);
+      
+      // Scrive i dati nel file
+      fs.writeFileSync(dbPath, jsonData, 'UTF-8');
+    } catch (error) {
+      console.error('Errore nella scrittura del database:', error);
+      throw new Error('Impossibile scrivere nel database.');
+    }
+  }
 // Crea un token da un payload
 function createToken(payload) {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
@@ -50,12 +82,21 @@ server.get('/operators', (req, res) => {
     res.json(operators);
 });
 
-// Endpoint per registrare un nuovo operatore
+
+
 server.post('/register', (req, res) => {
     const { name, surname, email, password } = req.body;
   
-    // Leggi il database esistente
-    const userdb = JSON.parse(fs.readFileSync(dbPath, 'UTF-8'));
+    console.log('Received registration request:', req.body); // Debugging request body
+  
+    let userdb;
+    try {
+      userdb = readDatabase();
+      console.log('Current database:', userdb); // Debugging current database state
+    } catch (error) {
+      console.error('Error reading database:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
   
     // Verifica se l'email esiste già
     if (userdb.operators.find(user => user.email === email)) {
@@ -67,20 +108,25 @@ server.post('/register', (req, res) => {
   
     // Crea un nuovo operatore
     const newOperator = { id: generateId(), name, surname, email, password: hashedPassword };
+    console.log('New operator to be added:', newOperator); // Debugging new operator
   
     // Aggiungi il nuovo operatore al database
     userdb.operators.push(newOperator);
   
-    // Scrivi i dati aggiornati nel file
-    fs.writeFileSync(dbPath, JSON.stringify(userdb, null, 2)); // Formatta JSON per leggibilità
+    try {
+      writeDatabase(userdb);
+      console.log('Database after adding new operator:', readDatabase()); // Debugging updated database
+    } catch (error) {
+      console.error('Error writing to database:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
   
     // Crea un token e restituiscilo nella risposta
     const accessToken = createToken({ email });
-    res.cookie('token', accessToken, { httpOnly: true });
-  
-    // Restituisci una risposta con il token e l'ID dell'operatore
+    // res.cookie('token', accessToken, { httpOnly: true });
     res.status(201).json({ accessToken, operatorId: newOperator.id });
   });
+  
   
 
 // Effettua il login dell'utente

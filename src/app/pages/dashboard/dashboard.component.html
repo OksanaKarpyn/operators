@@ -1,7 +1,7 @@
-<p>dashboard works!</p>
-@if(operator){
-
-  <div class="container">
-      <h1>Benvenuto, {{ operator.name }}</h1>
-  </div>
-}
+<div *ngIf="operator">
+  <!-- <h1>Benvenuto, {{ operator.name }}!</h1> -->
+  <p>Email: {{ operator.email }}</p>
+</div>
+<div *ngIf="!operator">
+  <p>Operatore non trovato.</p>
+</div>

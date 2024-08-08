@@ -1,15 +1,25 @@
 {
   "operators": [
     {
-      "id": "fd83",
-      "name": "francesa",
-      "surname": "rossi",
-      "email": "okssna@hello.com",
-      "password": "password"
+      "id": "548276db-e747-4d8f-a19f-bd82108a9834",
+      "name": "oksana",
+      "surname": "karpyn",
+      "email": "oksana1@test.it",
+      "password": "$2a$08$SC7MxJN/Z8KBPLEJMEKrbO90ia5twS7K27UxLWq17AYS1VqTluVHK"
     },
     {
-      "email": "oksana@test.it",
-      "password": "$2a$08$7KDW1IQlmeHixtYV7eRpI.g/A7BrCHtRJKZP6DLYWSWRb0Er8endC"
+      "id": "42e00e36-7edb-481e-8954-511a16620e3d",
+      "name": "lidia",
+      "surname": "karpyn",
+      "email": "lidia@test.it",
+      "password": "$2a$08$M3ghOhYCfgxXG0sKJAbiZ.GsFFl96e8R5GAJG0yRlCsNJzh9FuhwS"
+    },
+    {
+      "id": "cd882418-e375-43ba-a864-44f52ce8744d",
+      "name": "romana",
+      "surname": "karpyn",
+      "email": "romana@test.it",
+      "password": "$2a$08$upnJvizXM1x5W9B4.Z29Puhmf7EY2DcXpKbZxK4ZQo9Y/lsoPcuBW"
     }
   ]
 }

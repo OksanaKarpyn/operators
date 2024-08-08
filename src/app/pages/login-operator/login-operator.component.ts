@@ -36,12 +36,13 @@ export class LoginOperatorComponent {
       const { email, password } = this.loginForm.value;
       this.operatorsService.login(email, password).subscribe(response => {
         if (response != null && response.accessToken) {
+          console.log(response.accessToken);
               // Salva il token 
            this.operatorsService.saveToken(response.accessToken);
         // Reindirizza l'utente alla dashboard
-        this.router.navigate(['/dashboard']);
+        const operatorId = response.userId;
+        this.router.navigate([`/dashboard/${operatorId}`]);
 
-          
         } else {
           // Operatore non trovato o credenziali errate
           alert('Email o password errati');
