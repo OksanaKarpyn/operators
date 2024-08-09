@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterOperatorComponent } from './pages/register-operator/register-operator.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LoginOperatorComponent } from './pages/login-operator/login-operator.component';
+// import { LoginOperatorComponent } from './pages/login-operator/login-operator.component';
 
 export const routes: Routes = [
     {
@@ -18,7 +18,8 @@ export const routes: Routes = [
     {
         path: 'login', 
         pathMatch: 'full',
-        component: LoginOperatorComponent,
+        // component: LoginOperatorComponent,
+        loadComponent:()=> import('./pages/login-operator/login-operator.component').then(c=>c.LoginOperatorComponent),// lazy loaded component
         title: 'Login Page'
     },
     {

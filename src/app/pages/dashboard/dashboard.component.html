@@ -1,6 +1,8 @@
 <div *ngIf="operator">
   <!-- <h1>Benvenuto, {{ operator.name }}!</h1> -->
-  <p>Email: {{ operator.email }}</p>
+  <p>Email: {{ operator.email }}</p>   
+  <p>Nome: {{ operator.name }}</p>
+  <p>id:{{operator.id}}</p>
 </div>
 <div *ngIf="!operator">
   <p>Operatore non trovato.</p>

@@ -122,9 +122,9 @@ server.post('/register', (req, res) => {
     }
   
     // Crea un token e restituiscilo nella risposta
-    const accessToken = createToken({ email });
+    // const accessToken = createToken({ email });
     // res.cookie('token', accessToken, { httpOnly: true });
-    res.status(201).json({ accessToken, operatorId: newOperator.id });
+    res.status(201);
   });
   
   

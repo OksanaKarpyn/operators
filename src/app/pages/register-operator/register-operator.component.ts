@@ -43,17 +43,15 @@ export class RegisterOperatorComponent {
       const newOperator: Operator = { name, surname, email, password };
   
       // Passa l'oggetto Operator al servizio di registrazione
-      this.operatorService.register(newOperator).subscribe(response => {
-        if (response) {
-          console.log('Registration successful:', response);
-          const operatorId = response.operatorId; // Assicurati che la risposta contenga l'ID dell'operatore
-          // Reindirizza alla dashboard dell'operatore
-          this.router.navigate([`/dashboard/${operatorId}`]);
-        } else {
-          // Se c'è un problema nella registrazione, mostriamo un messaggio di errore
-          alert('Si è verificato un errore durante la registrazione. Riprovare.');
+      this.operatorService.register(newOperator).subscribe({
+        next: (res)=>{
+
+          alert('sei registrato');
+        },error:(res)=>{
+          // debugger;
+          console.error(res.error.message)
         }
-      });
+      })
     }
   }
 }

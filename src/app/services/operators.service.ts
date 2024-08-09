@@ -15,20 +15,9 @@ export class OperatorsService {
 
   constructor(private http: HttpClient,private cookieService: CookieService) {}
 
-  register(operator: Operator): Observable<any> {
-    return this.http.post<any>(`${this.url}/register`, operator, { withCredentials: true }).pipe(
-      map(response => {
-        if (response.accessToken) {
-          this.isAuthenticatedSubject.next(true);
-          return response;
-        }
-        return null;
-      }),
-      catchError(error => {
-        console.error('Error during registration:', error);
-        return of(null);
-      })
-    );
+  register(operator: Operator): Observable<void> {
+    return this.http.post<void>(`${this.url}/register`, operator, { withCredentials: true });
+    
   }
 
   login(email: string, password: string): Observable<any> {
