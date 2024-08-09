@@ -1,8 +1,11 @@
 <div *ngIf="operator">
-  <!-- <h1>Benvenuto, {{ operator.name }}!</h1> -->
-  <p>Email: {{ operator.email }}</p>   
-  <p>Nome: {{ operator.name }}</p>
-  <p>id:{{operator.id}}</p>
+  <div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Nome:<h2>{{ operator.name }} </h2></li>
+      <li class="list-group-item">Email: {{ operator.email }}</li>
+      <li class="list-group-item">Id: {{operator.id}}</li>
+    </ul>
+  </div>
 </div>
 <div *ngIf="!operator">
   <p>Operatore non trovato.</p>
