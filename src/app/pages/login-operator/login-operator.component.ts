@@ -40,7 +40,9 @@ export class LoginOperatorComponent {
               // Salva il token 
            this.operatorsService.saveToken(response.accessToken);
         // Reindirizza l'utente alla dashboard
+
         const operatorId = response.userId;
+        debugger;
         this.router.navigate([`/dashboard/${operatorId}`]);
 
         } else {

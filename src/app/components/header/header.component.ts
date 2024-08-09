@@ -11,13 +11,18 @@ import { OperatorsService } from '../../services/operators.service';
 })
 export class HeaderComponent {
   isAuthenticated = false;
-  currentOperatorId: string | null = null;
+  currentOperatorId?: string | null = null;
   
   constructor(private operatorsService:OperatorsService,private router: Router){}
   
   
   ngOnInit():void{
     this.isAuthenticated= this.operatorsService.isAuthenticated();
+    this.operatorsService.getCurrentOperator().subscribe(operator => {
+      if (operator) {
+        this.currentOperatorId = operator.id// Memorizza l'ID dell'operatore loggato
+      }
+    });
 
   }
   logout(): void {
