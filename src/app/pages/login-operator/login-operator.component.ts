@@ -42,7 +42,6 @@ export class LoginOperatorComponent {
         // Reindirizza l'utente alla dashboard
 
         const operatorId = response.userId;
-        debugger;
         this.router.navigate([`/dashboard/${operatorId}`]);
 
         } else {

@@ -1,20 +1,26 @@
-<ul class="nav justify-content-between">
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['']">Home</a>
-  </li>
+<div class="header-content">
 
-  <div class="d-flex ml-auto">
-    <li class="nav-item" *ngIf="!isAuthenticated">
-      <a class="nav-link btn btn-primary mr-2" [routerLink]="['register']">Register</a>
-    </li>
-    <li class="nav-item" *ngIf="!isAuthenticated">
-      <a class="nav-link btn btn-primary" [routerLink]="['login']">Login</a>
-    </li>
-    <li class="nav-item" *ngIf="isAuthenticated">
-      <a class="nav-link btn btn-primary mr-2" [routerLink]="['/dashboard', currentOperatorId]">Dashboard</a>
-    </li>
-    <li class="nav-item" *ngIf="isAuthenticated">
-      <button class="nav-link btn btn-danger" (click)="logout()">Logout</button>
-    </li>
+  <div class="container py-4">
+  
+    <ul class="nav justify-content-between">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['']">Home</a>
+      </li>
+    
+      <div class="d-flex ml-auto flex-wrap">
+        <li class="nav-item" *ngIf="!isAuthenticated">
+          <a class="nav-link btn btn-primary mr-2" [routerLink]="['register']">Register</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAuthenticated">
+          <a class="nav-link btn btn-outline-primary" [routerLink]="['login']">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a class="nav-link btn btn-outline-primary mr-2" [routerLink]="['/dashboard', currentOperatorId]">Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <button class="nav-link btn btn-outline-danger" (click)="logout()">Logout</button>
+        </li>
+      </div>
+    </ul>
   </div>
-</ul>
+</div>
