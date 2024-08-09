@@ -20,8 +20,8 @@ export class DashboardComponent implements OnInit {
   constructor(private operatorsService: OperatorsService) {}
 
   ngOnInit(): void {
-    this.operatorsService.getCurrentOperator().subscribe(operator => {
-      this.operator = operator;
+    this.operatorsService.getCurrentOperator().subscribe(operatorData => {
+      this.operator = operatorData;
     });
   }
 }

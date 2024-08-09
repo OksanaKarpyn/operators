@@ -73,13 +73,21 @@ server.use(cookieParser());
 server.use(middlewares);
 
 
-// Endpoint per ottenere gli operatori basato su una query di email
+// // Endpoint per ottenere gli operatori basato su una query di email
+// server.get('/operators', (req, res) => {
+//     console.log('Received query:', req.query); // Log della query email per debug
+//     const userdb = JSON.parse(fs.readFileSync(dbPath, 'UTF-8'));
+//     const operators = userdb.operators.filter(operator => operator.email === req.query.email);
+//     console.log('Found operators:', operators); // Log degli operatori trovati per debug
+//     res.json(operators);
+// });
+
+
+// Endpoint per ottenere tutti gli operatori
 server.get('/operators', (req, res) => {
-    console.log('Received query:', req.query); // Log della query email per debug
-    const userdb = JSON.parse(fs.readFileSync(dbPath, 'UTF-8'));
-    const operators = userdb.operators.filter(operator => operator.email === req.query.email);
-    console.log('Found operators:', operators); // Log degli operatori trovati per debug
-    res.json(operators);
+  const userdb = JSON.parse(fs.readFileSync(dbPath, 'UTF-8'));
+  const operators = userdb.operators;
+  res.json(operators);
 });
 
 

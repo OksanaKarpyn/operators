@@ -1,9 +1,30 @@
 <div class="container border">
+    <h1>List of Operators</h1>
     <div class="row">
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <!-- <a class="btn btn-primary" type="button" [routerLink]="['login']" >Enter</a>
-            <a class="btn btn-primary" type="button" [routerLink]="['register']" >Register</a> 
-          </div> -->
-          <h1>Home page</h1>
+       <!-- <pre>{{ operators | json }}</pre> -->
+<table class="table table-striped table-hover d-flex d-md-table my-5">
+    <tr class="d-none d-md-table-row">
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Last</th>
+      <th scope="col">Email</th>
+    </tr>
+    <tbody class="flex-fill">
+      <!-- track by $index if id does non exists  -->
+  
+      @for(operator of operators; track operator.id){
+      <tr class="mb-2 mb-md-0 d-flex d-md-table-row flex-column">
+        <th>{{ operator.id }}</th>
+        <td>{{ operator.name }}</td>
+        <td>{{ operator.surname }}</td>
+        <td>{{ operator.email }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
     </div>
 </div>
+
+
+
+

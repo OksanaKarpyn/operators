@@ -41,6 +41,9 @@ export class OperatorsService {
     this.isAuthenticatedSubject.next(false);
   }
 
+  getAllOpreators(): Observable<Array<Operator>>{
+    return this.http.get<Array<Operator>>(`${this.url}/operators`);
+  }
   getCurrentOperator(): Observable<Operator | null> {
     const token = this.getCookie('token');
     if (token) {
