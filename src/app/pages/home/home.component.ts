@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { OperatorsService } from '../../services/operators.service';
-import { Operator } from '../../models/operator';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -11,16 +11,9 @@ import { Operator } from '../../models/operator';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  operators: Array<Operator> = [];
-  constructor(private operatorService: OperatorsService) {
-    operatorService.getAllOpreators().subscribe({
-      next: (dataOperarors) => {
-        this.operators = dataOperarors;
-      },
-      error: (err) => {
-        console.error(err.message);
-      }
-    })
+  operators: Array<User> = [];
+  constructor(private operatorService: AuthService) {
+  
   }
 
 

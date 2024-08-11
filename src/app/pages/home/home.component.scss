@@ -1,0 +1,17 @@
+.home-component{
+    border: 5px solid blue;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+     .card{
+        height: 200px;
+        .card-body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+     }
+}
