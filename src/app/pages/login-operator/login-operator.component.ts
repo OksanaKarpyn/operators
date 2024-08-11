@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { OperatorsService } from '../../services/operators.service';
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { window } from 'rxjs';
+import { User } from '../../models/user';
 
 
 @Component({
@@ -19,11 +22,12 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginOperatorComponent {
   loginForm!: UntypedFormGroup;
-
+  userId?: string;
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private operatorsService: OperatorsService,
+    private authService: AuthService,
+    private userService: UserService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -34,15 +38,30 @@ export class LoginOperatorComponent {
   submit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.operatorsService.login(email, password).subscribe(response => {
+      this.authService.login(email, password).subscribe(response => {
         if (response != null && response.accessToken) {
-          console.log(response.accessToken);
+          console.log(response);
               // Salva il token 
-           this.operatorsService.saveToken(response.accessToken);
-        // Reindirizza l'utente alla dashboard
+           this.authService.saveToken(response.accessToken);
+         // Decodifica il token per ottenere l'ID utente
+        const decodedToken = this.userService.decodeToken(response.accessToken);
+        const userId = decodedToken?.id; // Assumendo che l'ID utente sia contenuto nel token
 
-        const operatorId = response.userId;
-        this.router.navigate([`/dashboard/${operatorId}`]);
+        if (userId) {
+          // Reindirizza l'utente alla dashboard con l'ID nell'URL
+          this.router.navigate([`/dashboard/${userId}`]);
+        } else {
+          console.error('User ID not found in token');
+          alert('Errore durante il login. Riprova.');
+        }
+          //  this.userService.getCurrentUser().subscribe(user => {
+          //   if (user) {
+          //     this.userId = user.id// Memorizza l'ID dell'operatore loggato
+          //   }
+          // });
+        // Reindirizza l'utente alla dashboard
+        // this.router.navigate([`/dashboard/${this.userId}`]);
+        
 
         } else {
           // Operatore non trovato o credenziali errate
