@@ -9,6 +9,7 @@ const path = require('path');
 
 const server = express();
 const dbPath = path.join(__dirname, 'public', 'db.json');
+const userdb = JSON.parse(fs.readFileSync(dbPath, 'UTF-8'));
 const router = jsonServer.router(dbPath); // JSON Server userà questo file come database
 const middlewares = jsonServer.defaults();
 
@@ -26,7 +27,7 @@ function readDatabase() {
     try {
       // Legge il contenuto del file
       const fileContent = fs.readFileSync(dbPath, 'UTF-8');
-      
+      console.log('sono nel func read data base')
       // Parsea il contenuto JSON
       return JSON.parse(fileContent);
     } catch (error) {
@@ -59,10 +60,12 @@ function verifyToken(token) {
 
 // Verifica se l'utente esiste nel database
 function isAuthenticated({ email, password }) {
-  const userdb = JSON.parse(fs.readFileSync(dbPath, 'UTF-8'));
-  const user = userdb.operators.find(user => user.email === email);
+  const user = userdb.users.find(user => user.email === email);
   if (user) {
-    return bcrypt.compareSync(password, user.password);
+    console.log(`User found: ${JSON.stringify(user)}`);
+    const isMatch = bcrypt.compareSync(password, user.password);
+    console.log(`Password match: ${isMatch}`);
+    return isMatch;
   }
   return false;
 }
@@ -74,26 +77,19 @@ server.use(middlewares);
 
 
 // // Endpoint per ottenere gli operatori basato su una query di email
-// server.get('/operators', (req, res) => {
-//     console.log('Received query:', req.query); // Log della query email per debug
-//     const userdb = JSON.parse(fs.readFileSync(dbPath, 'UTF-8'));
-//     const operators = userdb.operators.filter(operator => operator.email === req.query.email);
-//     console.log('Found operators:', operators); // Log degli operatori trovati per debug
-//     res.json(operators);
-// });
-
-
-// Endpoint per ottenere tutti gli operatori
-server.get('/operators', (req, res) => {
-  const userdb = JSON.parse(fs.readFileSync(dbPath, 'UTF-8'));
-  const operators = userdb.operators;
-  res.json(operators);
+server.get('/users', (req, res) => {
+    console.log('Received query:', req.query); // Log della query email per debug
+    const users = userdb.users.filter(operator => operator.email === req.query.email);
+    console.log('Found users:', users); // Log degli operatori trovati per debug
+    res.json(users);
 });
 
 
 
-server.post('/register', (req, res) => {
-    const { name, surname, email, password } = req.body;
+
+
+server.post('/users/register', (req, res) => {
+    const { name, surname,role, email, password } = req.body;
   
     console.log('Received registration request:', req.body); // Debugging request body
   
@@ -107,7 +103,7 @@ server.post('/register', (req, res) => {
     }
   
     // Verifica se l'email esiste già
-    if (userdb.operators.find(user => user.email === email)) {
+    if (userdb.users.find(user => user.email === email)) {
       return res.status(400).json({ message: 'Email already exists' });
     }
   
@@ -115,11 +111,11 @@ server.post('/register', (req, res) => {
     const hashedPassword = bcrypt.hashSync(password, 8);
   
     // Crea un nuovo operatore
-    const newOperator = { id: generateId(), name, surname, email, password: hashedPassword };
+    const newOperator = { id: generateId(), name, surname, role, email, password: hashedPassword };
     console.log('New operator to be added:', newOperator); // Debugging new operator
   
     // Aggiungi il nuovo operatore al database
-    userdb.operators.push(newOperator);
+    userdb.users.push(newOperator);
   
     try {
       writeDatabase(userdb);
@@ -128,24 +124,28 @@ server.post('/register', (req, res) => {
       console.error('Error writing to database:', error);
       return res.status(500).json({ message: 'Internal server error' });
     }
+    console.log('fine funzione');
   
     // Crea un token e restituiscilo nella risposta
     // const accessToken = createToken({ email });
     // res.cookie('token', accessToken, { httpOnly: true });
-    res.status(201);
+
+    return res.status(200).json({})
+    // res.status(200).json({  operatorId: newOperator.id });
+
   });
   
   
 
 // Effettua il login dell'utente
-server.post('/login', (req, res) => {
+server.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
 
   if (!isAuthenticated({ email, password })) {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
-
-  const accessToken = createToken({ email });
+  const user = userdb.users.find(user => user.email === email);
+  const accessToken = createToken({ email,role:user.role ,id:user.id});
   //res.cookie('token', accessToken, { httpOnly: true });
   res.status(200).json({ accessToken });
 });

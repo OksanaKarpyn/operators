@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { OperatorsService } from '../../services/operators.service';
-import { Operator } from '../../models/operator';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
 import { CommonModule } from '@angular/common';
 import { from } from 'rxjs';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -13,13 +14,13 @@ import { from } from 'rxjs';
   ],
 })
 export class DashboardComponent implements OnInit {
-  operator: Operator | null = null;
+  user: User | null = null;
 
-  constructor(private operatorsService: OperatorsService) {}
+  constructor(private authservice: AuthService,private userSevice:UserService) {}
 
   ngOnInit(): void {
-    this.operatorsService.getCurrentOperator().subscribe(operatorData => {
-      this.operator = operatorData;
+    this.userSevice.getCurrentUser().subscribe(userData => {
+      this.user = userData;
     });
   }
 }

@@ -1,6 +1,6 @@
 
 
-<div class="container">
+<div class="register-component">
     <h2>Register form</h2>
     <div class="row justify-content-center">
 
@@ -9,9 +9,19 @@
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" formControlName="name" required />
             </div>
+
             <div class="col-md-6">
                 <label for="surname" class="form-label">Surname</label>
                 <input type="text" class="form-control" id="surname" formControlName="surname" required />
+            </div>
+            <div class="col-12">
+                <label for="role" class="form-label">State</label>
+                <select for="role" class="form-select" aria-label="Default select example" id="role" formControlName="role">
+                    <option  value="" disabled selected>Choise role</option>
+                    <option value="admin">Admin</option>
+                    <option value="operator">Operator</option>
+                    <option value="standard">Standard</option>
+                  </select>
             </div>
             <div class="col-md-6">
                 <label for="email" class="form-label">Email</label>
@@ -26,4 +36,5 @@
             </div>
         </form>
     </div>
+    <button class="btn btn-primary mr-2" [routerLink]="['']">Go Back</button>
 </div>

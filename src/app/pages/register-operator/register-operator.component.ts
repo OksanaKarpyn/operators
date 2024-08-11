@@ -4,8 +4,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { OperatorsService } from '../../services/operators.service';
-import { Operator } from '../../models/operator';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register-operator',
@@ -23,27 +24,23 @@ export class RegisterOperatorComponent {
 
   constructor(
     private fb: FormBuilder,
-    private operatorService: OperatorsService,
-    private router: Router
+    private operatorService: AuthService,
+    private router: Router,
+    private userService: UserService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
+      role: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
 
   submit(): void {
-    if (this.form.valid) {
-      // Estrai i valori del modulo
-      const { name, surname, email, password } = this.form.value;
-      
-      // Crea l'oggetto Operator con i dati del modulo
-      const newOperator: Operator = { name, surname, email, password };
-  
+   
       // Passa l'oggetto Operator al servizio di registrazione
-      this.operatorService.register(newOperator).subscribe({
+      this.userService.register(this.form.value).subscribe({
         next: (res)=>{
 
           alert('sei registrato');
@@ -53,6 +50,6 @@ export class RegisterOperatorComponent {
           console.error(res.error.message)
         }
       })
-    }
+    
   }
 }
