@@ -1,55 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { Operator } from '../models/operator';
+import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { Token } from '../models/token';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class OperatorsService {
-  readonly url = 'http://localhost:3000';
+export class UserService {
+  readonly url = 'http://localhost:3000/users';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(private http: HttpClient,private cookieService: CookieService) {}
 
-  register(operator: Operator): Observable<void> {
-    return this.http.post<void>(`${this.url}/register`, operator, { withCredentials: true });
+  register(user: User): Observable<void> {
+    return this.http.post<void>(`${this.url}/register`, user, { withCredentials: true });
     
   }
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.url}/login`, { email, password }, { withCredentials: true }).pipe(
-      map(response => {
-        if (response.accessToken) {
-          this.isAuthenticatedSubject.next(true);
-          return response;
-        }
-        return null;
-      }),
-      catchError(error => {
-        console.error('Error during login:', error);
-        return of(null);
-      })
-    );
-  }
+ 
 
-  logout(): void {
-    document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    this.isAuthenticatedSubject.next(false);
-  }
+  
 
-  getAllOpreators(): Observable<Array<Operator>>{
-    return this.http.get<Array<Operator>>(`${this.url}/operators`);
+  getAllUsers(): Observable<Array<User>>{
+    return this.http.get<Array<User>>(`${this.url}`);
   }
-  getCurrentOperator(): Observable<Operator | null> {
+  getCurrentUser(): Observable<User | null> {
     const token = this.getCookie('token');
     if (token) {
         const decodedToken = this.decodeToken(token);
         if (decodedToken && decodedToken.email) {
-            return this.http.get<Operator[]>(`${this.url}/operators?email=${decodedToken.email}`, { withCredentials: true }).pipe(
+            return this.http.get<User[]>(`${this.url}?email=${decodedToken.email}`, { withCredentials: true }).pipe(
                 map(operators => operators.length ? operators[0] : null),
                 catchError(error => {
                   console.error('Error fetching current operator:', error);
@@ -61,12 +46,8 @@ export class OperatorsService {
     return of(null);
   }
 
-
-  saveToken(token: string, expiresInDays: number = 1): void {
-    this.cookieService.set('token', token, expiresInDays);
-  }
   //----------------------------------------
-  private decodeToken(token: string): any {
+ decodeToken(token: string): any {
     try {
       return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
