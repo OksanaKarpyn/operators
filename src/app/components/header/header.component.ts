@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JsonPipe,CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { OperatorsService } from '../../services/operators.service';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -9,26 +11,44 @@ import { OperatorsService } from '../../services/operators.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isAuthenticated = false;
-  currentOperatorId?: string | null = null;
-  
-  constructor(private operatorsService:OperatorsService,private router: Router){}
+  userId?: string | null = null;
+  sub?: Subscription;
+
+  constructor(
+    private authService:AuthService,
+    private userService:UserService,
+    private router: Router) {
+  }
   
   
   ngOnInit():void{
-    this.isAuthenticated= this.operatorsService.isAuthenticated();
-    this.operatorsService.getCurrentOperator().subscribe(operator => {
-      if (operator) {
-        this.currentOperatorId = operator.id// Memorizza l'ID dell'operatore loggato
-      }
-    });
+    this.isAuthenticated = this.userService.isAuthenticated();
+    
 
+    this.sub = this.userService.isAuthenticated$.subscribe((value) => {
+
+      this.isAuthenticated = value;
+
+      if (value) {
+        this.userService.getCurrentUser().subscribe(user => {
+          if (user) {
+            this.userId= user.id// Memorizza l'ID dell'operatore loggato
+          }
+        });
+      }
+    })
+        
   }
   logout(): void {
-    this.operatorsService.logout();
+    this.authService.logout();
     this.isAuthenticated = false;
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
   }
+
+//  ngOnDestroy(): void {
+//    this.sub.unsubscribe()
+//  }
 
 }
