@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterOperatorComponent } from './pages/register-operator/register-operator.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { UsersComponent } from './pages/users/users.component';
 // import { LoginOperatorComponent } from './pages/login-operator/login-operator.component';
 
 export const routes: Routes = [
@@ -11,9 +12,14 @@ export const routes: Routes = [
         title: 'Home Page'
     },
     {
-        path: 'register',
+        path: 'register/add-edit',
         component: RegisterOperatorComponent,
         title: 'Register Page'
+    },
+    {
+        path: 'register/add-edit/:id',
+        component: RegisterOperatorComponent,
+        title: 'Register Edit Page'
     },
     {
         path: 'login', 
@@ -27,4 +33,10 @@ export const routes: Routes = [
         component: DashboardComponent,
         title: 'Dashboard Page'
     },
+    {
+        path:'users',
+        component: UsersComponent,
+        title:'Users list Page'
+    }
+
 ];
