@@ -9,52 +9,12 @@
       "role": "admin"
     },
     {
-      "id": "82e9d72d-957d-4359-8382-8b63d41dd793",
-      "name": "romana",
-      "surname": "karpyn",
-      "email": "romana@test.it",
-      "password": "$2a$08$2jTZshAMuL.9jF1PrBOV7ercVVkL3rADREVeucrnHrNB.EaYbB4jm",
-      "role": "operator"
-    },
-    {
-      "id": "3cd56507-caa9-4e9b-a207-6fb629eeccb5",
-      "name": "elisa",
-      "surname": "pippo",
-      "email": "elisa@test.it",
-      "password": "$2a$08$u/uC7dkJBxpAOGA4gx1bkufBYaaHqzQ73KajChf.ePkhHUg37zjsu",
-      "role": "standard"
-    },
-    {
-      "id": "24afedbc-1fc6-4444-a717-d1355a5ef3ab",
-      "name": "silvia",
-      "surname": "rossi",
-      "email": "silvia@test.it",
-      "password": "$2a$08$SJOkE49YUmzZnjmALQW58uZZk8himqvl4w.FcWnLVYzjKTJWgSUtK",
-      "role": "standard"
-    },
-    {
-      "id": "b4fb048a-2a24-4d94-9e6a-65d3c647afa9",
-      "name": "marco",
-      "surname": "pippo",
-      "email": "marco.debon@anitia.it",
-      "password": "$2a$08$WvFkX.6uLjQOqU08S5ZO6OpYQp7hIHJiU.uEllrW/NAY.9HRAf7he",
-      "role": "standard"
-    },
-    {
-      "id": "4f304750-b996-4978-871b-965686d996f9",
-      "name": "oksana10",
+      "id": "893846d1-90ba-4a22-b090-4110080ff5f6",
+      "name": "lidia",
       "surname": "karpyn",
       "role": "operator",
-      "email": "oksana10@test.it",
-      "password": "$2a$08$qSh86UH5nbbKJ.yAJawFLe4ZROzpNcZa3SxV7W2SgH//gW4e6YODS"
-    },
-    {
-      "id": "a4d99f2a-ddb3-4cb4-b673-552622c63e67",
-      "name": "oksana11",
-      "surname": "karpyn11",
-      "role": "standard",
-      "email": "oksana11@test.it",
-      "password": "$2a$08$9P4WRqXI3WIGmJ3uK4cuZ.DiEczMymAR4u8HcaTM.h90z9piwkcXC"
+      "email": "lidia@test.it",
+      "password": "$2a$08$jXupdRne2Yndqu7kGib9CedorM0QEanvzUjtXxm9S6b/k5Wkz4ini"
     }
   ]
 }

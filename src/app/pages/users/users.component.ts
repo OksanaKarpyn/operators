@@ -15,9 +15,10 @@ export class UsersComponent {
   users: Array<User> = [];
 
   constructor(private userService: UserService) {
-    userService.getAllUsers().subscribe({
+    this.userService.getAllUsers().subscribe({
       next: (data) => {
         this.users = data;
+        console.log(this.users);
       },
       error: (err) => {
         console.error(err.massege);

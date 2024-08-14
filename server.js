@@ -79,7 +79,8 @@ server.use(middlewares);
 // // Endpoint per ottenere gli operatori basato su una query di email
 server.get('/users', (req, res) => {
     console.log('Received query:', req.query); // Log della query email per debug
-    const users = userdb.users.filter(operator => operator.email === req.query.email);
+    const users  = res
+    // const users = userdb.users.filter(operator => operator.email === req.query.email);
     console.log('Found users:', users); // Log degli operatori trovati per debug
     res.json(users);
 });
@@ -129,7 +130,7 @@ server.post('/users/register', (req, res) => {
     // Crea un token e restituiscilo nella risposta
     // const accessToken = createToken({ email });
     // res.cookie('token', accessToken, { httpOnly: true });
-
+    userdb = readDatabase();
     return res.status(200).json({})
     // res.status(200).json({  operatorId: newOperator.id });
 
@@ -140,8 +141,9 @@ server.post('/users/register', (req, res) => {
 // Effettua il login dell'utente
 server.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
-
+  console.log('prima authentificato');
   if (!isAuthenticated({ email, password })) {
+    console.log('e authentificato');
     return res.status(401).json({ message: 'Invalid credentials' });
   }
   const user = userdb.users.find(user => user.email === email);
