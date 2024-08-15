@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterOperatorComponent } from './pages/register-operator/register-operator.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsersComponent } from './pages/users/users.component';
+import { DetailsUserComponent } from './pages/details-user/details-user.component';
 // import { LoginOperatorComponent } from './pages/login-operator/login-operator.component';
 
 export const routes: Routes = [
@@ -37,6 +38,10 @@ export const routes: Routes = [
         path:'users',
         component: UsersComponent,
         title:'Users list Page'
+    },{
+        path:'users/:id',
+        component:DetailsUserComponent,
+        title:'User Details'
     }
 
 ];
