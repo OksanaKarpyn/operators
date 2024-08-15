@@ -23,14 +23,6 @@
       "role": "standard",
       "email": "romana@test.it",
       "password": "123456"
-    },
-    {
-      "id": "87669a53-0187-4ea8-af66-d34478babc95",
-      "name": "francesa",
-      "surname": "karpyn",
-      "role": "standard",
-      "email": "francesca@test.it",
-      "password": "$2a$08$q1q/v2MmtQ9wVMHXRSqa4.bqMRp48Xrq7LuDGZjsPMy/VCxIcFL7e"
     }
   ]
 }

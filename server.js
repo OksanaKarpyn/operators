@@ -207,7 +207,30 @@ server.put('/users/:id', (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
+server.delete('/users/:id', (req, res)=>{
+  const userId = req.params.id;
+  console.log(`Request to delete user with ID: ${userId}`);
+  let userDb;
+  try{
+   userDb = readDatabase();
+  }catch(err){
+    console.error('Error reading the database:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+  const userIndex = userDb.users.findIndex(user=>user.id === userId);
+    // Rimuovi l'utente dal database
+    userdb.users.splice(userIndex, 1);
 
+    // Scrivi il database aggiornato
+    try {
+      writeDatabase(userdb);
+      console.log('User deleted successfully');
+      return res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+      console.error('Error writing to the database:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+})
 
 server.use(router);
 
