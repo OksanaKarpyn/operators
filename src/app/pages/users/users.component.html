@@ -18,7 +18,7 @@
       <td>{{ user.surname }}</td>
       <td>{{ user.email }}</td>
       <td>
-        <a class="btn btn-primary mx-2" [routerLink]="['add-edit', user.id]">Edit</a>
+        <a class="btn btn-primary mx-2" [routerLink]="['/register/add-edit', user.id]">Edit</a>
         <button class="btn btn-danger mx-2" (click)="deleteUser(user.id)">
           Delete
         </button>

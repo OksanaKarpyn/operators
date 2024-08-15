@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, BehaviorSubject, of, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
@@ -21,6 +21,9 @@ export class UserService {
     return this.http.post<void>(`${this.url}/register`, user, { withCredentials: true });
     
   }
+  updateUser(user:User):Observable<User> {
+    return this.http.put<User>(`${this.url}/${user.id}`,user,{ withCredentials: true });
+  }
 
  
 
@@ -29,13 +32,23 @@ export class UserService {
   getAllUsers(): Observable<Array<User>>{
     return this.http.get<Array<User>>(`${this.url}/all`);
   }
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.url}/${userId}`, { withCredentials: true }).pipe(
+      catchError(error => {
+        console.error('Error fetching user by ID:', error);
+        return throwError(error); // o puoi restituire of(null) se preferisci
+      })
+    );
+  }
+  
+
   getCurrentUser(): Observable<User | null> {
     const token = this.getCookie('token');
     if (token) {
         const decodedToken = this.decodeToken(token);
         if (decodedToken && decodedToken.email) {
             return this.http.get<User[]>(`${this.url}?email=${decodedToken.email}`, { withCredentials: true }).pipe(
-                map(operators => operators.length ? operators[0] : null),
+                map(user => user.length ? user[0] : null),
                 catchError(error => {
                   console.error('Error fetching current operator:', error);
                   return of(null);

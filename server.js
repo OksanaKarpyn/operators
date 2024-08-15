@@ -180,6 +180,34 @@ server.use((req, res, next) => {
     return res.status(401).json({ message: 'Access token not provided' });
   }
 });
+// Endpoint per aggiornare un utente
+server.put('/users/:id', (req, res) => {
+  const userId = req.params.id;
+  const updatedUser = req.body;
+
+  console.log(`Request to update user with ID: ${userId}`);
+  
+  let userdb = readDatabase();
+  const userIndex = userdb.users.findIndex(user => user.id === userId);
+  
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  // Aggiorna i dati dell'utente
+  userdb.users[userIndex] = { ...userdb.users[userIndex], ...updatedUser };
+
+  // Scrivi il database aggiornato
+  try {
+    writeDatabase(userdb);
+    console.log('User updated successfully:', userdb.users[userIndex]);
+    return res.status(200).json(userdb.users[userIndex]);
+  } catch (error) {
+    console.error('Error writing to the database:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 server.use(router);
 
