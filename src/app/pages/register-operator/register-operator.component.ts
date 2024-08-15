@@ -44,7 +44,7 @@ export class RegisterOperatorComponent {
         next: (res)=>{
 
           alert('sei registrato');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/users']);
         },error:(res)=>{
           // debugger;
           console.error(res.error.message)

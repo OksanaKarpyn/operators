@@ -54,14 +54,6 @@ export class LoginOperatorComponent {
           console.error('User ID not found in token');
           alert('Errore durante il login. Riprova.');
         }
-          //  this.userService.getCurrentUser().subscribe(user => {
-          //   if (user) {
-          //     this.userId = user.id// Memorizza l'ID dell'operatore loggato
-          //   }
-          // });
-        // Reindirizza l'utente alla dashboard
-        // this.router.navigate([`/dashboard/${this.userId}`]);
-        
 
         } else {
           // Operatore non trovato o credenziali errate

@@ -27,7 +27,7 @@ export class UserService {
   
 
   getAllUsers(): Observable<Array<User>>{
-    return this.http.get<Array<User>>(`${this.url}`);
+    return this.http.get<Array<User>>(`${this.url}/all`);
   }
   getCurrentUser(): Observable<User | null> {
     const token = this.getCookie('token');

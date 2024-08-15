@@ -41,40 +41,16 @@ export class AuthService {
   logout(): void {
     document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     this.isAuthenticatedSubject.next(false);
+    this.cookieService.delete('token');
   }
 
-  // getAllOpreators(): Observable<Array<User>>{
-  //   return this.http.get<Array<User>>(`${this.url}/operators`);
-  // }
-  // getCurrentOperator(): Observable<User | null> {
-  //   const token = this.getCookie('token');
-  //   if (token) {
-  //       const decodedToken = this.decodeToken(token);
-  //       if (decodedToken && decodedToken.email) {
-  //           return this.http.get<User[]>(`${this.url}/operators?email=${decodedToken.email}`, { withCredentials: true }).pipe(
-  //               map(operators => operators.length ? operators[0] : null),
-  //               catchError(error => {
-  //                 console.error('Error fetching current operator:', error);
-  //                 return of(null);
-  //               })
-  //           );
-  //       }
-  //   }
-  //   return of(null);
-  // }
+ 
 
 
   saveToken(token: string, expiresInDays: number = 1): void {
     this.cookieService.set('token', token, expiresInDays);
   }
   //----------------------------------------
-  // private decodeToken(token: string): any {
-  //   try {
-  //     return JSON.parse(atob(token.split('.')[1]));
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
 
   private getCookie(name: string): string | null {
     const nameLenPlus = (name.length + 1);

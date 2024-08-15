@@ -43,12 +43,12 @@ export class HeaderComponent implements OnInit {
   }
   logout(): void {
     this.authService.logout();
-    this.isAuthenticated = false;
+    this.isAuthenticated = false!;
     this.router.navigate(['']);
   }
 
-//  ngOnDestroy(): void {
-//    this.sub.unsubscribe()
-//  }
+ ngOnDestroy(): void {
+   this.sub?.unsubscribe()
+ }
 
 }

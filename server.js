@@ -76,14 +76,26 @@ server.use(cookieParser());
 server.use(middlewares);
 
 
-// // Endpoint per ottenere gli operatori basato su una query di email
+
+
+ 
+
+// Endpoint per ottenere gli operatori basato su una query di email
 server.get('/users', (req, res) => {
     console.log('Received query:', req.query); // Log della query email per debug
-    const users  = res
-    // const users = userdb.users.filter(operator => operator.email === req.query.email);
+    const users = userdb.users.filter(operator => operator.email === req.query.email);
     console.log('Found users:', users); // Log degli operatori trovati per debug
     res.json(users);
 });
+
+
+// Endpoint per ottenere tutti gli utenti
+server.get('/users/all',(req,res)=>{
+  // Ricarica il database per avere i dati aggiornati
+  const userdb = readDatabase();
+  console.log('Returning all users');
+  return res.json(userdb.users);
+ })
 
 
 
@@ -155,9 +167,11 @@ server.post('/auth/login', (req, res) => {
 // Middleware per verificare il token
 server.use((req, res, next) => {
   const token = req.cookies.token;
+  console.log('Token from cookies:', token);
 
   if (token) {
     const verifyTokenResult = verifyToken(token);
+    console.log('Token verification result:', verifyTokenResult);
     if (verifyTokenResult instanceof Error) {
       return res.status(401).json({ message: 'Access token not valid' });
     }
@@ -172,3 +186,4 @@ server.use(router);
 server.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
+
