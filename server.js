@@ -78,8 +78,6 @@ server.use(middlewares);
 
 
 
-
-
 // Endpoint per ottenere gli operatori basato su una query di email
 server.get('/users', (req, res) => {
     console.log('Received query:', req.query); // Log della query email per debug
@@ -120,7 +118,22 @@ server.get('/users/all',(req,res)=>{
   return res.status(200).json(user);
 });
 
+// Effettua il login dell'utente
+server.post('/auth/login', (req, res) => {
+  const { email, password } = req.body;
+  console.log(req.body);
 
+  console.log('prima di authenticazione');
+  const user = userdb.users.find(user => user.email === email);
+  if (!isAuthenticated({ email,password })) {
+    console.log('non authentificato');
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
+ 
+  const accessToken = createToken({ email,role:user.role ,id:user.id});
+  //res.cookie('token', accessToken, { httpOnly: true });
+  res.status(200).json({ accessToken });
+});
 
 
 server.post('/users/register', (req, res) => {
@@ -172,19 +185,7 @@ server.post('/users/register', (req, res) => {
   
   
 
-// Effettua il login dell'utente
-server.post('/auth/login', (req, res) => {
-  const { email, password } = req.body;
-  console.log('prima authentificato');
-  if (!isAuthenticated({ email, password })) {
-    console.log('e authentificato');
-    return res.status(401).json({ message: 'Invalid credentials' });
-  }
-  const user = userdb.users.find(user => user.email === email);
-  const accessToken = createToken({ email,role:user.role ,id:user.id});
-  //res.cookie('token', accessToken, { httpOnly: true });
-  res.status(200).json({ accessToken });
-});
+
 
 // Middleware per verificare il token
 server.use((req, res, next) => {
