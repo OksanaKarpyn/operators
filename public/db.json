@@ -9,20 +9,28 @@
       "role": "admin"
     },
     {
-      "id": "893846d1-90ba-4a22-b090-4110080ff5f6",
+      "id": "dd432de4-8d49-4110-bc5f-95cf10ea7edd",
+      "name": "romana",
+      "surname": "karpyn",
+      "role": "operator",
+      "email": "romana@test.it",
+      "password": "$2a$08$ztdKbdyGyY2VYI31kE9pM.hRhhI7V9VM0JHnJhD12CphzzmQeje9S"
+    },
+    {
+      "id": "ed666217-553c-4530-b8dd-5a40eb26decb",
       "name": "lidia",
       "surname": "karpyn",
       "role": "operator",
       "email": "lidia@test.it",
-      "password": "$2a$08$jXupdRne2Yndqu7kGib9CedorM0QEanvzUjtXxm9S6b/k5Wkz4ini"
+      "password": "$2a$08$EonJ9LVQxrIpC3JZeUPIqOTtM5Bklyq2d3RcN8iKQ.d5teNMzcZVi"
     },
     {
-      "id": "b83b7668-4ad3-41a0-b0c1-ebf88bbc753f",
-      "name": "romana edit",
-      "surname": "karpyn edit",
-      "role": "standard",
-      "email": "romana@test.it",
-      "password": "123456"
+      "id": "1591b8af-7acf-456a-900b-6da2550d8250",
+      "name": "francesa",
+      "surname": "rossi",
+      "role": "operator",
+      "email": "francesca@test.it",
+      "password": "$2a$08$yZksaaNcRra3UtSSqUNSWO1fHdEOao9xt7wHvwy4VdS7YdfY.QALq"
     }
   ]
 }

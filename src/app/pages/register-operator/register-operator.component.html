@@ -5,16 +5,16 @@
     <div class="row justify-content-center">
 
         <form class="row g-3 my-5 p-4 bg-body-tertiary rounded-3" [formGroup]="form" (ngSubmit)="submit()">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="form.get('name')?.enabled">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" formControlName="name" required />
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="form.get('surname')?.enabled">
                 <label for="surname" class="form-label">Surname</label>
                 <input type="text" class="form-control" id="surname" formControlName="surname" required />
             </div>
-            <div class="col-12">
+            <div class="col-12" *ngIf="form.get('role')?.enabled">
                 <label for="role" class="form-label">State</label>
                 <select for="role" class="form-select" aria-label="Default select example" id="role" formControlName="role">
                     <option  value="" disabled selected>Choise role</option>
@@ -23,11 +23,11 @@
                     <option value="standard">Standard</option>
                   </select>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="form.get('email')?.enabled">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" formControlName="email" required>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="form.get('password')?.enabled">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" formControlName="password" required>
             </div>
@@ -36,5 +36,5 @@
             </div>
         </form>
     </div>
-    <button class="btn btn-primary mr-2" [routerLink]="['']">Go Back</button>
+    <button class="btn btn-primary mr-2" [routerLink]="['/users']">Go Back</button>
 </div>

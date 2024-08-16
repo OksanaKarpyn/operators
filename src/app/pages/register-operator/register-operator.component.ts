@@ -20,6 +20,7 @@ import { User } from '../../models/user';
 export class RegisterOperatorComponent implements OnInit {
   form: FormGroup;
   userId!: string | null;
+  currentRole:string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +31,7 @@ export class RegisterOperatorComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
-      role: ['', Validators.required],
+      role: [{ value: '', disabled: true }, Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
@@ -39,29 +40,65 @@ export class RegisterOperatorComponent implements OnInit {
   ngOnInit(): void {
     // Ottieni l'ID dell'utente dalla rotta (se presente)
     this.userId = this.route.snapshot.paramMap.get('id');
-
-    if (this.userId) {
-      // Modalità di modifica: carica i dati dell'utente
-      this.userService.getUserById(this.userId).subscribe({
-        next: (userData: User) => {
-          // Riempie il modulo con i dati dell'utente, eccetto la password
-          this.form.patchValue({
-            name: userData.name,
-            surname: userData.surname,
-            role: userData.role,
-            email: userData.email
+    this.userService.getCurrentUser().subscribe(user=>{
+      if(user){
+        this.currentRole = user.role;
+        if (this.userId) {
+          // Modalità di modifica: carica i dati dell'utente
+          this.userService.getUserById(this.userId).subscribe(userData => {
+            this.form.patchValue(userData);
           });
           // Disabilita il campo password durante l'editing
           this.form.get('password')?.clearValidators();
           this.form.get('password')?.updateValueAndValidity();
-        },
-        error: (error) => {
-          console.error('Error loading user data:', error);
-          alert('Error loading user data.');
         }
-      });
+        // Adatta la visibilità dei campi in base al ruolo
+        this.updateFormVisibility();
+      }
+    });
+
+
+    
+    // if (this.userId) {
+    //   // Modalità di modifica: carica i dati dell'utente
+    //   this.userService.getUserById(this.userId).subscribe({
+    //     next: (userData: User) => {
+    //       // Riempie il modulo con i dati dell'utente, eccetto la password
+    //       this.form.patchValue({
+    //         name: userData.name,
+    //         surname: userData.surname,
+    //         role: userData.role,
+    //         email: userData.email
+    //       });
+    //       // Disabilita il campo password durante l'editing
+    //       this.form.get('password')?.clearValidators();
+    //       this.form.get('password')?.updateValueAndValidity();
+    //     },
+    //     error: (error) => {
+    //       console.error('Error loading user data:', error);
+    //       alert('Error loading user data.');
+    //     }
+    //   });
+    // }
+  }
+
+  updateFormVisibility(): void {
+    if (this.currentRole === 'admin') {
+      // Mostra tutto per admin
+      this.form.get('role')?.enable();
+      this.form.get('name')?.enable();
+      this.form.get('surname')?.enable();
+      this.form.get('email')?.enable();
+      this.form.get('password')?.enable();
+    } else if (this.currentRole === 'operator') {
+      // Nascondi il campo role per l'administrator
+      this.form.get('role')?.disable();
+    } else {
+      // Nascondi tutto per standard
+      this.form.disable();
     }
   }
+
 
   submit(): void {
     if (this.form.valid) {

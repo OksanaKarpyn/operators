@@ -180,13 +180,13 @@ server.use((req, res, next) => {
     return res.status(401).json({ message: 'Access token not provided' });
   }
 });
-// Endpoint per aggiornare un utente
+
+
+
 server.put('/users/:id', (req, res) => {
   const userId = req.params.id;
   const updatedUser = req.body;
 
-  console.log(`Request to update user with ID: ${userId}`);
-  
   let userdb = readDatabase();
   const userIndex = userdb.users.findIndex(user => user.id === userId);
   
@@ -194,12 +194,22 @@ server.put('/users/:id', (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
 
-  // Aggiorna i dati dell'utente
-  userdb.users[userIndex] = { ...userdb.users[userIndex], ...updatedUser };
+  // Se la password è presente nel body della richiesta, hashala
+  if (updatedUser.password) {
+    console.log('Hashing the new password');
+    const hashedPassword = bcrypt.hashSync(updatedUser.password, 8);
+    updatedUser.password = hashedPassword;
+  }
+
+  // Aggiorna i dati dell'utente (inclusa la password hashata se presente)
+  const oldUserData = userdb.users[userIndex];
+  userdb.users[userIndex] = { ...oldUserData, ...updatedUser };
 
   // Scrivi il database aggiornato
   try {
     writeDatabase(userdb);
+    console.log('User updated successfully. Re-reading the database...');
+    userdb = readDatabase();
     console.log('User updated successfully:', userdb.users[userIndex]);
     return res.status(200).json(userdb.users[userIndex]);
   } catch (error) {
@@ -207,6 +217,10 @@ server.put('/users/:id', (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
+  
+
+
+
 server.delete('/users/:id', (req, res)=>{
   const userId = req.params.id;
   console.log(`Request to delete user with ID: ${userId}`);
