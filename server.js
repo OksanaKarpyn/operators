@@ -78,7 +78,7 @@ server.use(middlewares);
 
 
 
- 
+
 
 // Endpoint per ottenere gli operatori basato su una query di email
 server.get('/users', (req, res) => {
@@ -97,6 +97,28 @@ server.get('/users/all',(req,res)=>{
   return res.json(userdb.users);
  })
 
+ // Endpoint per ottenere un utente per ID
+ server.get('/users/:id', (req, res) => {
+  const userId = req.params.id;
+
+  console.log(`Request to get user with ID: ${userId}`);
+  
+  let userdb;
+  try {
+    userdb = readDatabase();
+  } catch (error) {
+    console.error('Error reading the database:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+
+  const user = userdb.users.find(user => user.id === userId);
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  return res.status(200).json(user);
+});
 
 
 
@@ -198,6 +220,7 @@ server.put('/users/:id', (req, res) => {
   if (updatedUser.password) {
     console.log('Hashing the new password');
     const hashedPassword = bcrypt.hashSync(updatedUser.password, 8);
+    console.log('Hashed Password:', hashedPassword); 
     updatedUser.password = hashedPassword;
   }
 

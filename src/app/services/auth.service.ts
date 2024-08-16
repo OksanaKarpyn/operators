@@ -15,7 +15,9 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
-  constructor(private http: HttpClient,private cookieService: CookieService) {}
+  constructor(private http: HttpClient,private cookieService: CookieService) {
+    this.isAuthenticatedSubject.next(this.isAuthenticated());
+  }
 
   register(operator: User): Observable<void> {
     return this.http.post<void>(`${this.url}/register`, operator, { withCredentials: true });
@@ -26,6 +28,7 @@ export class AuthService {
     return this.http.post<any>(`${this.url}/login`, { email, password }, { withCredentials: true }).pipe(
       map((response: Token) => {
         if (response.accessToken) {
+          this.saveToken(response.accessToken);
           this.isAuthenticatedSubject.next(true);
           return response;
         }
@@ -39,9 +42,8 @@ export class AuthService {
   }
 
   logout(): void {
-    document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    this.isAuthenticatedSubject.next(false);
-    this.cookieService.delete('token');
+  this.cookieService.delete('token');
+  this.isAuthenticatedSubject.next(false);
   }
 
  

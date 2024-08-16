@@ -20,7 +20,7 @@ import { User } from '../../models/user';
 export class RegisterOperatorComponent implements OnInit {
   form: FormGroup;
   userId!: string | null;
-  currentRole:string = '';
+  currentRole: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -40,8 +40,8 @@ export class RegisterOperatorComponent implements OnInit {
   ngOnInit(): void {
     // Ottieni l'ID dell'utente dalla rotta (se presente)
     this.userId = this.route.snapshot.paramMap.get('id');
-    this.userService.getCurrentUser().subscribe(user=>{
-      if(user){
+    this.userService.getCurrentUser().subscribe(user => {
+      if (user) {
         this.currentRole = user.role;
         if (this.userId) {
           // Modalità di modifica: carica i dati dell'utente
@@ -58,7 +58,7 @@ export class RegisterOperatorComponent implements OnInit {
     });
 
 
-    
+
     // if (this.userId) {
     //   // Modalità di modifica: carica i dati dell'utente
     //   this.userService.getUserById(this.userId).subscribe({
@@ -108,6 +108,16 @@ export class RegisterOperatorComponent implements OnInit {
         this.userService.updateUser(updatedUser).subscribe({
           next: () => {
             alert('User updated successfully');
+
+            // Esegui una nuova richiesta GET per aggiornare i dati nel form
+            this.userService.getUserById(this.userId!).subscribe({
+              next: (updatedUserData: User) => {
+                this.form.patchValue(updatedUserData);
+              },
+              error: (error) => {
+                console.error('Error reloading user data:', error);
+              }
+            });
             this.router.navigate(['/users']);
           },
           error: (res) => {

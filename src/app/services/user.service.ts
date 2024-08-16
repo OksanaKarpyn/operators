@@ -34,8 +34,8 @@ export class UserService {
   getAllUsers(): Observable<Array<User>>{
     return this.http.get<Array<User>>(`${this.url}/all`);
   }
-  getUserById(userId: string): Observable<User> {
-    return this.http.get<User>(`${this.url}/${userId}`, { withCredentials: true }).pipe(
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`, { withCredentials: true }).pipe(
       catchError(error => {
         console.error('Error fetching user by ID:', error);
         return throwError(error); // o puoi restituire of(null) se preferisci
