@@ -1,10 +1,20 @@
-<h1>User Details</h1>
+
 @if(user){
 
-<div class="card">
-  <h2 class="card-title">{{ user.name }} {{ user.surname }}</h2>
-  <p>{{user.role}}</p>
-  <button class="btn btn-primary mr-2" [routerLink]="['/users']">Go Back</button>
-</div>
+  <div class="details-user-content">
+    <div class="details-user-box">
+      <h2>User Details</h2>
+      <div class="card">
+        <h5 class="card-header">Name: {{ user.name }}</h5>
+        <h5 class="card-header">Surname: {{ user.surname }}</h5>
+  
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Role: {{user.role}}</li>
+          <li class="list-group-item"> Email: {{user.email}}</li>
+          <li class="list-group-item">ID: {{user.id}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 }
 

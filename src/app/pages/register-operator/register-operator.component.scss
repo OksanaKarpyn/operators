@@ -21,7 +21,8 @@
     }
   }
   .register-box {
-    align-self: center;
+    margin-top: 50px;
+    align-self: self-start;
     padding: 20px;
    
     background: rgba(0, 0, 0, 0.5);
@@ -30,14 +31,10 @@
     border-radius: 10px;
   
     h2 {
-      margin: 0 0 30px;
+      margin: 0 0 20px;
       padding: 0;
       color: #fff;
       text-align: center;
     }
-  
-   
-  
-   
   }
   

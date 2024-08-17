@@ -21,11 +21,11 @@
         <td>{{ user.surname }}</td>
         <td>{{ user.email }}</td>
         <td>
-          <a class="btn button  mx-2" [routerLink]="['/register/add-edit', user.id]">Edit</a>
-          <button class="btn button  mx-2" (click)="deleteUser(user.id)">
+          <a class="btn button" [routerLink]="['/register/add-edit', user.id]">Edit</a>
+          <button class="btn button" (click)="deleteUser(user.id)">
             Delete
           </button>
-          <a class="btn button mx-2" [routerLink]="[user.id]">Details</a>
+          <a class="btn button" [routerLink]="[user.id]">Details</a>
         </td>
       </tr>
   
