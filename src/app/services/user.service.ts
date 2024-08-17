@@ -45,20 +45,23 @@ export class UserService {
   
 
   getCurrentUser(): Observable<User | null> {
-    const token = this.getCookie('token');
-    if (token) {
-        const decodedToken = this.decodeToken(token);
-        if (decodedToken && decodedToken.email) {
-            return this.http.get<User[]>(`${this.url}?email=${decodedToken.email}`, { withCredentials: true }).pipe(
-                map(user => user.length ? user[0] : null),
-                catchError(error => {
-                  console.error('Error fetching current operator:', error);
-                  return of(null);
-                })
-            );
-        }
-    }
-    return of(null);
+    return this.http.get<User>(`${this.url}/profile`,{ withCredentials: true });
+
+
+    // const token = this.getCookie('token');
+    // if (token) {
+    //     const decodedToken = this.decodeToken(token);
+    //     if (decodedToken && decodedToken.email) {
+    //         return this.http.get<User[]>(`${this.url}?email=${decodedToken.email}`, { withCredentials: true }).pipe(
+    //             map(user => user.length ? user[0] : null),
+    //             catchError(error => {
+    //               console.error('Error fetching current operator:', error);
+    //               return of(null);
+    //             })
+    //         );
+    //     }
+    // }
+    //return of(null);
   }
 
   //----------------------------------------

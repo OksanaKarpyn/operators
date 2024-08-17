@@ -17,12 +17,12 @@
       "password": "$2a$08$dYEf781h3LwqTKXpzW7eE.MT36sJcPgGSmLEXdM2GdudLPVV8zDty"
     },
     {
-      "id": "cd55c6e3-071f-44a8-8029-080eacca06b1",
-      "name": "lidia modifica",
+      "id": "4007e1ed-c49e-444f-ad20-67ad20783200",
+      "name": "lidia",
       "surname": "karpyn",
-      "role": "standard",
+      "role": "admin",
       "email": "lidia@test.it",
-      "password": "$2a$08$4t4M1WcIQg8/MCmKZ6bSMO7MVFxpS8CNCJ1S7PuQ5VmjcFHhZkc9W"
+      "password": "$2a$08$dzGAbJz4t8BSsv5IJSP9ReViInuyu3ov2xH7rsQxqevPzj1gizale"
     }
   ]
 }

@@ -80,12 +80,21 @@ server.use(middlewares);
 
 // Endpoint per ottenere gli operatori basato su una query di email
 server.get('/users', (req, res) => {
-    console.log('Received query:', req.query); // Log della query email per debug
-    const users = userdb.users.filter(operator => operator.email === req.query.email);
+    console.log('Received query:', req.body); // Log della query email per debug
+    const users = userdb.users.filter(operator => operator.email === req.body.email);
     console.log('Found users:', users); // Log degli operatori trovati per debug
     res.json(users);
 });
-
+server.get('/users/profile',(req,res)=>{
+  const token = req.cookies.token;
+  if (token) {
+    const verifyTokenResult = verifyToken(token);
+    console.log(verifyTokenResult);
+    const email = verifyTokenResult.email;
+    const user = userdb.users.find(operator => operator.email === email);
+    res.json(user);
+  }
+})
 
 // Endpoint per ottenere tutti gli utenti
 server.get('/users/all',(req,res)=>{

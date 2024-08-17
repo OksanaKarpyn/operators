@@ -1,3 +1,25 @@
-.dashboard-content{
-    border: 2px solid green;
+
+.dashboard-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dashboard-box{
+    width: 100%;
+    margin-top: 50px;
+    align-self: flex-start;
+    padding: 20px;
+   
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+  
+    h2 {
+      margin: 0 0 30px;
+      padding: 0;
+      color: #fff;
+      text-align: center;
+    }
 }
