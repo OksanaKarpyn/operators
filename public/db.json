@@ -23,6 +23,14 @@
       "role": "admin",
       "email": "lidia@test.it",
       "password": "$2a$08$3ldKeoJOZn/B1IW0.bsfY./Kr8yC2XOsqEtduWUGAKYeT.3I9pfWW"
+    },
+    {
+      "id": "e6d885df-b1fd-43ac-95e7-649077ec8919",
+      "name": "marco",
+      "surname": "rossi",
+      "role": "operator",
+      "email": "marco.debon@anitia.it",
+      "password": "$2a$08$tmV8LRBpgl9C0w6/ebkXzev97sJRmKNon2O6XJrL3Kg.ZztR1JD5i"
     }
   ]
 }

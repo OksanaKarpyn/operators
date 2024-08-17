@@ -1,8 +1,8 @@
 
 
-<div class="register-component">
-    <h2>Register form</h2>
-    <div class="row justify-content-center">
+<div class="register-content">
+    <div class="row justify-content-center register-box">
+        <h2>Register form</h2>
 
         <form class="row g-3 my-5 p-4 bg-body-tertiary rounded-3" [formGroup]="form" (ngSubmit)="submit()">
             <div class="col-md-6" *ngIf="form.get('name')?.enabled">
@@ -32,9 +32,9 @@
                 <input type="password" class="form-control" id="password" formControlName="password" required>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Sign in</button>
+                <button type="submit" class="btn button" [disabled]="!form.valid">Sign in</button>
             </div>
         </form>
     </div>
-    <button class="btn btn-primary mr-2" [routerLink]="['/users']">Go Back</button>
+    <!-- <button class="btn btn-primary mr-2" [routerLink]="['/users']">Go Back</button> -->
 </div>
