@@ -74,6 +74,15 @@ export class AuthService {
   saveToken(token: string, expiresInDays: number = 1): void {
     this.cookieService.set('token', token, expiresInDays);
   }
+
+
+  decodeToken(token: string): any {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (e) {
+      return null;
+    }
+  }
   //----------------------------------------
 
   private getCookie(name: string): string | null {

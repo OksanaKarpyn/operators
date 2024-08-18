@@ -53,14 +53,7 @@ export class UserService {
 
 
   //----------------------------------------
- decodeToken(token: string): any {
-    try {
-      return JSON.parse(atob(token.split('.')[1]));
-    } catch (e) {
-      return null;
-    }
-  }
-
+ 
   private getCookie(name: string): string | null {
     const nameLenPlus = (name.length + 1);
     return document.cookie

@@ -171,7 +171,7 @@ server.get('/users', (req, res) => {
     res.json(users);
 });
 
-//user profilo
+// //user profilo
 server.get('/users/profile',(req,res)=>{
   const token = req.cookies.token;
   if (token) {
@@ -181,9 +181,43 @@ server.get('/users/profile',(req,res)=>{
     const email = verifyTokenResult.email;
     const userdb = readDatabase();
     const user = userdb.users.find(operator => operator.email === email);
-    res.json(user);
+   return res.json(user);
+
   }
+  return res.status(401).json({ message: 'Access token not provided' });
 })
+
+// server.get('/users/profile', (req, res) => {
+//   const token = req.cookies.token;
+//   if (token) {
+//     const verifyTokenResult = verifyToken(token);
+//     console.log('Token verification result:', verifyTokenResult);
+
+//     if (verifyTokenResult instanceof Error) {
+//       return res.status(401).json({ message: 'Access token not valid' });
+//     }
+
+//     const email = verifyTokenResult.email;
+//     console.log('Extracted email from token:', email);
+//     const userdb = readDatabase();
+//     console.log('Database content:', userdb);
+    
+//     const user = userdb.users.find(operator => operator.email === email);
+//     console.log('Found user:', user);
+    
+//     if (user) {
+//       return res.json(user);
+//     } else {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+//   } else {
+//     return res.status(401).json({ message: 'Access token not provided' });
+//   }
+// });
+
+
+
+
 
 // Endpoint per ottenere tutti gli utenti
 server.get('/users/all',(req,res)=>{

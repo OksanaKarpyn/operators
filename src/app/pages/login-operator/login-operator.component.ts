@@ -44,7 +44,7 @@ export class LoginOperatorComponent {
               // Salva il token 
            this.authService.saveToken(response.accessToken);
          // Decodifica il token per ottenere l'ID utente
-        const decodedToken = this.userService.decodeToken(response.accessToken);
+        const decodedToken = this.authService.decodeToken(response.accessToken);
         const userId = decodedToken?.id; // Assumendo che l'ID utente sia contenuto nel token
 
         if (userId) {

@@ -1,4 +1,6 @@
-<div class="header-content">
+<!-- {{user| json }} -->
+
+<div class="header-content" *ngIf="user">
 
   <div class="container py-4">
   
@@ -8,16 +10,16 @@
       </li> -->
     
       <div class="d-flex ml-auto flex-wrap">
-        <li class="nav-item" *ngIf="isAuthenticated">
+        <li class="nav-item">
           <a class="nav-link btn btn-primary mr-2" [routerLink]="['register/add-edit']">Register User</a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticated">
+        <li class="nav-item">
           <a class="nav-link btn btn-outline-primary mr-2" [routerLink]="['/users']">Users list</a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticated">
+        <li class="nav-item">
           <a class="nav-link btn btn-outline-primary mr-2" [routerLink]="['/dashboard', userId]">Dashboard</a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticated">
+        <li class="nav-item">
           <button class="nav-link btn btn-outline-danger" (click)="logout()">Logout</button>
         </li>
       </div>

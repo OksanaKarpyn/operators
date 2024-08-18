@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { User } from '../../models/user';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -15,11 +16,18 @@ export class HeaderComponent implements OnInit {
   isAuthenticated = false;
   userId?: string | null = null;
   sub?: Subscription;
+  user?: User |undefined;
 
   constructor(
     private authService:AuthService,
     private userService:UserService,
     private router: Router) {
+      userService.profile$.subscribe({
+        
+        next:(user)=>{
+          this.user = user;
+        }
+      })
   }
   
   
@@ -34,6 +42,7 @@ export class HeaderComponent implements OnInit {
       if (value) {
         this.userService.getCurrentUser().subscribe(user => {
           if (user) {
+            console.log(user.id,'header component');
             this.userId= user.id// Memorizza l'ID dell'operatore loggato
           }
         });
@@ -43,8 +52,6 @@ export class HeaderComponent implements OnInit {
   }
   logout(): void {
     this.authService.logout();
-    this.isAuthenticated = false!;
-    this.router.navigate(['']);
   }
 
  ngOnDestroy(): void {
