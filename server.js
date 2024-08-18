@@ -27,7 +27,7 @@ function readDatabase() {
     try {
       // Legge il contenuto del file
       const fileContent = fs.readFileSync(dbPath, 'UTF-8');
-      console.log('sono nel func read data base')
+      console.log('sono nel func readDataBase')
       // Parsea il contenuto JSON
       return JSON.parse(fileContent);
     } catch (error) {
@@ -60,7 +60,14 @@ function verifyToken(token) {
 
 // Verifica se l'utente esiste nel database
 function isAuthenticated({ email, password }) {
+  console.log('sono dentro la funzione isAuthenticated');
+  //ricarica database per avere dati aggiornati
+  const userdb = readDatabase();
+
   const user = userdb.users.find(user => user.email === email);
+  console.log(user);
+  console.log(`User prova a logarsi: ${JSON.stringify(user)}`);
+
   if (user) {
     console.log(`User found: ${JSON.stringify(user)}`);
     const isMatch = bcrypt.compareSync(password, user.password);
@@ -76,64 +83,22 @@ server.use(cookieParser());
 server.use(middlewares);
 
 
-
-
-// Endpoint per ottenere gli operatori basato su una query di email
-server.get('/users', (req, res) => {
-    console.log('Received query:', req.body); // Log della query email per debug
-    const users = userdb.users.filter(operator => operator.email === req.body.email);
-    console.log('Found users:', users); // Log degli operatori trovati per debug
-    res.json(users);
-});
-server.get('/users/profile',(req,res)=>{
-  const token = req.cookies.token;
-  if (token) {
-    const verifyTokenResult = verifyToken(token);
-    console.log(verifyTokenResult);
-    const email = verifyTokenResult.email;
-    const user = userdb.users.find(operator => operator.email === email);
-    res.json(user);
-  }
-})
-
-// Endpoint per ottenere tutti gli utenti
-server.get('/users/all',(req,res)=>{
-  // Ricarica il database per avere i dati aggiornati
-  const userdb = readDatabase();
-  console.log('Returning all users');
-  return res.json(userdb.users);
- })
-
- // Endpoint per ottenere un utente per ID
- server.get('/users/:id', (req, res) => {
-  const userId = req.params.id;
-
-  console.log(`Request to get user with ID: ${userId}`);
-  
-  let userdb;
-  try {
-    userdb = readDatabase();
-  } catch (error) {
-    console.error('Error reading the database:', error);
-    return res.status(500).json({ message: 'Internal server error' });
-  }
-
-  const user = userdb.users.find(user => user.id === userId);
-
-  if (!user) {
-    return res.status(404).json({ message: 'User not found' });
-  }
-
-  return res.status(200).json(user);
+// Endpoint per il logout
+server.post('/auth/logout', (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ message: 'Logout successful' });
 });
 
 // Effettua il login dell'utente
 server.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
-
-  console.log('prima di authenticazione');
+  //ricarica database per avere dati aggiornati
+  const userdb = readDatabase();
   const user = userdb.users.find(user => user.email === email);
+  console.log(`Trovato utente per login: ${JSON.stringify(user)}`);
+  console.log('prima di authenticazione');
+
   if (!isAuthenticated({ email,password })) {
     console.log('non authentificato');
     return res.status(401).json({ message: 'Invalid credentials' });
@@ -144,7 +109,7 @@ server.post('/auth/login', (req, res) => {
   res.status(200).json({ accessToken });
 });
 
-
+// registra utente
 server.post('/users/register', (req, res) => {
     const { name, surname,role, email, password } = req.body;
   
@@ -192,6 +157,66 @@ server.post('/users/register', (req, res) => {
 
   });
   
+
+
+
+
+
+
+// Endpoint per ottenere gli operatori basato su una query di email
+server.get('/users', (req, res) => {
+    console.log('Received query:', req.body); // Log della query email per debug
+    const users = userdb.users.filter(operator => operator.email === req.body.email);
+    console.log('Found users:', users); // Log degli operatori trovati per debug
+    res.json(users);
+});
+
+//user profilo
+server.get('/users/profile',(req,res)=>{
+  const token = req.cookies.token;
+  if (token) {
+    const verifyTokenResult = verifyToken(token);
+    console.log(verifyTokenResult);
+
+    const email = verifyTokenResult.email;
+    const userdb = readDatabase();
+    const user = userdb.users.find(operator => operator.email === email);
+    res.json(user);
+  }
+})
+
+// Endpoint per ottenere tutti gli utenti
+server.get('/users/all',(req,res)=>{
+  // Ricarica il database per avere i dati aggiornati
+  const userdb = readDatabase();
+  console.log('Returning all users');
+  return res.json(userdb.users);
+ })
+
+ // Endpoint per ottenere un utente per ID
+ server.get('/users/:id', (req, res) => {
+  const userId = req.params.id;
+
+  console.log(`Request to get user with ID: ${userId}`);
+  
+  let userdb;
+  try {
+    userdb = readDatabase();
+  } catch (error) {
+    console.error('Error reading the database:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+
+  const user = userdb.users.find(user => user.id === userId);
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  return res.status(200).json(user);
+});
+
+
   
 
 
@@ -278,6 +303,7 @@ server.delete('/users/:id', (req, res)=>{
       return res.status(500).json({ message: 'Internal server error' });
     }
 })
+
 
 server.use(router);
 

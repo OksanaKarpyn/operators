@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { Token } from '../models/token';
+import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -15,13 +17,14 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
-  constructor(private http: HttpClient,private cookieService: CookieService) {
-    this.isAuthenticatedSubject.next(this.isAuthenticated());
-  }
 
-  register(operator: User): Observable<void> {
-    return this.http.post<void>(`${this.url}/register`, operator, { withCredentials: true });
-    
+
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+     private userService:UserService,
+     private router:Router) {
+    this.isAuthenticatedSubject.next(this.isAuthenticated());
   }
 
   login(email: string, password: string): Observable<Token | null> {
@@ -42,9 +45,28 @@ export class AuthService {
   }
 
   logout(): void {
-  this.cookieService.delete('token');
-  this.isAuthenticatedSubject.next(false);
+    this.http.post(`${this.url}/logout`, {}, { withCredentials: true }).subscribe({
+      next: () => {
+        this.cookieService.delete('token');
+        this.userService.profile$.next(undefined); 
+        this.isAuthenticatedSubject.next(false);
+        this.router.navigate(['']); 
+      },
+      error: (err) => {
+        console.error('Logout failed', err);
+        this.cookieService.delete('token');
+        this.isAuthenticatedSubject.next(false);
+        window.location.reload();
+      }
+    });
   }
+
+  // logout(): void {
+  // this.userService.profile$.next(undefined);  
+  // this.cookieService.delete('token','');         
+  // this.isAuthenticatedSubject.next(false);    
+  // this.router.navigate(['']); 
+  // }
 
  
 

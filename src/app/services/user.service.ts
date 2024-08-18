@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { Token } from '../models/token';
 
@@ -13,7 +13,11 @@ import { Token } from '../models/token';
 export class UserService {
   readonly url = 'http://localhost:3000/users';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
+
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+ 
+
+  profile$: BehaviorSubject<User| undefined> = new BehaviorSubject<User | undefined>(undefined);
 
   constructor(private http: HttpClient,private cookieService: CookieService) {}
 
@@ -27,10 +31,6 @@ export class UserService {
   deleteUser(id: string): Observable<User> {
     return this.http.delete<User>(`${this.url}/${id}`,{ withCredentials: true });
   }
- 
-
-  
-
   getAllUsers(): Observable<Array<User>>{
     return this.http.get<Array<User>>(`${this.url}/all`);
   }
@@ -45,24 +45,12 @@ export class UserService {
   
 
   getCurrentUser(): Observable<User | null> {
-    return this.http.get<User>(`${this.url}/profile`,{ withCredentials: true });
+    return this.http.get<User>(`${this.url}/profile`,{ withCredentials: true }).pipe(tap((user)=>{
+      this.profile$.next(user);
+    }));
 
-
-    // const token = this.getCookie('token');
-    // if (token) {
-    //     const decodedToken = this.decodeToken(token);
-    //     if (decodedToken && decodedToken.email) {
-    //         return this.http.get<User[]>(`${this.url}?email=${decodedToken.email}`, { withCredentials: true }).pipe(
-    //             map(user => user.length ? user[0] : null),
-    //             catchError(error => {
-    //               console.error('Error fetching current operator:', error);
-    //               return of(null);
-    //             })
-    //         );
-    //     }
-    // }
-    //return of(null);
   }
+
 
   //----------------------------------------
  decodeToken(token: string): any {
