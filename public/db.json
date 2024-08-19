@@ -9,20 +9,20 @@
       "role": "admin"
     },
     {
-      "id": "92299624-d95d-40c7-a1a1-e37c42136ef8",
-      "name": "francesa",
-      "surname": "rossi",
-      "role": "standard",
-      "email": "francesca@test.it",
-      "password": "$2a$08$dYEf781h3LwqTKXpzW7eE.MT36sJcPgGSmLEXdM2GdudLPVV8zDty"
-    },
-    {
       "id": "46c5f011-cb6e-46b6-8e78-a10669ff5f03",
       "name": "lidia",
       "surname": "karpyn",
       "role": "operator",
       "email": "lidia@test.it",
       "password": "$2a$08$eLlvdOM.qwe4W1jcs0jjy.A1M625Ed6HGqO70jGEPYXzOZMEwBE2m"
+    },
+    {
+      "id": "135ad631-7aec-474e-a3ca-4d5b6df205b5",
+      "name": "romana edit",
+      "surname": "karpyn",
+      "role": "operator",
+      "email": "romana@test.it",
+      "password": "$2a$08$OTrwF.IrBf0PCeKJi8KlpOaGerTI083NpPzDylJacbn6SkfpbbO.q"
     }
   ]
 }

@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
-
 @Component({
   selector: 'app-register-operator',
   standalone: true,
@@ -13,6 +12,7 @@ import { User } from '../../models/user';
     CommonModule,
     ReactiveFormsModule,
     RouterModule
+  
   ],
   templateUrl: './register-operator.component.html',
   styleUrls: ['./register-operator.component.scss']
@@ -21,7 +21,7 @@ export class RegisterOperatorComponent implements OnInit {
   form: FormGroup;
   userId!: string | null;
   currentRole: string = '';
-
+  isEditing: boolean = false;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -44,6 +44,7 @@ export class RegisterOperatorComponent implements OnInit {
       if (user) {
         this.currentRole = user.role;
         if (this.userId) {
+          this.isEditing = true;
           // Modalità di modifica: carica i dati dell'utente
           this.userService.getUserById(this.userId).subscribe(userData => {
             this.form.patchValue(userData);
@@ -53,7 +54,7 @@ export class RegisterOperatorComponent implements OnInit {
           this.form.get('password')?.updateValueAndValidity();
         }
         // Adatta la visibilità dei campi in base al ruolo
-        this.updateFormVisibility();
+        this.userService.updateFormVisibility(this.form,this.currentRole);
       }
     });
 
@@ -82,22 +83,22 @@ export class RegisterOperatorComponent implements OnInit {
     // }
   }
 
-  updateFormVisibility(): void {
-    if (this.currentRole === 'admin') {
-      // Mostra tutto per admin
-      this.form.get('role')?.enable();
-      this.form.get('name')?.enable();
-      this.form.get('surname')?.enable();
-      this.form.get('email')?.enable();
-      this.form.get('password')?.enable();
-    } else if (this.currentRole === 'operator') {
-      // Nascondi il campo role per l'administrator
-      this.form.get('role')?.disable();
-    } else {
-      // Nascondi tutto per standard
-      this.form.disable();
-    }
-  }
+  // updateFormVisibility(): void {
+  //   if (this.currentRole === 'admin') {
+  //     // Mostra tutto per admin
+  //     this.form.get('role')?.enable();
+  //     this.form.get('name')?.enable();
+  //     this.form.get('surname')?.enable();
+  //     this.form.get('email')?.enable();
+  //     this.form.get('password')?.enable();
+  //   } else if (this.currentRole === 'operator') {
+  //     // Nascondi il campo role per l'administrator
+  //     this.form.get('role')?.disable();
+  //   } else {
+  //     // Nascondi tutto per standard
+  //     this.form.disable();
+  //   }
+  // }
 
 
   submit(): void {

@@ -1,4 +1,4 @@
-<div class="users-content">
+<div class="users-content" >
   <div class="users-box">
     <h2>List of Users</h2>
 
@@ -21,9 +21,9 @@
         <td>{{ user.name }}</td>
         <td>{{ user.surname }}</td>
         <td>{{ user.email }}</td>
-        <td>
-          <a class="btn button" [routerLink]="['/register/add-edit', user.id]">Edit</a>
-          <button class="btn button" (click)="deleteUser(user.id)">
+        <td >
+          <a class="btn button" [routerLink]="['/register/add-edit', user.id]" *ngIf="canViewEditButton">Edit</a>
+          <button class="btn button" (click)="deleteUser(user.id)" *ngIf="canViewDeleteButton">
             Delete
           </button>
           <a class="btn button" [routerLink]="[user.id]">Details</a>

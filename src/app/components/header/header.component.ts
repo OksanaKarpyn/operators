@@ -5,10 +5,16 @@ import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [JsonPipe,RouterLink,CommonModule],
+  imports: [
+    JsonPipe,
+    RouterLink,
+    CommonModule,
+   
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -17,6 +23,10 @@ export class HeaderComponent implements OnInit {
   userId?: string | null = null;
   sub?: Subscription;
   user?: User |undefined;
+   
+  canViewRegisterButton: boolean = false;
+  canViewEditButton: boolean = false;
+  canViewDeleteButton : boolean = false;
 
   constructor(
     private authService:AuthService,
@@ -26,6 +36,7 @@ export class HeaderComponent implements OnInit {
         
         next:(user)=>{
           this.user = user;
+          this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
         }
       })
   }
@@ -44,12 +55,22 @@ export class HeaderComponent implements OnInit {
           if (user) {
             console.log(user.id,'header component');
             this.userId= user.id// Memorizza l'ID dell'operatore loggato
+            this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
           }
         });
       }
     })
         
   }
+
+  updateButtonVisibility():void {
+    if(this.user){
+      const visibility = this.userService.getButtonVisibility(this.user.role);
+      this.canViewRegisterButton = visibility.canViewRegisterButton;
+      this.canViewEditButton = visibility.canViewEditButton;
+      this.canViewDeleteButton = visibility.canViewDeleteButton;
+    }
+   }
   logout(): void {
     this.authService.logout();
   }
@@ -57,5 +78,7 @@ export class HeaderComponent implements OnInit {
  ngOnDestroy(): void {
    this.sub?.unsubscribe()
  }
+
+
 
 }
