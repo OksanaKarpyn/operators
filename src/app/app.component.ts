@@ -5,11 +5,11 @@ import { UserService } from './services/user.service';
 import { Observable } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
-
+import { FooterComponent } from './components/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent,CommonModule],
+  imports: [RouterOutlet, HeaderComponent,CommonModule,FooterComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']  // `styleUrls` non `styleUrl`
 })
