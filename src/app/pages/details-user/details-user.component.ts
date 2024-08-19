@@ -2,10 +2,14 @@ import { Component } from '@angular/core';
 import { User } from '../../models/user';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { JsonPipe, UpperCasePipe } from '@angular/common';
 @Component({
   selector: 'app-details-user',
   standalone: true,
-  imports: [RouterLink],
+  imports: [
+    RouterLink,
+    UpperCasePipe,
+    JsonPipe],
   templateUrl: './details-user.component.html',
   styleUrl: './details-user.component.scss'
 })

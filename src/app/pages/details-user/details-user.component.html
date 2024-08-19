@@ -5,8 +5,8 @@
     <div class="details-user-box">
       <h2>User Details</h2>
       <div class="card">
-        <h5 class="card-header">Name: {{ user.name }}</h5>
-        <h5 class="card-header">Surname: {{ user.surname }}</h5>
+        <h5 class="card-header">Name: {{ user.name | uppercase}}</h5>
+        <h5 class="card-header">Surname: {{ user.surname |uppercase }}</h5>
   
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Role: {{user.role}}</li>

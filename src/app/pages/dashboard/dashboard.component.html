@@ -14,7 +14,7 @@
           
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">{{ user.name }} {{user.surname}}</h5>
+              <h5 class="card-title" >{{ user.name | uppercase }} {{user.surname | uppercase}}</h5>
               <p class="card-text">{{user.role}}</p>
               <p class="card-text"><small class="text-body-secondary">Email: {{ user.email }}</small></p>
             </div>
