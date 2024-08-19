@@ -14,7 +14,7 @@
       "surname": "karpyn",
       "role": "operator",
       "email": "lidia@test.it",
-      "password": "$2a$08$37NzWsuAYcm6EBY2y2NA2.sQbIWY2L2G2o1PNKdDlS2jDlYAPc7vK"
+      "password": "$2a$08$fKk6CrCFQbIKi7sEZqfdkeGN5QBc9eKYOHWzlAxV6NvygeGAyjpZW"
     },
     {
       "id": "135ad631-7aec-474e-a3ca-4d5b6df205b5",
@@ -22,7 +22,7 @@
       "surname": "karpyn",
       "role": "standard",
       "email": "romana@test.it",
-      "password": "$2a$08$ypjpkn/tE2MP14w1vOJopusM4z2ymra23qnuDYZr31BKF4XButCqO"
+      "password": "$2a$08$6/wn/pmURfHf3i5OQMIoOuJ.VrEIEZa.oO1OO3CqcWrO8Mg/GnD6u"
     }
   ]
 }

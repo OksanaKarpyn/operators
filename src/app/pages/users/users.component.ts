@@ -47,10 +47,18 @@ export class UsersComponent {
     }
    }
 
+   // mi serve per acedere  al userService.canDeleteUser xke userServicee private  
+   canDeleteUser(id: string): boolean {
+    if(!id){
+      return false
+    }
+    return this.userService.canDeleteUser(id, this.user);
+  }
+
   deleteUser(id?: string) {
     //service.delete user by id
     console.log('delete', id);
-    if (id) {
+    if (id && this.canDeleteUser(id)) {
       this.userService.deleteUser(id).subscribe({
         next: () => {
           this.users = this.users.filter((user) => user.id !== id);
@@ -59,7 +67,9 @@ export class UsersComponent {
           console.error('Error deleting user', err);
         },
       });
-  }
+    }else{
+      console.warn('Non puoi cancellare te stesso non hai permesso');
+    }
   //   // users find by index
   //   //if index exist
   //   //user.splice(idx,1);

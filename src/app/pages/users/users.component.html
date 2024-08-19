@@ -23,7 +23,7 @@
         <td>{{ user.email }}</td>
         <td >
           <a class="btn button" [routerLink]="['/register/add-edit', user.id]" *ngIf="canViewEditButton">Edit</a>
-          <button class="btn button" (click)="deleteUser(user.id)" *ngIf="canViewDeleteButton">
+          <button class="btn button" (click)="deleteUser(user.id)" *ngIf="user.id && canDeleteUser(user.id)">
             Delete
           </button>
           <a class="btn button" [routerLink]="[user.id]">Details</a>

@@ -110,6 +110,13 @@ export class UserService {
     }
     return visibility;
   }
+  
+  canDeleteUser(id:string,currentUser?:User): boolean {
+    if(currentUser && currentUser.role === 'admin'){
+      return currentUser.id !== id; // L'admin può cancellare chiunque tranne se stesso
+    }
+    return false; // Gli altri utenti non possono cancellare nessuno
+  }
 }
 
 
