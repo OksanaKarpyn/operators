@@ -28,9 +28,17 @@
       "id": "95f2971a-c1c2-4594-8d05-71d651299aa8",
       "name": "oksana",
       "surname": "karpyn",
-      "role": "operator",
+      "role": "admin",
       "email": "oksana1@test.it",
-      "password": "$2a$08$Izix15sFi6vK3GPVngejTOnd4j.tsYqDolgsAi.OmbEqqssUxux6C"
+      "password": "$2a$08$sMJU0iZ7.6laP9oufLaBq.NUx0rqMT.lFjhMwyzRGUc1phuH8stw6"
+    },
+    {
+      "id": "fd656ae8-f648-4389-87c0-126fb5899649",
+      "name": "francesa",
+      "surname": "karpyn",
+      "role": "admin",
+      "email": "francesca@test.it",
+      "password": "$2a$08$zGwInqXMI.4YffbwbbrBTe9ZGj4F6ho/WFv1D0eCp4Mc2.JWnfH42"
     }
   ]
 }

@@ -22,7 +22,7 @@ export class UsersComponent {
   users: Array<User> = [];
   
   filteredUsers: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
-  searchTerm: string = '';
+  searchValueInput: string = '';
 
   canViewRegisterButton: boolean = false;
   canViewEditButton: boolean = false;
@@ -58,7 +58,7 @@ export class UsersComponent {
   }
   //bottone search users
   onSearchChange(): void {
-    this.filteredUsers.next(this.applyFilter(this.searchTerm));
+    this.filteredUsers.next(this.applyFilter(this.searchValueInput));
   }
    // Applicare il filtro agli utenti
    applyFilter(term: string): User[] {
@@ -95,7 +95,7 @@ export class UsersComponent {
       this.userService.deleteUser(id).subscribe({
         next: () => {
           this.users = this.users.filter((user) => user.id !== id);
-          this.filteredUsers.next(this.applyFilter(this.searchTerm));
+          this.filteredUsers.next(this.applyFilter(this.searchValueInput));
         },
         error: (err) => {
           console.error('Error deleting user', err);
