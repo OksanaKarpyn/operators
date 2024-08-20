@@ -3,40 +3,73 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [JsonPipe, RouterLink,CommonModule],
+  imports: [
+    JsonPipe, 
+    RouterLink,
+    CommonModule,
+    FormsModule
+  ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
 export class UsersComponent {
   users: Array<User> = [];
-  user?: User |undefined;
+  
+  filteredUsers: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  searchTerm: string = '';
+
   canViewRegisterButton: boolean = false;
   canViewEditButton: boolean = false;
   canViewDeleteButton : boolean = false;
-
+  user?: User |undefined;
   constructor(private userService: UserService) {
+ 
+  }
+  ngOnInit():void{
     this.userService.getAllUsers().subscribe({
       next: (data) => {
         this.users = data;
         console.log(this.users);
+        this.filteredUsers.next(this.users);// inizializza la lista filtrata con tutti utenti 
       },
       error: (err) => {
         console.error(err.massege);
       },
     });
-
-    userService.profile$.subscribe({
+  
+    this.userService.profile$.subscribe({
         
       next:(user)=>{
         this.user = user;
         this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
+        
+      },
+      error:(err)=>{
+        console.error(err.message);
       }
-    })
+    });
+   
   }
+  //bottone search users
+  onSearchChange(): void {
+    this.filteredUsers.next(this.applyFilter(this.searchTerm));
+  }
+   // Applicare il filtro agli utenti
+   applyFilter(term: string): User[] {
+    if (!term.trim()) {
+      return this.users;
+    }
+    return this.users.filter(user => 
+      user.name.toLowerCase().includes(term.toLowerCase())
+    );
+  }
+
 
   updateButtonVisibility():void {
     if(this.user){
@@ -62,6 +95,7 @@ export class UsersComponent {
       this.userService.deleteUser(id).subscribe({
         next: () => {
           this.users = this.users.filter((user) => user.id !== id);
+          this.filteredUsers.next(this.applyFilter(this.searchTerm));
         },
         error: (err) => {
           console.error('Error deleting user', err);

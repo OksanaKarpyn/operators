@@ -1,7 +1,10 @@
 <div class="users-content" >
   <div class="users-box">
     <h2>List of Users</h2>
-
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+      <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="onSearchChange()"   placeholder="Search by name" />
+    </div>
   <!-- <pre>{{ users | json }}</pre> -->
   <table class="table table-striped table-hover d-flex d-md-table">
     <tr class="d-none d-md-table-row text-white">
@@ -15,9 +18,9 @@
       <!-- track by $index if id does non exists  -->
        <!-- track by user.id if exists -->
   
-      @for(user of users; track $index){
-      <tr class="mb-2 mb-md-0 d-flex d-md-table-row flex-column">
-        <th>{{ $index}}</th>
+      
+      <tr class="mb-2 mb-md-0 d-flex d-md-table-row flex-column" *ngFor="let user of filteredUsers | async; let index = index;">
+        <th>{{ index}}</th>
         <td>{{ user.name }}</td>
         <td>{{ user.surname }}</td>
         <td>{{ user.email }}</td>
@@ -30,7 +33,7 @@
         </td>
       </tr>
   
-      }
+      
     </tbody>
   </table>
   </div>

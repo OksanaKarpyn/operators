@@ -23,6 +23,14 @@
       "role": "standard",
       "email": "romana@test.it",
       "password": "$2a$08$6/wn/pmURfHf3i5OQMIoOuJ.VrEIEZa.oO1OO3CqcWrO8Mg/GnD6u"
+    },
+    {
+      "id": "95f2971a-c1c2-4594-8d05-71d651299aa8",
+      "name": "oksana",
+      "surname": "karpyn",
+      "role": "operator",
+      "email": "oksana1@test.it",
+      "password": "$2a$08$Izix15sFi6vK3GPVngejTOnd4j.tsYqDolgsAi.OmbEqqssUxux6C"
     }
   ]
 }
