@@ -50,7 +50,7 @@ export class AuthService {
         this.cookieService.delete('token');
         this.userService.profile$.next(undefined); 
         this.isAuthenticatedSubject.next(false);
-        this.router.navigate(['']); 
+        this.router.navigate(['/login']); 
       },
       error: (err) => {
         console.error('Logout failed', err);

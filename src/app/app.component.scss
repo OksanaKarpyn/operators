@@ -1,3 +1,24 @@
 
 
 
+.main{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    
+
+    .container-components {
+        flex: 1;
+        display: flex;
+        .app-component {
+            width: 100%;
+            background-color: #ecf0f1;
+            padding: 1rem;
+            overflow-y: auto;
+            height: 100%;
+          }
+
+    }
+
+}

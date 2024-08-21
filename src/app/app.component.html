@@ -8,15 +8,21 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-<main class="main ">
-    <app-header></app-header>
- 
-     <div class="container app-component">
-         <router-outlet />
-     </div>
-    
-     <app-footer></app-footer>
+<main class="main">
+  <app-header></app-header>
+<div class="container-components">
+
+    <div class="side-component">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="app-component">
+      <router-outlet></router-outlet>
+    </div>
+
+</div>
+  <app-footer></app-footer>
 </main>
+
 
 
 
@@ -32,6 +38,3 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-

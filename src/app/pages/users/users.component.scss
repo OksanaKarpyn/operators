@@ -10,9 +10,9 @@
     display: flex;
     justify-content: center;
     .button {
-      width: 80px;
-      border: 2px solid #fff;
-      background-color:#878383;
+      margin-left: 2px;
+      border: 1px solid #b0b0ae;
+     
       color: #fff;
       &:hover {
         background-color:#565454;
@@ -26,7 +26,7 @@
     align-self: flex-start;
     padding: 20px;
    
-    background: rgba(0, 0, 0, 0.5);
+   
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
@@ -34,8 +34,24 @@
     h2 {
       margin: 0 0 30px;
       padding: 0;
-      color: #fff;
+      
       text-align: center;
+    }
+    table{
+      tr{
+        th{
+          padding-left: 5px;
+        }
+        td{
+          padding-left: 5px;
+          i{
+            &:hover{
+              color: #fff;
+            }
+          }
+        }
+      }
+     
     }
 }
   
