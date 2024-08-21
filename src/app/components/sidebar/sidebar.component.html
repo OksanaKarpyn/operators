@@ -1,1 +1,41 @@
-<p>sidebar works!</p>
+<div class="side-component col-12 col-md-12" *ngIf="user">
+    <div class="container d-flex flex-column justify-content-between h-100">
+        <div class="flex-grow-1 mt-5">
+            <ul class="nav m-auto">
+                   <!-- Bottone Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard', userId]"> <i class="fa-solid fa-house me-2" style="color: #FFF;"></i>Home</a>
+                </li>
+
+                 <!-- Bottone Dashboard -->
+                 <li class="nav-item">
+                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard', userId]"> <i class="fa-solid fa-chart-line me-2" style="color: #FFFF;"></i>Dashboard</a>
+                </li>
+                <!-- Bottone Register User -->
+                <li class="nav-item" *ngIf="canViewRegisterButton">
+                    <a class="nav-link btn btn-primary mr-2 my-2" [routerLink]="['register/add-edit']"><i class="fa-solid fa-user-plus me-2" style="color: #FFF;"></i>Register User</a>
+                </li>
+                <!-- Bottone Users List -->
+                <li class="nav-item">
+                    <a class="nav-link  mr-2 my-2" [routerLink]="['/users']"><i class="fa-solid fa-users me-2" style="color: #FFFF;"></i>Users list</a>
+                </li>
+
+               
+                <li class="nav-item">
+                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard',userId]"><i class="fa-solid fa-gear me-2" style="color: #FFF;"></i>Setting</a>
+                </li>
+                <!-- Bottone Logout -->
+                <!-- <li class="nav-item">
+                    <button class="nav-link btn btn-outline-danger" (click)="logout()">Logout</button>
+                </li> -->
+            </ul>
+            
+
+        </div>
+        <ul class="nav mt-auto">
+            <li class="nav-item">
+                <button class="nav-link btn text-white" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket me-2" style="color: #ffff;"></i>Log Out</button>
+            </li>
+        </ul>
+    </div>
+</div>

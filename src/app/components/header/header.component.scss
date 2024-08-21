@@ -1,3 +1,10 @@
-.header-content{
-    background-color: rgba(209, 205, 205, 0.829);
+.header-component{
+    background-color: #3f51b5;
+    color: white;
+    padding: .5rem;
+        
+      .dropdown-toggle::after {
+        display: none;
+      }
 }
+   
