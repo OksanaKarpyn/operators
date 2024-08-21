@@ -27,8 +27,8 @@
         <td>{{user.role }}</td>
         <td>{{user.email }}</td>
         <td >
-          <a class="btn btn-outline-secondary" [routerLink]="['/register/add-edit', user.id]" *ngIf="canViewEditButton"><i class="fa-regular fa-pen-to-square"></i></a>
-          <button class="btn btn-outline-secondary" (click)="deleteUser(user.id)" *ngIf="user.id && canDeleteUser(user.id)">
+          <a class="btn btn-outline-secondary me-2" [routerLink]="['/register/add-edit', user.id]" *ngIf="canViewEditButton"><i class="fa-regular fa-pen-to-square"></i></a>
+          <button class="btn btn-outline-secondary me-2" (click)="deleteUser(user.id)" *ngIf="user.id && canDeleteUser(user.id)">
             <i class="fa-solid fa-trash"></i>
           </button>
           <a class="btn btn-outline-secondary" [routerLink]="[user.id]"><i class="fa-solid fa-circle-info"></i></a>

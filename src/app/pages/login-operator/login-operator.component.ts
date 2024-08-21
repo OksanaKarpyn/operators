@@ -42,7 +42,7 @@ export class LoginOperatorComponent {
         if (response != null && response.accessToken) {
           console.log(response);
               // Salva il token 
-           this.authService.saveToken(response.accessToken);
+        this.authService.saveToken(response.accessToken);
          // Decodifica il token per ottenere l'ID utente
         const decodedToken = this.authService.decodeToken(response.accessToken);
         const userId = decodedToken?.id; // Assumendo che l'ID utente sia contenuto nel token

@@ -33,12 +33,20 @@
       "password": "$2a$08$sMJU0iZ7.6laP9oufLaBq.NUx0rqMT.lFjhMwyzRGUc1phuH8stw6"
     },
     {
-      "id": "fd656ae8-f648-4389-87c0-126fb5899649",
+      "id": "4ef2afba-1eb9-458b-8e73-b12d93c5f0cb",
+      "name": "marco",
+      "surname": "de bon",
+      "role": "operator",
+      "email": "marco.debon@anitia.it",
+      "password": "$2a$08$RKUZ4RTcSbJnABPx9cytyuidMBeRAmVJ/OiT1qvLOGHhNwkloFRqq"
+    },
+    {
+      "id": "9fdb8a64-0cf1-40e0-916d-b0e01b865fba",
       "name": "francesa",
-      "surname": "karpyn",
-      "role": "admin",
+      "surname": "pippo",
+      "role": "operator",
       "email": "francesca@test.it",
-      "password": "$2a$08$zGwInqXMI.4YffbwbbrBTe9ZGj4F6ho/WFv1D0eCp4Mc2.JWnfH42"
+      "password": "$2a$08$ItNjiZVtYnBOJ7v/Q.wZN.8G3PhfwKVr8/4Wp.lkV21v.IXcSJg5a"
     }
   ]
 }
