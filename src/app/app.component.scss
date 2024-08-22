@@ -11,6 +11,7 @@
     .container-components {
         flex: 1;
         display: flex;
+        overflow: hidden;
         .app-component {
             width: 100%;
             background-color: #ecf0f1;
