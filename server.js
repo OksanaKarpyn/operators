@@ -187,38 +187,6 @@ server.get('/users/profile',(req,res)=>{
   return res.status(401).json({ message: 'Access token not provided' });
 })
 
-// server.get('/users/profile', (req, res) => {
-//   const token = req.cookies.token;
-//   if (token) {
-//     const verifyTokenResult = verifyToken(token);
-//     console.log('Token verification result:', verifyTokenResult);
-
-//     if (verifyTokenResult instanceof Error) {
-//       return res.status(401).json({ message: 'Access token not valid' });
-//     }
-
-//     const email = verifyTokenResult.email;
-//     console.log('Extracted email from token:', email);
-//     const userdb = readDatabase();
-//     console.log('Database content:', userdb);
-    
-//     const user = userdb.users.find(operator => operator.email === email);
-//     console.log('Found user:', user);
-    
-//     if (user) {
-//       return res.json(user);
-//     } else {
-//       return res.status(404).json({ message: 'User not found' });
-//     }
-//   } else {
-//     return res.status(401).json({ message: 'Access token not provided' });
-//   }
-// });
-
-
-
-
-
 // Endpoint per ottenere tutti gli utenti
 server.get('/users/all',(req,res)=>{
   // Ricarica il database per avere i dati aggiornati
@@ -338,6 +306,32 @@ server.delete('/users/:id', (req, res)=>{
     }
 })
 
+
+//------------------------------sales-products-data----------------------
+//-----------------------------------------------------------------------
+
+server.get('/sales', (req, res) => {
+  const salesdb = readDatabase();
+  return res.json(salesdb.sales);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//------------------------------sales-products-data----------------------
+//-----------------------------------------------------------------------
 
 server.use(router);
 
