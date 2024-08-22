@@ -5,6 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsersComponent } from './pages/users/users.component';
 import { DetailsUserComponent } from './pages/details-user/details-user.component';
 // import { LoginOperatorComponent } from './pages/login-operator/login-operator.component';
+import { ChartsComponent } from './pages/charts/charts.component';
 
 export const routes: Routes = [
     {
@@ -38,10 +39,17 @@ export const routes: Routes = [
         path:'users',
         component: UsersComponent,
         title:'Users list Page'
-    },{
+    },
+    {
         path:'users/:id',
         component:DetailsUserComponent,
         title:'User Details'
+    },
+    {
+        path:'charts',
+        component:ChartsComponent,
+        title:'Charts Page'
     }
+    
 
 ];
