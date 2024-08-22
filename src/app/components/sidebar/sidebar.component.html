@@ -4,25 +4,26 @@
             <ul class="nav m-auto">
                    <!-- Bottone Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard', userId]"> <i class="fa-solid fa-house me-2" style="color: #FFF;"></i>Home</a>
-                </li>
-
-                 <!-- Bottone Dashboard -->
-                 <li class="nav-item">
-                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard', userId]"> <i class="fa-solid fa-chart-line me-2" style="color: #FFFF;"></i>Dashboard</a>
+                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard', userId]"><i class="fa-solid fa-house me-3" style="color: #FFF;"></i>Home</a>
                 </li>
                 <!-- Bottone Register User -->
                 <li class="nav-item" *ngIf="canViewRegisterButton">
-                    <a class="nav-link btn btn-primary mr-2 my-2" [routerLink]="['register/add-edit']"><i class="fa-solid fa-user-plus me-2" style="color: #FFF;"></i>Register User</a>
+                    <a class="nav-link btn btn-primary mr-2 my-2" [routerLink]="['register/add-edit']"><i class="fa-solid fa-user-plus me-3" style="color: #FFF;"></i>Register User</a>
                 </li>
                 <!-- Bottone Users List -->
                 <li class="nav-item">
-                    <a class="nav-link  mr-2 my-2" [routerLink]="['/users']"><i class="fa-solid fa-users me-2" style="color: #FFFF;"></i>Users list</a>
+                    <a class="nav-link  mr-2 my-2" [routerLink]="['/users']"><i class="fa-solid fa-users me-3" style="color: #FFFF;"></i>Users list</a>
                 </li>
-
+                <!-- Bottone Overview -->
+                <li class="nav-item">
+                    <a href="http://google.com" class="nav-link mr-2 my-2"><i class="fa-solid fa-globe me-3" style="color: #FFFF;"></i>Overview</a>
+                </li>
                
                 <li class="nav-item">
-                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard',userId]"><i class="fa-solid fa-gear me-2" style="color: #FFF;"></i>Setting</a>
+                    <a href="" class="nav-link mr-2 my-2"><i class="fa-solid fa-chart-line me-3" style="color: #FFFF;"></i>Charts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard',userId]"><i class="fa-solid fa-gear me-3" style="color: #FFF;"></i>Setting</a>
                 </li>
                 <!-- Bottone Logout -->
                 <!-- <li class="nav-item">
@@ -34,7 +35,7 @@
         </div>
         <ul class="nav mt-auto">
             <li class="nav-item">
-                <button class="nav-link btn text-white" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket me-2" style="color: #ffff;"></i>Log Out</button>
+                <button class="nav-link btn text-white" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket me-3" style="color: #ffff;"></i>Log Out</button>
             </li>
         </ul>
     </div>
