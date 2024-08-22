@@ -33,31 +33,62 @@ export class ChartsComponent implements OnInit {
           this.realdata.push(elem.amount);
           this.colordata.push(elem.colorcode);
         })
-        this.renderChart(this.labeldata,this.realdata,this.colordata);
+        this.renderBarChart(this.labeldata,this.realdata,this.colordata);
+        this.renderPieChart(this.labeldata,this.realdata,this.colordata);
+        this.renderDoughnutChart(this.labeldata,this.realdata,this.colordata);
       }
     })
   }
 
+//------------barchart----------
+  renderBarChart (labeldata:any,realdata:any,colordata:any){
+    this.renderChart(labeldata,realdata,colordata,'barchartId', 'bar')
+   }
+//------------piechart------------
+   renderPieChart (labeldata:any,realdata:any,colordata:any){
+    this.renderChart(labeldata,realdata,colordata,'piechartId', 'pie')
+   }
+
+//--------doughnutchart-----------
+
+renderDoughnutChart(labeldata:any,realdata:any,colordata:any ){
+  this.renderChart(labeldata,realdata,colordata,'doughnutchartId', 'doughnut');
+}
+
+
+
+
   //function for rendering chart
 
-  renderChart(labeldata:any,realdata:any,colordata:any){
-    const myChart = new Chart('barchart',{
-      type: 'bar',
+  renderChart(labeldata:any,realdata:any,colordata:any,chartid:string,charttype:any){
+    const myChart = new Chart(chartid,{
+      type: charttype,
         data:{
           labels:labeldata,
           datasets:[
             {
+              label:'salesData',
               data:realdata,
-              backgroundColor:colordata
+              backgroundColor:colordata,
 
             }
           ]
 
       },
       options:{
+        responsive:true,
+        animation: {
+          duration: 2000, // Duration of animations in milliseconds
+          easing: 'easeInOutQuad', // Easing function for the animations
+          
+        },
+        
         scales:{
           y:{
             beginAtZero:true,
+            ticks: {
+              stepSize: 1000 // Step size for the y-axis ticks
+            }
           }
         }
       }

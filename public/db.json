@@ -62,26 +62,45 @@
       "colorcode": "yellow"
     },
     {
-      "year": 2015,
-      "amount": 5000,
+      "year": 2016,
+      "amount":2000,
       "colorcode": "red"
     },
     {
-      "year": 2015,
-      "amount": 5000,
+      "year": 2017,
+      "amount": 3000,
       "colorcode": "blue"
     },
     {
-      "year": 2015,
-      "amount": 5000,
+      "year": 2018,
+      "amount": 13500,
       "colorcode": "pink"
     },
     {
-      "year": 2015,
+      "year": 2019,
+      "amount": 8000,
+      "colorcode": "lime"
+    },
+    {
+      "year": 2020,
       "amount": 5000,
+      "colorcode": "purple"
+    },
+    {
+      "year": 2021,
+      "amount": 6000,
       "colorcode": "green"
+    },
+    {
+      "year": 2022,
+      "amount": 13000,
+      "colorcode": "grey"
+    },
+    {
+      "year": 2023,
+      "amount": 18000,
+      "colorcode": "orange"
     }
-  
 
   ]
 }
