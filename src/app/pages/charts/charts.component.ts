@@ -2,7 +2,8 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import Chart, { registerables } from 'chart.js/auto';
-Chart.register(...registerables)
+Chart.register(...registerables);
+import { SalesData } from '../../models/salesdata';
 
 @Component({
   selector: 'app-charts',
@@ -13,6 +14,7 @@ Chart.register(...registerables)
 })
 export class ChartsComponent {
   chart: any = [];
+  salesdata :SalesData[]=[];
   constructor(){
      
   }
