@@ -7,16 +7,10 @@
         display: flex;
         flex-wrap: wrap;
         .chart-box{
+            background-color: #fff;
             margin-top: 20px;
             padding: 10px;
-            background-color: aliceblue;
-            box-shadow: 0 5px 25px rgba(164, 194, 226, 0.4);
             border-radius: 10px;
-            // display: flex;
-            // flex-wrap: wrap;
-            // justify-content: center;
-            // align-items: center;
-            // text-align: center;
         }
     }
     
