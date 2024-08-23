@@ -36,6 +36,8 @@ export class ChartsComponent implements OnInit {
         this.renderBarChart(this.labeldata,this.realdata,this.colordata);
         this.renderPieChart(this.labeldata,this.realdata,this.colordata);
         this.renderDoughnutChart(this.labeldata,this.realdata,this.colordata);
+        this.renderLineChart(this.labeldata,this.realdata,this.colordata);
+        this.renderRadarChart(this.labeldata,this.realdata,this.colordata);
       }
     })
   }
@@ -55,6 +57,16 @@ renderDoughnutChart(labeldata:any,realdata:any,colordata:any ){
   this.renderChart(labeldata,realdata,colordata,'doughnutchartId', 'doughnut');
 }
 
+//------------linechart-------------------
+ renderLineChart( labeldata:any,realdata:any,colordata:any ){
+  this.renderChart(labeldata,realdata,colordata,'linechartId', 'line')
+ }
+
+
+ //------------radarchart---------------------
+ renderRadarChart ( labeldata:any,realdata:any,colordata:any) {
+  this.renderChart(labeldata,realdata,colordata,'radarChartId','radar')
+ }
 
 
 

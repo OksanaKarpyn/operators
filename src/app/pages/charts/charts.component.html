@@ -1,26 +1,37 @@
-<p>charts works!</p>
 
-<!-- <div class="col-12">
-    <canvas id="canvas" class="col-12">{{chart}}</canvas>
-</div> -->
 
 <div class="container-fluid "> 
-    <div class="row d-flex">
-        <div class="col-12 col-md-6 col-lg-6 flex-grow-1">
-            <h4>Bar Chart</h4>
-            <canvas id="barchartId">{{salesdata}}</canvas>
+    <div class="chart-component">
+        <div class="chart-content gap-3"> 
+            <div class="chart-box col-12 col-md-5 flex-grow-1">
+                <h4>Pie Chart</h4>
+                <canvas id="piechartId">{{salesdata}}</canvas>
+            </div>
+            <div class="chart-box col-12 col-md-6">
+                <div class="chart-box col-12">
+                    <h4>Line Chart</h4>
+                    <canvas id="linechartId">{{salesdata}}</canvas>
+                </div>
+                <div class="chart-box col-12">
+                    <h4>Bar Chart</h4>
+                    <canvas id="barchartId">{{salesdata}}</canvas>
+                </div>
+                
+            </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-6">
-            <h4>Pie Chart</h4>
-            <canvas id="piechartId">{{salesdata}}</canvas>
+       
+        <div class="chart-content gap-3">
+          
+            <div class="chart-box col-12 col-md-5 flex-grow-1">
+                <h4>Radar Chart</h4>
+                <canvas id="radarChartId">{{salesdata}}</canvas>
+            </div>
+            <div class="chart-box col-12 col-md-6">
+                <h4>Doughnut Chart</h4>
+                <canvas id="doughnutchartId">{{salesdata}}</canvas>
+            </div>
         </div>
 
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-6">
-            <h4>Doughnut Chart</h4>
-            <canvas id="doughnutchartId">{{salesdata}}</canvas>
-        </div>
     </div>
 
 </div>
