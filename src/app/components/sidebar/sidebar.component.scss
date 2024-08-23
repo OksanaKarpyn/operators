@@ -11,6 +11,12 @@
             a{
                 color: white;
             }
+            .dropdown-menu{
+              background-color: #35526c;
+               a:hover{
+                color: #2c3e50;
+              }
+            }
         }
 
     @media (max-width: 768px) {
