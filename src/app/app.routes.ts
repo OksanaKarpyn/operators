@@ -6,12 +6,14 @@ import { UsersComponent } from './pages/users/users.component';
 import { DetailsUserComponent } from './pages/details-user/details-user.component';
 // import { LoginOperatorComponent } from './pages/login-operator/login-operator.component';
 import { ChartsComponent } from './pages/charts/charts.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        title: 'Home Page'
+        title: 'Home Page',
+        canActivate: [AuthGuard]
     },
     {
         path: 'register/add-edit',
@@ -28,7 +30,8 @@ export const routes: Routes = [
         pathMatch: 'full',
         // component: LoginOperatorComponent,
         loadComponent:()=> import('./pages/login-operator/login-operator.component').then(c=>c.LoginOperatorComponent),// lazy loaded component
-        title: 'Login Page'
+        title: 'Login Page',
+        canActivate: [AuthGuard]
     },
     {
         path: 'dashboard',

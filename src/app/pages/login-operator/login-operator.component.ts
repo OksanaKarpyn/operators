@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -20,7 +20,7 @@ import { User } from '../../models/user';
   templateUrl: './login-operator.component.html',
   styleUrls: ['./login-operator.component.scss']
 })
-export class LoginOperatorComponent {
+export class LoginOperatorComponent implements OnInit{
   loginForm!: UntypedFormGroup;
   userId?: string;
   constructor(
@@ -33,6 +33,11 @@ export class LoginOperatorComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+  }
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   submit(): void {
