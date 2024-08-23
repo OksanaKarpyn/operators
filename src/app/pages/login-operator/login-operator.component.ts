@@ -40,21 +40,16 @@ export class LoginOperatorComponent {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe(response => {
         if (response != null && response.accessToken) {
-          console.log(response);
-              // Salva il token 
-        this.authService.saveToken(response.accessToken);
-         // Decodifica il token per ottenere l'ID utente
-        const decodedToken = this.authService.decodeToken(response.accessToken);
-        const userId = decodedToken?.id; // Assumendo che l'ID utente sia contenuto nel token
-
-        if (userId) {
-          // Reindirizza l'utente alla dashboard con l'ID nell'URL
-          this.router.navigate([`/dashboard/${userId}`]);
-        } else {
-          console.error('User ID not found in token');
-          alert('Errore durante il login. Riprova.');
-        }
-
+          console.log('response',response);
+          this.userService.profile$.next(response.user)
+            if(response.user){
+            // Reindirizza l'utente alla dashboard con l'ID nell'URL
+                this.router.navigate([`/dashboard`]);
+            }else{
+            console.error('User ID not found in token');
+            alert('Errore durante il login. Riprova.');
+            this.router.navigate([`/login`]);
+            }
         } else {
           // Operatore non trovato o credenziali errate
           alert('Email o password errati');

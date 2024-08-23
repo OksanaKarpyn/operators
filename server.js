@@ -106,8 +106,10 @@ server.post('/auth/login', (req, res) => {
  
   const accessToken = createToken({ email,role:user.role ,id:user.id});
   //res.cookie('token', accessToken, { httpOnly: true });
-  res.status(200).json({ accessToken });
+  res.status(200).json({ user,accessToken });
 });
+
+
 
 // registra utente
 server.post('/users/register', (req, res) => {

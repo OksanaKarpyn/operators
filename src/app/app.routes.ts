@@ -31,7 +31,7 @@ export const routes: Routes = [
         title: 'Login Page'
     },
     {
-        path: 'dashboard/:id',
+        path: 'dashboard',
         component: DashboardComponent,
         title: 'Dashboard Page'
     },
