@@ -22,8 +22,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
-     private userService:UserService,
-     private router:Router) {
+    private userService: UserService,
+    private router: Router) {
     this.isAuthenticatedSubject.next(this.isAuthenticated());
   }
 
@@ -47,10 +47,7 @@ export class AuthService {
   logout(): void {
     this.http.post(`${this.url}/logout`, {}, { withCredentials: true }).subscribe({
       next: () => {
-        this.cookieService.delete('token');
-        this.userService.profile$.next(undefined); 
-        this.isAuthenticatedSubject.next(false);
-        this.router.navigate(['/login']); 
+        this.finalizeLogout();
       },
       error: (err) => {
         console.error('Logout failed', err);
@@ -61,6 +58,12 @@ export class AuthService {
     });
   }
 
+  finalizeLogout() {
+    this.cookieService.delete('token');
+    this.userService.profile$.next(undefined);
+    this.isAuthenticatedSubject.next(false);
+    this.router.navigate(['/login']);
+  }
   // logout(): void {
   // this.userService.profile$.next(undefined);  
   // this.cookieService.delete('token','');         
@@ -68,12 +71,12 @@ export class AuthService {
   // this.router.navigate(['']); 
   // }
 
- 
+
 
 
   saveToken(token: string): void {
     const expireDate = new Date();
-    expireDate.setHours(expireDate.getHours()+1);
+    expireDate.setHours(expireDate.getHours() + 1);
     this.cookieService.set('token', token, expireDate);
   }
 
@@ -90,13 +93,13 @@ export class AuthService {
   private getCookie(name: string): string | null {
     const nameLenPlus = (name.length + 1);
     return document.cookie
-        .split(';')
-        .map(c => c.trim())
-        .filter(cookie => cookie.substring(0, nameLenPlus) === `${name}=`)
-        .map(cookie => decodeURIComponent(cookie.substring(nameLenPlus)))[0] || null;
+      .split(';')
+      .map(c => c.trim())
+      .filter(cookie => cookie.substring(0, nameLenPlus) === `${name}=`)
+      .map(cookie => decodeURIComponent(cookie.substring(nameLenPlus)))[0] || null;
   }
 
- public isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     return !!this.getCookie('token');
   }
 }
