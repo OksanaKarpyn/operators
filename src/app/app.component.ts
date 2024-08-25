@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
-import { UserService } from './services/user.service';
 import { Observable } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import Chart from 'chart.js/auto';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,7 +15,6 @@ import Chart from 'chart.js/auto';
 })
 export class AppComponent {
   isAuthenticated$: Observable<boolean>; 
-  chart: any = [];
 
   constructor(private authService: AuthService) {
     // Inizializza `isAuthenticated$` dal servizio di autenticazione
