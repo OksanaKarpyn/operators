@@ -6,6 +6,7 @@ import { UserService } from '../../services/user.service';
 import { UpperCasePipe } from '@angular/common';
 import { UsersComponent } from '../users/users.component';
 import { RouterLink } from '@angular/router';
+import { ChartsComponent } from '../charts/charts.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -16,7 +17,8 @@ import { RouterLink } from '@angular/router';
     JsonPipe,
     UpperCasePipe,
     UsersComponent,
-    RouterLink
+    ChartsComponent
+    
   ],
 })
 export class DashboardComponent implements OnInit {
