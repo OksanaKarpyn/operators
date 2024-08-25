@@ -13,22 +13,25 @@
         color: #fff; 
       }
     }
-  }
-  .register-box {
-    margin-top: 50px;
-    align-self: self-start;
-    padding: 20px;
-   
-   
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px  rgba(164, 194, 226, 0.6);
-    border-radius: 10px;
-  
-    h2 {
-      margin: 0 0 20px;
-      padding: 0;
+
+
+
+    .register-box {
+      margin-top: 50px;
+      align-self: self-start;
+      padding: 20px;
+      background-color: #fff;
+      box-sizing: border-box;
+      //box-shadow: 0 15px 25px  rgba(164, 194, 226, 0.6);
+      border-radius: 10px;
     
-      text-align: center;
+      h2 {
+        margin: 0 0 20px;
+        padding: 0;
+      
+        text-align: center;
+      }
     }
   }
+
   

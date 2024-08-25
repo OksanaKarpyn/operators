@@ -9,24 +9,23 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    .button {
-      margin-left: 2px;
-      border: 1px solid #b0b0ae;
+    // .button {
+    //   margin-left: 2px;
+    //    border: 1px solid #b0b0ae;
      
-      color: #fff;
-      &:hover {
-        background-color:#565454;
-        color: #fff; 
-      }
-    }
+    //   color: #fff;
+    //   &:hover {
+        
+    //   }
+    // }
   }
   .users-box {
-
+    background-color: #fff;
     width: 100%;
     margin-top: 50px;
     align-self: flex-start;
     padding: 20px;
-    box-shadow: 0 15px 25px rgba(164, 194, 226, 0.6);
+   // box-shadow: 0 15px 25px rgba(164, 194, 226, 0.6);
     border-radius: 10px;
   
     h2 {

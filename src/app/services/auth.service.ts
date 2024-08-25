@@ -71,8 +71,10 @@ export class AuthService {
  
 
 
-  saveToken(token: string, expiresInDays: number = 1): void {
-    this.cookieService.set('token', token, expiresInDays);
+  saveToken(token: string): void {
+    const expireDate = new Date();
+    expireDate.setHours(expireDate.getHours()+1);
+    this.cookieService.set('token', token, expireDate);
   }
 
 

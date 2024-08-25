@@ -4,7 +4,7 @@
     
         <div class="row justify-content-center register-box">
             
-            <h2>{{ isEditing ? 'Edit form' : 'Register form' }}</h2>
+            <h2>{{ isEditing ? 'Edit form' : 'Register form' }}<i class="fa-solid fa-user ms-3" style="color: #000;"></i></h2>
             
     
             <form class="row g-3 my-5 p-4 bg-body-tertiary rounded-3" [formGroup]="form" (ngSubmit)="submit()">

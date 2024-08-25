@@ -2,39 +2,15 @@
   margin-top: 10px;
   padding: 10px;
   height: 100%;
-  overflow-y: auto;
+  //overflow-y: auto;
   .dashboard-box {
-    border: .5px solid red;
-    margin-top: 20px;
-    
-    //box-shadow: 0 5px 25px rgba(164, 194, 226, 0.4);
+    margin: 20px 10px;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-      a{
-        padding: 20px;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        border: none;
-        &:hover{
-        
-        }
-      }
-  }
-
-  .dashboard-button {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; 
-    align-items: stretch; 
-
    
+    //justify-content: center;
+    //align-items: center;
+    //text-align: center;
   }
 }
