@@ -23,7 +23,7 @@
       background-color: var(--background-side-color);
       color: var(--text-color);
       box-sizing: border-box;
-      //box-shadow: 0 15px 25px  rgba(164, 194, 226, 0.6);
+      box-shadow: var(--box-shadow);
       border-radius: 10px;
     
       h2 {

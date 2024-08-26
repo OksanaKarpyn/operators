@@ -4,6 +4,7 @@
     justify-content: center;
   }
   .details-user-box{
+    background-color: var(--background-side-color);
     width: 100%;
     margin-top: 50px;
     align-self: flex-start;
@@ -11,7 +12,7 @@
    
    
     box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--box-shadow);
     border-radius: 10px;
   
     h2 {
@@ -19,4 +20,9 @@
       padding: 0;
       text-align: center;
     }
+    
+}
+.btn{
+  box-shadow: var(--box-shadow);
+  
 }

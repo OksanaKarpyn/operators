@@ -1,20 +1,25 @@
+ <div class="container-fluid">
+  <div class="container">
+    @if(user){
 
-@if(user){
-
-  <div class="details-user-content">
-    <div class="details-user-box">
-      <h2>User Details</h2>
-      <div class="card">
-        <h5 class="card-header">Name: {{ user.name | uppercase}}</h5>
-        <h5 class="card-header">Surname: {{ user.surname |uppercase }}</h5>
-  
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Role: {{user.role}}</li>
-          <li class="list-group-item"> Email: {{user.email}}</li>
-          <li class="list-group-item">ID: {{user.id}}</li>
-        </ul>
+      <div class="details-user-content">
+        <div class="details-user-box">
+          <h2>User Details<i class="fa-solid fa-users ms-3"></i></h2>
+          <div class="card" [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' ">
+            <h5 class="card-header">Name: {{ user.name | uppercase}}</h5>
+            <h5 class="card-header">Surname: {{ user.surname |uppercase }}</h5>
+      
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Role: {{user.role}}</li>
+              <li class="list-group-item"> Email: {{user.email}}</li>
+              <li class="list-group-item">ID: {{user.id}}</li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+    }
+     <button class="btn mr-2  my-5" [ngClass]="isDarkTheme ? 'btn-outline-light ':'btn-outline-dark border-white' " [routerLink]="['/users']">Go Back</button>
   </div>
-}
+ </div>
+
 
