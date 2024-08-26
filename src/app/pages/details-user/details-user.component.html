@@ -5,7 +5,8 @@
       <div class="details-user-content">
         <div class="details-user-box">
           <h2>User Details<i class="fa-solid fa-users ms-3"></i></h2>
-          <div class="card" [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' ">
+          <div class="card">
+            <!-- [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' " -->
             <h5 class="card-header">Name: {{ user.name | uppercase}}</h5>
             <h5 class="card-header">Surname: {{ user.surname |uppercase }}</h5>
       
@@ -18,7 +19,8 @@
         </div>
       </div>
     }
-     <button class="btn mr-2  my-5" [ngClass]="isDarkTheme ? 'btn-outline-light ':'btn-outline-dark border-white' " [routerLink]="['/users']">Go Back</button>
+    <!-- [ngClass]="isDarkTheme ? 'btn-outline-light ':'btn-outline-dark border-white' " -->
+     <button class="btn border mr-2  my-5" [routerLink]="['/users']">Go Back</button>
   </div>
  </div>
 

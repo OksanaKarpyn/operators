@@ -7,7 +7,8 @@
             <h2>{{ isEditing ? 'Edit form' : 'Register form' }}<i class="fa-solid fa-user ms-3"></i></h2>
             
     
-            <form class="row g-3 my-5 p-4 bg-body-tertiary rounded-3" [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' " [formGroup]="form" (ngSubmit)="submit()">
+            <form class="row g-3 my-5 p-4 bg-body-tertiary rounded-3"[formGroup]="form" (ngSubmit)="submit()">
+                <!-- [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' "  -->
                 <div class="col-md-6" *ngIf="form.get('name')?.enabled">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" formControlName="name" required />

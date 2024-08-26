@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder,ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { window } from 'rxjs';
-import { User } from '../../models/user';
+
 
 
 @Component({

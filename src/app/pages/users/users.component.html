@@ -2,7 +2,8 @@
   <div class="users-content" >
     <div class="users-box">
       <h2>List of Users<i class="fa-solid fa-users ms-3"></i></h2>
-      <div class="input-group mb-5" [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' ">
+      <div class="input-group mb-5">
+        <!-- [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' " -->
         <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
         <input type="text" class="form-control"[(ngModel)]="searchValueInput" (input)="onSearchChange()"   placeholder="Search by name" />
       </div>

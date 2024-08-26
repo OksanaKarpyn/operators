@@ -21,7 +21,7 @@
         padding: 12px 24px;
         font-size: 16px;
         font-weight: bold;
-        color: #fff;
+        color: var(--text-color);
         text-decoration: none;
         text-transform: uppercase;
         border: 2px solid #928b87;
@@ -33,7 +33,7 @@
         overflow: hidden;
   
         &:hover {
-          color: #000;
+          color: var(--text-color);
           background-position: 100% 0;
         }
   
@@ -44,7 +44,7 @@
           left: 50%;
           width: 300%;
           height: 300%;
-          background: rgba(0, 0, 0, 0.1);
+          background-color: rgba(0, 0, 0, 0.1);
           transition: width 0.4s, height 0.4s;
           border-radius: 50%;
           z-index: 0;

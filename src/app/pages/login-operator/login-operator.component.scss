@@ -10,12 +10,12 @@
   
     button {
       margin-bottom: 10px;
-      border: 2px solid #fff;
+      border: 2px solid var(--text-color);
       //background-color:#878383;
       align-self: flex-end;
       //color: #fff;
       &:hover {
-        background-color: #fff;
+        background-color: var(--background-side-color);
         color: #000; // Change text color for better contrast if needed
       }
     }
@@ -29,9 +29,9 @@
    // width: 600px;
     padding: 40px;
     transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.5);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(164, 194, 226, 0.4);
+    background:var(--background-side-color);
+  
+    box-shadow:var(--box-shadow);
     border-radius: 10px;
   
     h2 {
@@ -50,8 +50,8 @@
         font-size: 16px;
      
         margin-bottom: 30px;
-        border: none;
-        border-bottom: 1px solid #fff;
+       // border: none;
+        //border-bottom: 1px solid #fff;
         outline: none;
         background: transparent;
   
