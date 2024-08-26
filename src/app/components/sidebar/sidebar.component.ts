@@ -63,16 +63,15 @@ export class SidebarComponent {
      
     
     //--------theme---------
-    const savedTheme = this.themeService.getTheme();
-    this.isDarkTheme = savedTheme === 'dark-theme';
-    this.themeService.setTheme(savedTheme);
+    this.themeService.theme$.subscribe(theme => {
+      this.isDarkTheme = theme === 'dark-theme';
+    });
   
 
   }
   //------function-theme------
   toggleTheme(){
-    this.isDarkTheme = !this.isDarkTheme;
-    const newTheme = this.isDarkTheme ? 'dark-theme' : 'light-theme';
+    const newTheme = this.isDarkTheme ? 'light-theme' : 'dark-theme';
     this.themeService.setTheme(newTheme);
   }
   //------------------------------

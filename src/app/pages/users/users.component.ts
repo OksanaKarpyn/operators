@@ -5,6 +5,7 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-users',
@@ -28,7 +29,12 @@ export class UsersComponent {
   canViewEditButton: boolean = false;
   canViewDeleteButton : boolean = false;
   user?: User |undefined;
-  constructor(private userService: UserService) {
+  isDarkTheme: boolean = false;
+
+  constructor(
+    private userService: UserService,
+    private themeService:ThemeService
+  ) {
  
   }
   ngOnInit():void{
@@ -54,8 +60,13 @@ export class UsersComponent {
         console.error(err.message);
       }
     });
-   
+   //---------------theme-------
+     this.themeService.theme$.subscribe(theme => {
+      this.isDarkTheme = theme === 'dark-theme';
+     });
+
   }
+  
   //bottone search users
   onSearchChange(): void {
     this.filteredUsers.next(this.applyFilter(this.searchValueInput));
