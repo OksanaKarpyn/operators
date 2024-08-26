@@ -7,6 +7,7 @@ import { UpperCasePipe } from '@angular/common';
 import { UsersComponent } from '../users/users.component';
 import { RouterLink } from '@angular/router';
 import { ChartsComponent } from '../charts/charts.component';
+import { ThemeService } from '../../services/theme.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -15,6 +16,8 @@ import { ChartsComponent } from '../charts/charts.component';
   imports: [
     CommonModule,
     JsonPipe,
+    RouterLink,
+  
     UpperCasePipe,
     UsersComponent,
     ChartsComponent
@@ -22,12 +25,24 @@ import { ChartsComponent } from '../charts/charts.component';
   ],
 })
 export class DashboardComponent implements OnInit {
+
   user: User | null = null;
-  constructor(private authservice: AuthService,private userSevice:UserService) {}
+  isDarkTheme: boolean = false;
+
+  constructor(
+    private authservice: AuthService,
+    private userSevice:UserService,
+    private themeService:ThemeService
+   ) {}
 
   ngOnInit(): void {
     this.userSevice.getCurrentUser().subscribe(userData => {
       this.user = userData;
     });
+
+    //------theme-------
+    this.themeService.theme$.subscribe(theme =>{
+      this.isDarkTheme = theme === 'dark-theme';
+    })
   }
 }

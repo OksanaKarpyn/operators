@@ -5,6 +5,7 @@ import Chart, { registerables } from 'chart.js/auto';
 Chart.register(...registerables);
 import { SalesData } from '../../models/salesdata';
 import { ChartService } from '../../services/chart.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-charts',
@@ -19,7 +20,10 @@ export class ChartsComponent implements OnInit {
   labeldata: number[]=[];
   realdata: number[]=[];
   colordata:string[]=[];
-  constructor(private chartService:ChartService){}
+  constructor(
+    private chartService:ChartService,
+    private themeService:ThemeService
+  ){}
 
   ngOnInit(){
    this.chartData(); 

@@ -1,27 +1,42 @@
 <div class="side-component col-12 col-md-12" *ngIf="user">
     <div class="container d-flex flex-column justify-content-between h-100">
         <div class="flex-grow-1 mt-5">
-            <ul class="nav m-auto">
+            <ul class="nav m-auto nav-pills"  [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' ">
                    <!-- Bottone Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard']"><i class="fa-solid fa-house me-3"></i>Home</a>
+                    <a class="nav-link mr-2 my-2" 
+                    routerLinkActive="active"
+                    
+                    [routerLink]="['/dashboard']"><i class="fa-solid fa-house me-3"></i>Home</a>
                 </li>
                 <!-- Bottone Register User -->
                 <li class="nav-item" *ngIf="canViewRegisterButton">
-                    <a class="nav-link btn btn-primary mr-2 my-2" [routerLink]="['register/add-edit']"><i class="fa-solid fa-user-plus me-3" ></i>Register User</a>
+                    <a class="nav-link mr-2 my-2"
+                    routerLinkActive="active"
+                    
+                    [routerLink]="['register/add-edit']"><i class="fa-solid fa-user-plus me-3" ></i>Register User</a>
                 </li>
                 <!-- Bottone Users List -->
                 <li class="nav-item">
-                    <a class="nav-link  mr-2 my-2" [routerLink]="['/users']"><i class="fa-solid fa-users me-3"></i>Users list</a>
+                    <a class="nav-link  mr-2 my-2"
+                    routerLinkActive="active"
+                   
+                    [routerLink]="['/users']"><i class="fa-solid fa-users me-3"></i>Users list</a>
                 </li>
 
                  <!-- button chart -->
                  <li class="nav-item">
-                    <a class="nav-link mr-2 my-2" [routerLink]="['/charts']" ><i class="fa-solid fa-chart-line me-3" ></i>Charts</a>
+                    <a class="nav-link mr-2 my-2"
+                    routerLinkActive="active" 
+              
+                    [routerLink]="['/charts']" ><i class="fa-solid fa-chart-line me-3" ></i>Charts</a>
                 </li>
                 <!-- Bottone Overview -->
                 <li class="nav-item">
-                    <a href="http://google.com" class="nav-link mr-2 my-2"><i class="fa-solid fa-globe me-3"></i>Overview</a>
+                    <a href="http://google.com"
+                    routerLinkActive="active"
+                   
+                    class="nav-link mr-2 my-2"><i class="fa-solid fa-globe me-3"></i>Overview</a>
                 </li>
                 <!-- -------dropdown button---------- -->
                 <li class="nav-item dropdown">
@@ -39,7 +54,8 @@
               
                 <!-- button setting -->
                 <li class="nav-item">
-                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard',userId]"><i class="fa-solid fa-gear me-3" style="color: var(--text-color)"></i>Setting</a>
+                    <a class="nav-link mr-2 my-2"
+                    routerLinkActive="active" href="#"><i class="fa-solid fa-gear me-3"></i>Setting</a>
                 </li>
                 <!-- Bottone Logout -->
                 <!-- <li class="nav-item">

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JsonPipe,CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
@@ -13,6 +13,8 @@ import { ThemeService } from '../../services/theme.service';
   imports: [
     JsonPipe,
     RouterLink,
+    RouterModule,
+    RouterLinkActive,
     CommonModule,
   ],
   templateUrl: './sidebar.component.html',
