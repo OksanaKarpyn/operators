@@ -4,29 +4,29 @@
             <ul class="nav m-auto">
                    <!-- Bottone Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard']"><i class="fa-solid fa-house me-3" style="color: #FFF;"></i>Home</a>
+                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard']"><i class="fa-solid fa-house me-3"></i>Home</a>
                 </li>
                 <!-- Bottone Register User -->
                 <li class="nav-item" *ngIf="canViewRegisterButton">
-                    <a class="nav-link btn btn-primary mr-2 my-2" [routerLink]="['register/add-edit']"><i class="fa-solid fa-user-plus me-3" style="color: #FFF;"></i>Register User</a>
+                    <a class="nav-link btn btn-primary mr-2 my-2" [routerLink]="['register/add-edit']"><i class="fa-solid fa-user-plus me-3" ></i>Register User</a>
                 </li>
                 <!-- Bottone Users List -->
                 <li class="nav-item">
-                    <a class="nav-link  mr-2 my-2" [routerLink]="['/users']"><i class="fa-solid fa-users me-3" style="color: #FFFF;"></i>Users list</a>
+                    <a class="nav-link  mr-2 my-2" [routerLink]="['/users']"><i class="fa-solid fa-users me-3"></i>Users list</a>
                 </li>
 
                  <!-- button chart -->
                  <li class="nav-item">
-                    <a class="nav-link mr-2 my-2" [routerLink]="['/charts']" ><i class="fa-solid fa-chart-line me-3" style="color: #FFFF;"></i>Charts</a>
+                    <a class="nav-link mr-2 my-2" [routerLink]="['/charts']" ><i class="fa-solid fa-chart-line me-3" ></i>Charts</a>
                 </li>
                 <!-- Bottone Overview -->
                 <li class="nav-item">
-                    <a href="http://google.com" class="nav-link mr-2 my-2"><i class="fa-solid fa-globe me-3" style="color: #FFFF;"></i>Overview</a>
+                    <a href="http://google.com" class="nav-link mr-2 my-2"><i class="fa-solid fa-globe me-3"></i>Overview</a>
                 </li>
                 <!-- -------dropdown button---------- -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle mr-2 my-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-layer-group me-3" style="color: #FFFF;"></i>
+                        <i class="fa-solid fa-layer-group me-3"></i>
                         layouts
                     </a>
                     <ul class="dropdown-menu">
@@ -39,7 +39,7 @@
               
                 <!-- button setting -->
                 <li class="nav-item">
-                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard',userId]"><i class="fa-solid fa-gear me-3" style="color: #FFF;"></i>Setting</a>
+                    <a class="nav-link mr-2 my-2" [routerLink]="['/dashboard',userId]"><i class="fa-solid fa-gear me-3" style="color: var(--text-color)"></i>Setting</a>
                 </li>
                 <!-- Bottone Logout -->
                 <!-- <li class="nav-item">
@@ -50,8 +50,11 @@
 
         </div>
         <ul class="nav mt-auto">
+            <li>
+                <button class="btn btn-outline-ligth" (click)="toggleTheme()">  <i [ngClass]="isDarkTheme ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"></i></button>
+            </li>
             <li class="nav-item">
-                <button class="nav-link btn text-white" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket me-3" style="color: #ffff;"></i>Log Out</button>
+                <button class="nav-link btn" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket me-3" style="color: var(--text-color);"></i>Log Out</button>
             </li>
         </ul>
     </div>

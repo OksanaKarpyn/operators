@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,7 +23,9 @@ export class SidebarComponent {
   userId?: string | null = null;
   sub?: Subscription;
   user?: User |undefined;
-   
+  isDarkTheme: boolean = false;
+
+
   canViewRegisterButton: boolean = false;
   canViewEditButton: boolean = false;
   canViewDeleteButton : boolean = false;
@@ -30,6 +33,7 @@ export class SidebarComponent {
   constructor(
     private authService:AuthService,
     private userService:UserService,
+    private themeService :ThemeService
   ){
     userService.profile$.subscribe({
         
@@ -42,8 +46,6 @@ export class SidebarComponent {
 
   ngOnInit():void{
     this.isAuthenticated = this.userService.isAuthenticated();
-    
-
     this.sub = this.userService.isAuthenticated$.subscribe((value) => {
 
       this.isAuthenticated = value;
@@ -58,7 +60,20 @@ export class SidebarComponent {
         });
       }
     })
-        
+     
+    
+    //--------theme---------
+    const savedTheme = this.themeService.getTheme();
+    this.isDarkTheme = savedTheme === 'dark-theme';
+    this.themeService.setTheme(savedTheme);
+  
+
+  }
+  //------function-theme------
+  toggleTheme(){
+    this.isDarkTheme = !this.isDarkTheme;
+    const newTheme = this.isDarkTheme ? 'dark-theme' : 'light-theme';
+    this.themeService.setTheme(newTheme);
   }
   //------------------------------
   updateButtonVisibility():void {

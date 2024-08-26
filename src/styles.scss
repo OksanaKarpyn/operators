@@ -10,14 +10,36 @@
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
+:root {
+  --primary-color: #ffffff;
+  --background-color: #f8f9fa;
+  --text-color: #212529;
+}
+
+.dark-theme {
+  --primary-color: #343a40;
+  --background-color: #212529;
+  --background-side-color:#2c3e50;
+  --text-color: #f8f9fa;
+}
+
+.light-theme {
+  --primary-color: #ffffff;
+  --background-color: #f8f9fa;
+  --background-side-color:#FFF;
+  --text-color: #212529;
+}
+body{
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
 .main {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #F5F5F5;
+  background-color: var(--background-color);
   .container {
     flex: 1;
   }
-
 
 }
