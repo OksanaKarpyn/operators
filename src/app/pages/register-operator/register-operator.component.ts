@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { ThemeService } from '../../services/theme.service';
 @Component({
   selector: 'app-register-operator',
   standalone: true,
@@ -21,12 +22,16 @@ export class RegisterOperatorComponent implements OnInit {
   form: FormGroup;
   userId!: string | null;
   currentRole: string = '';
+
   isEditing: boolean = false;
+  isDarkTheme: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private themeService:ThemeService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -58,29 +63,10 @@ export class RegisterOperatorComponent implements OnInit {
       }
     });
 
-
-
-    // if (this.userId) {
-    //   // Modalità di modifica: carica i dati dell'utente
-    //   this.userService.getUserById(this.userId).subscribe({
-    //     next: (userData: User) => {
-    //       // Riempie il modulo con i dati dell'utente, eccetto la password
-    //       this.form.patchValue({
-    //         name: userData.name,
-    //         surname: userData.surname,
-    //         role: userData.role,
-    //         email: userData.email
-    //       });
-    //       // Disabilita il campo password durante l'editing
-    //       this.form.get('password')?.clearValidators();
-    //       this.form.get('password')?.updateValueAndValidity();
-    //     },
-    //     error: (error) => {
-    //       console.error('Error loading user data:', error);
-    //       alert('Error loading user data.');
-    //     }
-    //   });
-    // }
+    //----theme---------
+   this.themeService.theme$.subscribe(theme=>{
+    this.isDarkTheme = theme === 'dark-theme';
+   })
   }
 
   // updateFormVisibility(): void {

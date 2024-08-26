@@ -37,29 +37,15 @@
         color: var(--text-color);
       }
     }
-
-    .dark-theme {
-      --background-color: #343a40;
-      --text-color: #ffffff;
-    }
-    
-    .light-theme {
-      --background-color: #ffffff;
-      --text-color: #000000;
-    }
     table{
-
-      //background-color: var(--background-color);
       color: var(--text-color);
       tr{
         th{
           padding-left: 5px;
-          //color: var(--text-color);
          
         }
         td{
-          //background-color: var(--background-color);
-          color: var(--text-color);
+          //color: var(--text-color);
        
           i{
             &:hover{
