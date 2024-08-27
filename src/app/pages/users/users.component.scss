@@ -1,53 +1,5 @@
-// .container{
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-
-// }
-
-.users-content {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-
-  }
-  .users-box {
-    background-color: var(--background-side-color);
-    width: 100%;
-    margin-top: 50px;
-    align-self: flex-start;
-    padding: 20px;
-    box-shadow:var(--box-shadow);
-
-    border-radius: 10px;
-  
-    h2 {
-      margin: 0 0 30px;
-      padding: 0;
-      text-align: center;
-      color: var(--text-color);
-      i{
-        color: var(--text-color);
-      }
-    }
-    table{
-      color: var(--text-color);
-      tr{
-        th{
-          padding-left: 5px;
-         
-        }
-        td{
-          //color: var(--text-color);
-       
-          i{
-            &:hover{
-              color: #fff;
-            }
-          }
-        }
-      }
-     
-    }
+.users-box {
+  background-color: var(--background-side-color);
+  box-shadow:var(--box-shadow); 
 }
   
