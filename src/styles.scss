@@ -10,14 +10,13 @@
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 $pippo: blue;
-:root {
-  --primary-color: #ffffff;
-  --background-color: #f8f9fa;
-  --text-color: #212529;
-}
+// :root {
+//   --primary-color: #ffffff;
+//   --background-color: #f8f9fa;
+//   --text-color: #212529;
+// }
 
 .dark-theme {
-  --primary-color: #343a40;
   --background-color: #212529;
   --background-active-color:#4f7094;
   --background-side-color:#2c3e50;
@@ -26,7 +25,6 @@ $pippo: blue;
 }
 
 .light-theme {
-  --primary-color: #ffffff;
   --background-color: #f8f9fa;
   --background-active-color:#F8F9FA;
   --background-side-color:#FFF;

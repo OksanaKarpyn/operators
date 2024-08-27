@@ -1,20 +1,20 @@
 <div class="header-component" *ngIf="user">
-  <nav class="navbar navbar-expand-md navbar-dark"> <!-- Aggiungi navbar-dark per il testo bianco -->
+  <nav class="navbar navbar-expand-md"> <!-- Aggiungi navbar-dark per il testo bianco -->
     <div class="container-fluid">
-      <a class="navbar-brand text-white" [routerLink]="['/dashboard', userId]">Anitia</a>
+      <a class="navbar-brand" [routerLink]="['/dashboard', userId]">Anitia</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav" *ngIf="canViewRegisterButton">
           <li class="nav-item d-block d-md-none">
-            <a class="nav-link text-white active" aria-current="page" [routerLink]="['register/add-edit']">Register User</a>
+            <a class="nav-link text-white active" aria-current="page" [routerLink]="['register/add-edit']" (click)="closeNavBar()">Register User</a>
           </li>
           <li class="nav-item d-block d-md-none">
-            <a class="nav-link text-white" [routerLink]="['/users']">User List</a>
+            <a class="nav-link text-white" [routerLink]="['/users']" (click)="closeNavBar()">User List</a>
           </li>
           <li class="nav-item d-block d-md-none">
-            <a class="nav-link text-white" [routerLink]="['/dashboard']">Dashboard</a>
+            <a class="nav-link text-white" [routerLink]="['/dashboard']" (click)="closeNavBar()">Dashboard</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">

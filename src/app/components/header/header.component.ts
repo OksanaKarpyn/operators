@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JsonPipe,CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit {
   canViewEditButton: boolean = false;
   canViewDeleteButton : boolean = false;
 
+
+  isNavbarShown = document.querySelector('.navbar-collapse.show');
   constructor(
     private authService:AuthService,
     private userService:UserService,
@@ -60,8 +62,16 @@ export class HeaderComponent implements OnInit {
         });
       }
     })
-        
+   
   }
+//closenavBar
+  closeNavBar() {
+    const navbarCollapse = document.querySelector('#navbarNav');
+    if (navbarCollapse?.classList.contains('show')) {
+      return navbarCollapse.classList.remove('show');
+    }
+  }
+
 
   updateButtonVisibility():void {
     if(this.user){
