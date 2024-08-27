@@ -1,20 +1,42 @@
-<div class="login-content">
-    <div class="login-box col-12 col-md-6">
-      <h2>Login</h2>
-      <form [formGroup]="loginForm" (ngSubmit)="submit()" class="rounded-3">
-        <div class="user-box">
-          <input type="email" id="email" formControlName="email" class="form-control" required>
-          <label for="email" class="form-label">Email</label>
+<div class="container">
+
+  <div class="vh-100 d-flex align-items-center justify-content-center">
+    <div class="card border-0 myVar-background-side-color">
+      <div class="card-body p-0">
+        <div class="row">
+          <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+            <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg"
+              class="img-fluid mx-auto" id="img">
+          </div>
+          <div class="col-12 col-md-6">
+
+            <div class="px-4">
+              <h2 class="text-muted fw-bold text-center my-4 ">Login</h2>
+
+              <form [formGroup]="loginForm" (ngSubmit)="submit()" class="rounded-3">
+                <div class="form-group mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="text" class="form-control" formControlName="email" id="email" name="email"
+                    placeholder="Enter Email">
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" formControlName="password" id="password" name="password"
+                    placeholder="Enter Password">
+                </div>
+
+
+                <div class="d-grid gap-2 mx-auto mb-4">
+                  <button class="btn btn-outline-primary" type="submit">Enter</button>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
         </div>
-        <div class="user-box">
-          <input type="password" id="password" formControlName="password" class="form-control" required>
-          <label for="password" class="form-label">Password</label>
-        </div>
-        <div class="col-12">
-          <button type="submit" class="btn border">Enter</button>
-        </div>
-      </form>
+      </div>
     </div>
-    <!-- <button class="button btn mb-2" [routerLink]="['']">Go Back</button>  -->
   </div>
-  
+</div>
