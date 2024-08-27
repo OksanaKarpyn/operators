@@ -1,4 +1,4 @@
-<div class="header-component" *ngIf="user">
+<div class="header-component py-2" *ngIf="user">
   <nav class="navbar navbar-expand-md"> <!-- Aggiungi navbar-dark per il testo bianco -->
     <div class="container-fluid">
       <a class="navbar-brand" [routerLink]="['/dashboard', userId]">Anitia</a>
@@ -8,24 +8,24 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav" *ngIf="canViewRegisterButton">
           <li class="nav-item d-block d-md-none">
-            <a class="nav-link text-white active" aria-current="page" [routerLink]="['register/add-edit']" (click)="closeNavBar()">Register User</a>
+            <a class="nav-link active" aria-current="page" [routerLink]="['register/add-edit']" (click)="closeNavBar()">Register User</a>
           </li>
           <li class="nav-item d-block d-md-none">
-            <a class="nav-link text-white" [routerLink]="['/users']" (click)="closeNavBar()">User List</a>
+            <a class="nav-link" [routerLink]="['/users']" (click)="closeNavBar()">User List</a>
           </li>
           <li class="nav-item d-block d-md-none">
-            <a class="nav-link text-white" [routerLink]="['/dashboard']" (click)="closeNavBar()">Dashboard</a>
+            <a class="nav-link" [routerLink]="['/dashboard']" (click)="closeNavBar()">Dashboard</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <div class="dropdown">
-              <button class="btn dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-user"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" [routerLink]="['/dashboard']">Profile</a></li>
-                <li><button class="dropdown-item" (click)="logout()">Log Out<i class="fa-solid fa-arrow-right-from-bracket ms-2" style="color: #000;"></i></button></li>
+                <li><button class="dropdown-item" (click)="logout()">Log Out<i class="fa-solid fa-arrow-right-from-bracket ms-2"></i></button></li>
               </ul>
             </div>
           </li>

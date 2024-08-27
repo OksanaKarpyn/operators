@@ -1,10 +1,5 @@
 .header-component{
-    background-color: #395069;
-    color: white;
-    padding: .5rem;
-        
-      .dropdown-toggle::after {
-        display: none;
-      }
+    background-color: var(--background-side-color);
+    color: var(--text-color);
 }
    
