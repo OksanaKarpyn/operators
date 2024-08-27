@@ -3,17 +3,17 @@
 <div class="container-fluid p-0"> 
     <div class="container p-0">
         <div class="chart-component">
-            <div class="chart-content gap-3"> 
-                <div class="chart-box col-12 col-md-5 flex-grow-1">
+            <div class="chart-content d-flex flex-wrap gap-3 mb-3"> 
+                <div class="chart-box myVar-background-side-color rounded-4 p-4 col-12 col-md-5 flex-grow-1">
                     <h4>Pie Chart</h4>
                     <canvas id="piechartId">{{salesdata}}</canvas>
                 </div>
-                <div class="chart-box col-12 col-md-6">
+                <div class="chart-box myVar-background-side-color rounded-4 p-4 col-12 col-md-6">
                     <div class="chart-box col-12">
                         <h4>Line Chart</h4>
                         <canvas id="linechartId">{{salesdata}}</canvas>
                     </div>
-                    <div class="chart-box col-12">
+                    <div class="chart-box myVar-background-side-color rounded-4 p-4 col-12">
                         <h4>Bar Chart</h4>
                         <canvas id="barchartId">{{salesdata}}</canvas>
                     </div>
@@ -21,13 +21,13 @@
                 </div>
             </div>
            
-            <div class="chart-content gap-3">
+            <div class="chart-content d-flex flex-wrap gap-3">
               
-                <div class="chart-box col-12 col-md-5 flex-grow-1">
+                <div class="chart-box myVar-background-side-color rounded-4 p-4 col-12 col-md-5 flex-grow-1">
                     <h4>Radar Chart</h4>
                     <canvas id="radarChartId">{{salesdata}}</canvas>
                 </div>
-                <div class="chart-box col-12 col-md-6">
+                <div class="chart-box myVar-background-side-color rounded-4 p-4 col-12 col-md-6">
                     <h4>Doughnut Chart</h4>
                     <canvas id="doughnutchartId">{{salesdata}}</canvas>
                 </div>

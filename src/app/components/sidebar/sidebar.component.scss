@@ -1,11 +1,13 @@
 .side-component {
-  background-color: var(--background-side-color);
   width: 200px;
   transition: transform 0.4s ease-in-out;
-
-  .nav-item {
-    .active {
-      background-color: var(--background-active-color);
+  .nav{
+    //margin-right: 5px;
+   
+    .nav-item {
+      .active {
+       background-color: var(--background-active-color);
+      }
     }
   }
   @media (max-width: 768px) {

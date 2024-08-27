@@ -11,13 +11,18 @@
 }
 //$pippo: blue;
 //$bg-side:pink;
-// :root {
-//   --background-color: #f8f9fa;
-//   --text-color: #212529;
-// }
+:root {
+  --background-color: #f8f9fa;
+  --background-active-color:#F8F9FA;
+  --background-side-color:#FFF;
+
+  --text-color: #212529;
+  --box-shadow:0 15px 25px rgba(164, 194, 226, 0.6);
+}
 .dark-theme {
   --background-color: #212529;
   --background-active-color:#4f7094;
+
   --background-side-color:#2c3e50;
   --text-color: #f8f9fa;
   --box-shadow: 2px 15px 25px rgba(126, 137, 156, 0.672);
@@ -34,5 +39,14 @@
 .main {
   background-color: var(--background-color);
   color: var(--text-color);
+}
+//------my var-------
+.myVar-box-shadow{
   box-shadow: var(--box-shadow);
+}
+.myVar-background-side-color {
+  background-color :var(--background-side-color);
+}
+.myVar-background-color {
+background-color: var(--background-color);
 }

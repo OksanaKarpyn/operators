@@ -1,4 +1,4 @@
-<div class="header-component py-2" *ngIf="user">
+<div class="header-component myVar-background-side-color py-2" *ngIf="user">
   <nav class="navbar navbar-expand-md"> <!-- Aggiungi navbar-dark per il testo bianco -->
     <div class="container-fluid">
       <a class="navbar-brand" [routerLink]="['/dashboard', userId]">Anitia</a>
@@ -8,7 +8,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav" *ngIf="canViewRegisterButton">
           <li class="nav-item d-block d-md-none">
-            <a class="nav-link active" aria-current="page" [routerLink]="['register/add-edit']" (click)="closeNavBar()">Register User</a>
+            <a class="nav-link" aria-current="page" [routerLink]="['register/add-edit']" (click)="closeNavBar()">Register User</a>
           </li>
           <li class="nav-item d-block d-md-none">
             <a class="nav-link" [routerLink]="['/users']" (click)="closeNavBar()">User List</a>

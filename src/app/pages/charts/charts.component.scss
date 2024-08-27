@@ -1,21 +1,2 @@
-.chart-component{
-    margin-top: 10px;
-    height: 100%;
-    overflow-y: auto; 
-    .chart-content{
-        display: flex;
-        flex-wrap: wrap;
-        .chart-box{
-            background-color: var(--background-side-color);
-            color: var(--text-color);
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 10px;
-            
-            canvas{
-                color: var(--text-color);
-            }
-        }
-    }
+
     
-}
