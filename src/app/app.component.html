@@ -10,12 +10,12 @@
 
 <main class="main d-flex flex-column vh-100" [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' ">
   <app-header></app-header>
-<div class="container-components d-flex flex-grow-1">
+<div class="container-components overflow-hidden d-flex flex-grow-1">
 
-    <div class="side-component w-xs-0 w-sm-0  w-md-25 w-lg-25">
+    <div class="side-component">
       <app-sidebar></app-sidebar>
     </div>
-    <div class="app-component flex-grow-1 w-100 w-md-75 w-lg-75 ">
+    <div class="app-component p-4 overflow-auto h-100 flex-grow-1 ">
       <router-outlet></router-outlet>
     </div>
 

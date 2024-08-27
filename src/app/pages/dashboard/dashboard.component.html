@@ -3,7 +3,7 @@
 
     <div class="dashboard-component col-12">
 
-      <div class="dashboard-box col-12 my-4">
+      <div class="dashboard-box my-2s col-12 my-4">
         @if(user){
         <div class="card text-center border-0  col-12 col-md-12">
           <div class="d-flex align-items-center flex-wrap text-center">
@@ -17,7 +17,7 @@
                 <h5 class="card-title me-3 mb-0">{{ user.name | uppercase }} {{user.surname | uppercase}} </h5>
                 <!-- Button trigger modal -->
                 <!-- [ngClass]="isDarkTheme ? 'btn-outline-light': 'btn-outline-success' " -->
-                <button type="button" class="btn border rounded-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn border d-flex justify-content-center align-items-center rounded-circle" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   <i class="fa-solid fa-info"></i>
                 </button>
 
@@ -51,7 +51,7 @@
         }
       </div>
       <!-- ------section cards -->
-      <div class="dashboard-box gap-3">
+      <div class="dashboard-box d-flex flex-wrap gap-3">
 
         <div class="card mb-3 col-12 col-md-5 col-lg-2 flex-grow-1"[ngClass]="isDarkTheme ? 'border-success text-success':'text-bg-success' ">
           <div class="card-header">Orders</div>
@@ -86,7 +86,7 @@
 
       <!-- chart sectinon -->
 
-      <!-- <app-charts></app-charts> -->
+      <app-charts></app-charts>
     </div>
   </div>
 </div>

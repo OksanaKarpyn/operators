@@ -1,39 +1,8 @@
 
 .register-content {
-    height: 100%;
-    display: flex;
-    button {
-      margin-bottom: 10px;
-      border: 2px solid #fff;
-      background-color: #3f51b5;
-      align-self: flex-end;
-      color: #fff;
-      &:hover {
-        background-color:#565454;
-        color: #fff; 
-      }
-    }
-
-
-
     .register-box {
-      margin-top: 50px;
-      align-self: self-start;
-      padding: 20px;
       background-color: var(--background-side-color);
-      color: var(--text-color);
-      box-sizing: border-box;
       box-shadow: var(--box-shadow);
-      border-radius: 10px;
-    
-      h2 {
-        margin: 0 0 20px;
-        padding: 0;
-        text-align: center;
-        i{
-          color: var(--text-color);
-        }
-      }
     }
   }
 

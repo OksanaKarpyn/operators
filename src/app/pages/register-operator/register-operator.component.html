@@ -2,14 +2,14 @@
 <div class="container">
     <div class="register-content">
     
-        <div class="row justify-content-center register-box">
+        <div class="register-box rounded-4 mt-5 p-4 m-0 text-center">
             
             <h2>{{ isEditing ? 'Edit form' : 'Register form' }}<i class="fa-solid fa-user ms-3"></i></h2>
             
     
             <form class="row g-3 my-5 p-4 bg-body-tertiary rounded-3"[formGroup]="form" (ngSubmit)="submit()">
                 <!-- [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' "  -->
-                <div class="col-md-6" *ngIf="form.get('name')?.enabled">
+                <div class="col-md-6 " *ngIf="form.get('name')?.enabled">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" formControlName="name" required />
                 </div>
@@ -38,9 +38,11 @@
                 <!-- <div class="col-12">
                     <button type="submit" class="btn button" [disabled]="!form.valid">Sign in</button>
                 </div> -->
-                <button type="submit" class="btn btn-outline-primary" [disabled]="!form.valid">
-                    {{ isEditing ? 'Edit User' : 'Add User' }}
-                  </button>
+                <div class="col-12 d-flex">
+                    <button type="submit" class="btn col-12 col-md-4" [disabled]="!form.valid">
+                        {{ isEditing ? 'Edit User' : 'Add User' }}
+                    </button>
+                </div>
             </form>
         </div>
         <!-- <button class="btn btn-primary mr-2" [routerLink]="['/users']">Go Back</button> -->
