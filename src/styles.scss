@@ -9,13 +9,12 @@
   box-sizing: border-box;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
-$pippo: blue;
+//$pippo: blue;
+//$bg-side:pink;
 // :root {
-//   --primary-color: #ffffff;
 //   --background-color: #f8f9fa;
 //   --text-color: #212529;
 // }
-
 .dark-theme {
   --background-color: #212529;
   --background-active-color:#4f7094;
@@ -28,23 +27,12 @@ $pippo: blue;
   --background-color: #f8f9fa;
   --background-active-color:#F8F9FA;
   --background-side-color:#FFF;
+
   --text-color: #212529;
   --box-shadow:0 15px 25px rgba(164, 194, 226, 0.6);
 }
-body{
+.main {
   background-color: var(--background-color);
   color: var(--text-color);
+  box-shadow: var(--box-shadow);
 }
-.main {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--background-color);
-  .container {
-    flex: 1;
-  }
-
-}
-// .active{
-//   background-color: var(--background-color);
-// }
