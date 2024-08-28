@@ -1,15 +1,6 @@
 .side-component {
   width: 200px;
   transition: transform 0.4s ease-in-out;
-  .nav{
-    //margin-right: 5px;
-   
-    .nav-item {
-      .active {
-       //background-color: var(--background-active-color);
-      }
-    }
-  }
   @media (max-width: 768px) {
     position: fixed;
     z-index: 1000;

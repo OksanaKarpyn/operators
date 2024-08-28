@@ -3,7 +3,7 @@
     @if(user){
 
       <div class="details-user-content d-flex justify-content-center">
-        <div class="details-user-box myVar-background-side-color myVar-box-shadow rounded-4 w-100 p-4">
+        <div class="details-user-box border border-primary-subtle myVar-background-side-color myVar-box-shadow rounded-4 w-100 p-4">
           <h2 class="p-0 mb-4 text-center">User Details<i class="fa-solid fa-users ms-3"></i></h2>
           <div class="card">
             <!-- [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' " -->
@@ -16,11 +16,12 @@
               <li class="list-group-item">ID: {{user.id}}</li>
             </ul>
           </div>
+          <!-- [ngClass]="isDarkTheme ? 'btn-outline-light ':'btn-outline-dark border-white' " -->
+          <button class="btn myVar-box-shadow border border-primary-subtle col-12 col-md-4 mr-2  my-5" [routerLink]="['/users']">Go Back</button>
         </div>
       </div>
     }
-    <!-- [ngClass]="isDarkTheme ? 'btn-outline-light ':'btn-outline-dark border-white' " -->
-     <button class="btn myVar-box-shadow border mr-2  my-5" [routerLink]="['/users']">Go Back</button>
+    
   </div>
  </div>
 
