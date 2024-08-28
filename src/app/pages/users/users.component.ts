@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { ThemeService } from '../../services/theme.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @Component({
   selector: 'app-users',
@@ -14,14 +15,17 @@ import { ThemeService } from '../../services/theme.service';
     JsonPipe, 
     RouterLink,
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
 export class UsersComponent {
   users: Array<User> = [];
-  
+  //paginaton
+    page: number = 1;
+
   filteredUsers: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   searchValueInput: string = '';
 
@@ -31,11 +35,14 @@ export class UsersComponent {
   user?: User |undefined;
   isDarkTheme: boolean = false;
 
+
+  totalRecords?:number;
+
   constructor(
     private userService: UserService,
     private themeService:ThemeService
   ) {
- 
+
   }
   ngOnInit():void{
     this.userService.getAllUsers().subscribe({
@@ -43,7 +50,7 @@ export class UsersComponent {
         this.users = data;
         console.log(this.users);
         this.filteredUsers.next(this.users);// inizializza la lista filtrata con tutti utenti 
-      },
+              },
       error: (err) => {
         console.error(err.massege);
       },

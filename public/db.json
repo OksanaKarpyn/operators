@@ -47,6 +47,14 @@
       "role": "operator",
       "email": "francesca@test.it",
       "password": "$2a$08$aNnJfJCuHub8sfdRmLaUbucG933Bp/3XJla7iMaEegD6YFEtEGPOS"
+    },
+    {
+      "id": "76f1f12d-72e4-48a7-9355-8ba6d7925ccd",
+      "name": "nicola",
+      "surname": "pippo",
+      "role": "operator",
+      "email": "nicola@test.it",
+      "password": "$2a$08$LbqUuZwpJPPPW8BXzjTzIOBgdYy8tw5UIZLKNGbsd5JYyiULwf56i"
     }
   ],
   "products": [],
