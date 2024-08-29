@@ -23,7 +23,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 })
 export class UsersComponent {
   users: Array<User> = [];
-  //paginaton
+  //---pagination-----
     page: number = 1;
 
   filteredUsers: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
