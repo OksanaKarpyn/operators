@@ -7,6 +7,7 @@ import { DetailsUserComponent } from './pages/details-user/details-user.componen
 // import { LoginOperatorComponent } from './pages/login-operator/login-operator.component';
 import { ChartsComponent } from './pages/charts/charts.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
     {
@@ -15,6 +16,7 @@ export const routes: Routes = [
         title: 'Home Page',
         canActivate: [AuthGuard]
     },
+   
     {
         path: 'register/add-edit',
         component: RegisterOperatorComponent,
@@ -52,6 +54,11 @@ export const routes: Routes = [
         path:'charts',
         component:ChartsComponent,
         title:'Charts Page'
+    },
+    {
+        path: '**',
+        component: PageNotFoundComponent,
+        title: 'Not Found Page',
     }
     
 
