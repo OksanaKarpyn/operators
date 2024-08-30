@@ -69,24 +69,6 @@ export class RegisterOperatorComponent implements OnInit {
    })
   }
 
-  // updateFormVisibility(): void {
-  //   if (this.currentRole === 'admin') {
-  //     // Mostra tutto per admin
-  //     this.form.get('role')?.enable();
-  //     this.form.get('name')?.enable();
-  //     this.form.get('surname')?.enable();
-  //     this.form.get('email')?.enable();
-  //     this.form.get('password')?.enable();
-  //   } else if (this.currentRole === 'operator') {
-  //     // Nascondi il campo role per l'administrator
-  //     this.form.get('role')?.disable();
-  //   } else {
-  //     // Nascondi tutto per standard
-  //     this.form.disable();
-  //   }
-  // }
-
-
   submit(): void {
     if (this.form.valid) {
       if (this.userId) {
