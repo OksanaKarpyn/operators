@@ -3,7 +3,7 @@ import { User } from '../../models/user';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CommonModule, JsonPipe, UpperCasePipe } from '@angular/common';
-import { ThemeService } from '../../services/theme.service';
+
 @Component({
   selector: 'app-details-user',
   standalone: true,
@@ -21,8 +21,7 @@ export class DetailsUserComponent {
   // isDarkTheme :boolean = false;
   constructor(
     private route:ActivatedRoute,
-    private userService:UserService,
-    private themeService:ThemeService
+    private userService:UserService
   ){
     const id = route.snapshot.paramMap.get('id');
     if(id){
@@ -34,9 +33,5 @@ export class DetailsUserComponent {
       })
     }
   }
-  // ngOnInit(): void {
-  //   this.themeService.theme$.subscribe(theme=>{
-  //     this.isDarkTheme = theme === 'dark-theme';
-  //   })
-  // }
+
 }

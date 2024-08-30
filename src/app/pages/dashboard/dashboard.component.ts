@@ -27,7 +27,7 @@ import { ThemeService } from '../../services/theme.service';
 export class DashboardComponent implements OnInit {
 
   user: User | null = null;
-  isDarkTheme: boolean = false;
+  isDarkTheme = false;
 
   constructor(
     private authservice: AuthService,

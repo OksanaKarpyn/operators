@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
-import { ThemeService } from '../../services/theme.service';
 @Component({
   selector: 'app-register-operator',
   standalone: true,
@@ -13,7 +12,7 @@ import { ThemeService } from '../../services/theme.service';
     CommonModule,
     ReactiveFormsModule,
     RouterModule
-  
+
   ],
   templateUrl: './register-operator.component.html',
   styleUrls: ['./register-operator.component.scss']
@@ -21,17 +20,14 @@ import { ThemeService } from '../../services/theme.service';
 export class RegisterOperatorComponent implements OnInit {
   form: FormGroup;
   userId!: string | null;
-  currentRole: string = '';
-
-  isEditing: boolean = false;
-  // isDarkTheme: boolean = false;
+  currentRole = '';
+  isEditing = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
     private route: ActivatedRoute,
-    private themeService:ThemeService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -59,14 +55,11 @@ export class RegisterOperatorComponent implements OnInit {
           this.form.get('password')?.updateValueAndValidity();
         }
         // Adatta la visibilità dei campi in base al ruolo
-        this.userService.updateFormVisibility(this.form,this.currentRole);
+        this.userService.updateFormVisibility(this.form, this.currentRole);
       }
     });
 
-  //   //----theme---------
-  //  this.themeService.theme$.subscribe(theme=>{
-  //   this.isDarkTheme = theme === 'dark-theme';
-  //  })
+
   }
 
   submit(): void {

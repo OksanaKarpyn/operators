@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, of, throwError } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-import { Token } from '../models/token';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
@@ -31,8 +30,8 @@ export class UserService {
   deleteUser(id: string): Observable<User> {
     return this.http.delete<User>(`${this.url}/${id}`,{ withCredentials: true });
   }
-  getAllUsers(): Observable<Array<User>>{
-    return this.http.get<Array<User>>(`${this.url}/all`);
+  getAllUsers(): Observable<User[]>{
+    return this.http.get<User[]>(`${this.url}/all`);
   }
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${this.url}/${id}`, { withCredentials: true }).pipe(

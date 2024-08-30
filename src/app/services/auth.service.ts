@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
@@ -28,7 +27,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<Token | null> {
-    return this.http.post<any>(`${this.url}/login`, { email, password }, { withCredentials: true }).pipe(
+    return this.http.post<Token>(`${this.url}/login`, { email, password }, { withCredentials: true }).pipe(
       map((response: Token) => {
         if (response.accessToken) {
           this.saveToken(response.accessToken);
@@ -85,6 +84,7 @@ export class AuthService {
     try {
       return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
+      console.error(e);
       return null;
     }
   }

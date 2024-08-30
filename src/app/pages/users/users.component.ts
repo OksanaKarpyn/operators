@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { ThemeService } from '../../services/theme.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 @Component({
@@ -21,17 +20,17 @@ import {NgxPaginationModule} from 'ngx-pagination';
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent {
-  users: Array<User> = [];
+export class UsersComponent implements OnInit{
+  users: User[] = [];
   //---pagination-----
-    page: number = 1;
+    page = 1;
 
   filteredUsers: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
-  searchValueInput: string = '';
+  searchValueInput = '';
 
-  canViewRegisterButton: boolean = false;
-  canViewEditButton: boolean = false;
-  canViewDeleteButton : boolean = false;
+  canViewRegisterButton = false;
+  canViewEditButton = false;
+  canViewDeleteButton = false;
   user?: User |undefined;
   // isDarkTheme: boolean = false;
 
@@ -40,7 +39,6 @@ export class UsersComponent {
 
   constructor(
     private userService: UserService,
-    private themeService:ThemeService
   ) {
 
   }
@@ -67,10 +65,7 @@ export class UsersComponent {
         console.error(err.message);
       }
     });
-  //  //---------------theme-------
-  //    this.themeService.theme$.subscribe(theme => {
-  //     this.isDarkTheme = theme === 'dark-theme';
-  //    });
+
 
   }
   

@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JsonPipe,CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
@@ -20,17 +20,17 @@ import { ThemeService } from '../../services/theme.service';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   isAuthenticated = false;
   userId?: string | null = null;
   sub?: Subscription;
   user?: User |undefined;
-  isDarkTheme: boolean = false;
+  isDarkTheme = false;
 
 
-  canViewRegisterButton: boolean = false;
-  canViewEditButton: boolean = false;
-  canViewDeleteButton : boolean = false;
+  canViewRegisterButton = false;
+  canViewEditButton = false;
+  canViewDeleteButton = false;
 
   constructor(
     private authService:AuthService,

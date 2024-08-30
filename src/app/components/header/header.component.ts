@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JsonPipe,CommonModule } from '@angular/common';
-import { Router, RouterLink, NavigationEnd } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
@@ -18,15 +18,15 @@ import { User } from '../../models/user';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit,OnDestroy {
   isAuthenticated = false;
   userId?: string | null = null;
   sub?: Subscription;
   user?: User |undefined;
    
-  canViewRegisterButton: boolean = false;
-  canViewEditButton: boolean = false;
-  canViewDeleteButton : boolean = false;
+  canViewRegisterButton = false;
+  canViewEditButton = false;
+  canViewDeleteButton = false;
 
 
   isNavbarShown = document.querySelector('.navbar-collapse.show');
