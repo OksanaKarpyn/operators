@@ -24,7 +24,7 @@ export class RegisterOperatorComponent implements OnInit {
   currentRole: string = '';
 
   isEditing: boolean = false;
-  isDarkTheme: boolean = false;
+  // isDarkTheme: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -63,10 +63,10 @@ export class RegisterOperatorComponent implements OnInit {
       }
     });
 
-    //----theme---------
-   this.themeService.theme$.subscribe(theme=>{
-    this.isDarkTheme = theme === 'dark-theme';
-   })
+  //   //----theme---------
+  //  this.themeService.theme$.subscribe(theme=>{
+  //   this.isDarkTheme = theme === 'dark-theme';
+  //  })
   }
 
   submit(): void {

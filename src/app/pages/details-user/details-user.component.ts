@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '../../models/user';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -16,9 +16,9 @@ import { ThemeService } from '../../services/theme.service';
   templateUrl: './details-user.component.html',
   styleUrl: './details-user.component.scss'
 })
-export class DetailsUserComponent implements OnInit {
+export class DetailsUserComponent {
   user!:User;
-  isDarkTheme :boolean = false;
+  // isDarkTheme :boolean = false;
   constructor(
     private route:ActivatedRoute,
     private userService:UserService,
@@ -34,9 +34,9 @@ export class DetailsUserComponent implements OnInit {
       })
     }
   }
-  ngOnInit(): void {
-    this.themeService.theme$.subscribe(theme=>{
-      this.isDarkTheme = theme === 'dark-theme';
-    })
-  }
+  // ngOnInit(): void {
+  //   this.themeService.theme$.subscribe(theme=>{
+  //     this.isDarkTheme = theme === 'dark-theme';
+  //   })
+  // }
 }

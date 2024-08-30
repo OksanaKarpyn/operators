@@ -33,7 +33,7 @@ export class UsersComponent {
   canViewEditButton: boolean = false;
   canViewDeleteButton : boolean = false;
   user?: User |undefined;
-  isDarkTheme: boolean = false;
+  // isDarkTheme: boolean = false;
 
 
   totalRecords?:number;
@@ -67,10 +67,10 @@ export class UsersComponent {
         console.error(err.message);
       }
     });
-   //---------------theme-------
-     this.themeService.theme$.subscribe(theme => {
-      this.isDarkTheme = theme === 'dark-theme';
-     });
+  //  //---------------theme-------
+  //    this.themeService.theme$.subscribe(theme => {
+  //     this.isDarkTheme = theme === 'dark-theme';
+  //    });
 
   }
   

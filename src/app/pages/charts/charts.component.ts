@@ -5,7 +5,6 @@ import Chart, { registerables } from 'chart.js/auto';
 Chart.register(...registerables);
 import { SalesData } from '../../models/salesdata';
 import { ChartService } from '../../services/chart.service';
-import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-charts',
@@ -15,14 +14,12 @@ import { ThemeService } from '../../services/theme.service';
   styleUrl: './charts.component.scss'
 })
 export class ChartsComponent implements OnInit {
-  chart: any = [];
   salesdata :SalesData[]=[];
   labeldata: number[]=[];
   realdata: number[]=[];
   colordata:string[]=[];
   constructor(
     private chartService:ChartService,
-    private themeService:ThemeService
   ){}
 
   ngOnInit(){
@@ -111,28 +108,4 @@ renderDoughnutChart(labeldata:any,realdata:any,colordata:any ){
     })
 
   }
-
-  // ngOnInit() {
-  //   this.chart = new Chart('canvas', {
-  //     type: 'bar',
-  //     data: {
-  //       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  //       datasets: [
-  //         {
-  //           label: '# of Votes',
-  //           data: [12, 19, 3, 5, 2, 3],
-  //           borderWidth: 1,
-  //         },
-  //       ],
-  //     },
-  //     options: {
-  //       scales: {
-  //         y: {
-  //           beginAtZero: true,
-  //         },
-  //       },
-  //     },
-  //   });
-  // }
-
 }
