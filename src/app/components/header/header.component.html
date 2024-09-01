@@ -1,7 +1,7 @@
 <div class="header-component border-bottom border-primary-subtle  myVar-background-side-color py-2" *ngIf="user">
   <nav class="navbar navbar-expand-md"> <!-- Aggiungi navbar-dark per il testo bianco -->
     <div class="container-fluid">
-      <a class="navbar-brand" [routerLink]="['/dashboard', userId]">Anitia</a>
+      <a class="navbar-brand" [routerLink]="['/dashboard', user.id]">Anitia</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

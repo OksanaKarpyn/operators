@@ -11,10 +11,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class UserService {
   readonly url = 'http://localhost:3000/users';
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
 
-  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
- 
 
   profile$: BehaviorSubject<User| undefined> = new BehaviorSubject<User | undefined>(undefined);
 
@@ -61,15 +58,6 @@ export class UserService {
         .filter(cookie => cookie.substring(0, nameLenPlus) === `${name}=`)
         .map(cookie => decodeURIComponent(cookie.substring(nameLenPlus)))[0] || null;
   }
-
- public isAuthenticated(): boolean {
-    return !!this.getCookie('token');
-  }
-
-
-
-
-
 
 //--------------------------------
 

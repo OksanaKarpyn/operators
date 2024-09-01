@@ -21,9 +21,7 @@ import { ThemeService } from '../../services/theme.service';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent implements OnInit {
-  isAuthenticated = false;
-  userId?: string | null = null;
-  sub?: Subscription;
+  
   user?: User |undefined;
   isDarkTheme = false;
 
@@ -46,23 +44,7 @@ export class SidebarComponent implements OnInit {
     })
   }
 
-  ngOnInit():void{
-    this.isAuthenticated = this.userService.isAuthenticated();
-    this.sub = this.userService.isAuthenticated$.subscribe((value) => {
-
-      this.isAuthenticated = value;
-
-      if (value) {
-        this.userService.getCurrentUser().subscribe(user => {
-          if (user) {
-            console.log(user.id,'header component');
-            this.userId= user.id// Memorizza l'ID dell'operatore loggato
-            this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
-          }
-        });
-      }
-    })
-     
+  ngOnInit():void{     
     
     //--------theme---------
     this.themeService.theme$.subscribe(theme => {
