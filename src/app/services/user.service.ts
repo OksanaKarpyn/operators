@@ -13,23 +13,27 @@ export class UserService {
   readonly url = 'http://localhost:3000/users';
 
 
-  profile$: BehaviorSubject<User| undefined> = new BehaviorSubject<User | undefined>(undefined);
+  profile$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
 
-  constructor(private http: HttpClient,private cookieService: CookieService) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   register(user: User): Observable<void> {
     return this.http.post<void>(`${this.url}/register`, user, { withCredentials: true });
-    
   }
-  updateUser(user:User):Observable<User> {
-    return this.http.put<User>(`${this.url}/${user.id}`,user,{ withCredentials: true });
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>(`${this.url}/${user.id}`, user, { withCredentials: true });
   }
+
   deleteUser(id: string): Observable<User> {
-    return this.http.delete<User>(`${this.url}/${id}`,{ withCredentials: true });
+    return this.http.delete<User>(`${this.url}/${id}`, { withCredentials: true });
   }
-  getAllUsers(): Observable<User[]>{
+
+  getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/all`);
   }
+
+  //prende utente sulla base dell suo id
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${this.url}/${id}`, { withCredentials: true }).pipe(
       catchError(error => {
@@ -38,30 +42,17 @@ export class UserService {
       })
     );
   }
-  
 
+  //prende utente loggato sulla base di cookies
   getCurrentUser(): Observable<User | null> {
-    return this.http.get<User>(`${this.url}/profile`,{ withCredentials: true }).pipe(tap((user)=>{
+    return this.http.get<User>(`${this.url}/profile`, { withCredentials: true }).pipe(tap((user) => {
       this.profile$.next(user);
     }));
 
   }
 
-
-  //----------------------------------------
- 
-  private getCookie(name: string): string | null {
-    const nameLenPlus = (name.length + 1);
-    return document.cookie
-        .split(';')
-        .map(c => c.trim())
-        .filter(cookie => cookie.substring(0, nameLenPlus) === `${name}=`)
-        .map(cookie => decodeURIComponent(cookie.substring(nameLenPlus)))[0] || null;
-  }
-
-//--------------------------------
-
   updateFormVisibility(form: FormGroup, currentRole: string): void {
+
     if (currentRole === 'admin') {
       // Mostra tutto per admin
       form.get('role')?.enable();
@@ -77,33 +68,32 @@ export class UserService {
       form.disable();
     }
   }
-  getButtonVisibility(currentRole:string){
 
-    const visibility ={
-      canViewRegisterButton:false,
+  getButtonVisibility(currentRole: string) {
+
+    const visibility = {
+      canViewRegisterButton: false,
       canViewEditButton: false,
-      canViewDeleteButton:false
+      canViewDeleteButton: false
 
     }
-    if(currentRole === 'admin'){
+    if (currentRole === 'admin') {
       visibility.canViewRegisterButton = true;
       visibility.canViewEditButton = true;
       visibility.canViewDeleteButton = true;
-      
-    }else if (currentRole === 'operator'){
+
+    } else if (currentRole === 'operator') {
       visibility.canViewRegisterButton = false;
       visibility.canViewEditButton = true;
       visibility.canViewDeleteButton = false;
     }
     return visibility;
   }
-  
-  canDeleteUser(id:string,currentUser?:User): boolean {
-    if(currentUser && currentUser.role === 'admin'){
+
+  canDeleteUser(id: string, currentUser?: User): boolean {
+    if (currentUser && currentUser.role === 'admin') {
       return currentUser.id !== id; // L'admin può cancellare chiunque tranne se stesso
     }
     return false; // Gli altri utenti non possono cancellare nessuno
   }
 }
-
-
