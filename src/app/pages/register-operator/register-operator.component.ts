@@ -41,7 +41,7 @@ export class RegisterOperatorComponent implements OnInit {
   ngOnInit(): void {
     // Ottieni l'ID dell'utente dalla rotta (se presente)
     this.userId = this.route.snapshot.paramMap.get('id');
-    this.userService.getCurrentUser().subscribe(user => {
+    this.userService.profile$.subscribe(user => {
       if (user) {
         this.currentRole = user.role;
         if (this.userId) {
