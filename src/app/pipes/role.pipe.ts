@@ -20,9 +20,9 @@ export class RolePipe implements PipeTransform {
 
 
   transform(allowedRoles: Role[]): boolean {
-    
-    if(this.currentRole){
 
+    if(this.currentRole){
+// sel current role é admin  in teoria e  sempre true
       return allowedRoles.includes(this.currentRole);
     }
     return false;

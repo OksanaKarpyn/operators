@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JsonPipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -11,11 +11,9 @@ import { RolePipe } from '../../pipes/role.pipe';
   selector: 'app-header',
   standalone: true,
   imports: [
-    JsonPipe,
     RouterLink,
     CommonModule,
     RolePipe
-
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -23,10 +21,6 @@ import { RolePipe } from '../../pipes/role.pipe';
 export class HeaderComponent implements OnInit {
 
   user?: User | undefined;
-
-  canViewRegisterButton = false;
-  canViewEditButton = false;
-  canViewDeleteButton = false;
 
 
   isNavbarShown = document.querySelector('.navbar-collapse.show');
@@ -37,8 +31,8 @@ export class HeaderComponent implements OnInit {
     userService.profile$.subscribe({
 
       next: (user) => {
+        debugger;
         this.user = user;
-        this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
       }
     })
   }
@@ -56,14 +50,14 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  updateButtonVisibility(): void {
-    if (this.user) {
-      const visibility = this.userService.getButtonVisibility(this.user.role);
-      this.canViewRegisterButton = visibility.canViewRegisterButton;
-      this.canViewEditButton = visibility.canViewEditButton;
-      this.canViewDeleteButton = visibility.canViewDeleteButton;
-    }
-  }
+  // updateButtonVisibility(): void {
+  //   if (this.user) {
+  //     const visibility = this.userService.getButtonVisibility(this.user.role);
+  //     this.canViewRegisterButton = visibility.canViewRegisterButton;
+  //     this.canViewEditButton = visibility.canViewEditButton;
+  //     this.canViewDeleteButton = visibility.canViewDeleteButton;
+  //   }
+  // }
 
   logout(): void {
     this.authService.logout();
