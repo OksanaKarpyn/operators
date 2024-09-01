@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JsonPipe, CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
+
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { RolePipe } from '../../pipes/role.pipe';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ import { User } from '../../models/user';
     JsonPipe,
     RouterLink,
     CommonModule,
+    RolePipe
 
   ],
   templateUrl: './header.component.html',

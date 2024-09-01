@@ -39,8 +39,15 @@
       "role": "operator",
       "email": "marco.debon@anitia.it",
       "password": "$2a$08$RKUZ4RTcSbJnABPx9cytyuidMBeRAmVJ/OiT1qvLOGHhNwkloFRqq"
+    },
+    {
+      "id": "a4b2741b-97f4-44b6-8f6c-314ac774c479",
+      "name": "alex",
+      "surname": "rossi",
+      "role": "standard",
+      "email": "alex@test.it",
+      "password": "$2a$08$HuoVrWEDqBjZ6Z7ANhY3guzYZxwWkz6Ck9N9ri/rs1.hBtTylAqtO"
     }
-
   ],
   "products": [],
   "sales": [
