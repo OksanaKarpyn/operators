@@ -26,7 +26,7 @@ import { ThemeService } from '../../services/theme.service';
 })
 export class DashboardComponent implements OnInit {
 
-  user: User | null = null;
+  user: User | undefined;
   isDarkTheme = false;
 
   constructor(
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
    ) {}
 
   ngOnInit(): void {
-    this.userSevice.getCurrentUser().subscribe(userData => {
+    this.userSevice.profile$.subscribe(userData => {
       this.user = userData;
     });
 

@@ -8,6 +8,7 @@ import { DetailsUserComponent } from './pages/details-user/details-user.componen
 import { ChartsComponent } from './pages/charts/charts.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { ProfileResolver } from './resolvers/profile.resolver';
 
 export const routes: Routes = [
     {
@@ -16,50 +17,59 @@ export const routes: Routes = [
         title: 'Home Page',
         canActivate: [AuthGuard]
     },
-   
     {
-        path: 'register/add-edit',
-        component: RegisterOperatorComponent,
-        title: 'Register Page'
-    },
-    {
-        path: 'register/add-edit/:id',
-        component: RegisterOperatorComponent,
-        title: 'Register Edit Page'
-    },
-    {
-        path: 'login', 
+        path: 'login',
         pathMatch: 'full',
         // component: LoginOperatorComponent,
-        loadComponent:()=> import('./pages/login-operator/login-operator.component').then(c=>c.LoginOperatorComponent),// lazy loaded component
+        loadComponent: () => import('./pages/login-operator/login-operator.component').then(c => c.LoginOperatorComponent),// lazy loaded component
         title: 'Login Page',
         canActivate: [AuthGuard]
     },
     {
-        path: 'dashboard',
-        component: DashboardComponent,
-        title: 'Dashboard Page'
+        path: '',
+        resolve: {
+            profile: ProfileResolver
+        },
+        children: [
+            {
+                path: 'register/add-edit',
+                component: RegisterOperatorComponent,
+                title: 'Register Page'
+            },
+            {
+                path: 'register/add-edit/:id',
+                component: RegisterOperatorComponent,
+                title: 'Register Edit Page'
+            },
+            {
+                path: 'dashboard',
+                component: DashboardComponent,
+                title: 'Dashboard Page'
+            },
+            {
+                path: 'users',
+                component: UsersComponent,
+                title: 'Users list Page'
+            },
+            {
+                path: 'users/:id',
+                component: DetailsUserComponent,
+                title: 'User Details'
+            },
+            {
+                path: 'charts',
+                component: ChartsComponent,
+                title: 'Charts Page'
+            },
+        ]
+
     },
-    {
-        path:'users',
-        component: UsersComponent,
-        title:'Users list Page'
-    },
-    {
-        path:'users/:id',
-        component:DetailsUserComponent,
-        title:'User Details'
-    },
-    {
-        path:'charts',
-        component:ChartsComponent,
-        title:'Charts Page'
-    },
+
     {
         path: '**',
         component: PageNotFoundComponent,
         title: 'Not Found Page',
     }
-    
+
 
 ];

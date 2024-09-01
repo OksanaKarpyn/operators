@@ -44,7 +44,7 @@ export class UserService {
   }
 
   //prende utente loggato sulla base di cookies
-  getCurrentUser(): Observable<User | null> {
+  getCurrentUser(): Observable<User | undefined> {
     return this.http.get<User>(`${this.url}/profile`, { withCredentials: true }).pipe(tap((user) => {
       this.profile$.next(user);
     }));
