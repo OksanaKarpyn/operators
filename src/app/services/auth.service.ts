@@ -14,10 +14,9 @@ import { DecodedToken } from '../models/decodeToken';
 })
 export class AuthService {
   readonly url = 'http://localhost:3000/auth';
+
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-
-
 
   constructor(
     private http: HttpClient,
@@ -70,7 +69,6 @@ export class AuthService {
     expireDate.setHours(expireDate.getHours() + 1);
     this.cookieService.set('token', token, expireDate);
   }
-
 
   decodeToken(token: string): DecodedToken | null {
     try {
