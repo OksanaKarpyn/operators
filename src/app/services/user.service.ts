@@ -98,14 +98,14 @@ export class UserService {
 
     }
     if(currentRole === 'admin'){
-      visibility.canViewRegisterButton = true,
-      visibility.canViewEditButton = true,
-      visibility.canViewDeleteButton = true
+      visibility.canViewRegisterButton = true;
+      visibility.canViewEditButton = true;
+      visibility.canViewDeleteButton = true;
       
     }else if (currentRole === 'operator'){
-      visibility.canViewRegisterButton = false,
-      visibility.canViewEditButton = true,
-      visibility.canViewDeleteButton = false
+      visibility.canViewRegisterButton = false;
+      visibility.canViewEditButton = true;
+      visibility.canViewDeleteButton = false;
     }
     return visibility;
   }

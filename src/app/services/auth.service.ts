@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Token } from '../models/token';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { DecodedToken } from '../models/decodeToken';
 
 
 @Injectable({
@@ -63,15 +64,6 @@ export class AuthService {
     this.isAuthenticatedSubject.next(false);
     this.router.navigate(['/login']);
   }
-  // logout(): void {
-  // this.userService.profile$.next(undefined);  
-  // this.cookieService.delete('token','');         
-  // this.isAuthenticatedSubject.next(false);    
-  // this.router.navigate(['']); 
-  // }
-
-
-
 
   saveToken(token: string): void {
     const expireDate = new Date();
@@ -80,7 +72,7 @@ export class AuthService {
   }
 
 
-  decodeToken(token: string): any {
+  decodeToken(token: string): DecodedToken | null {
     try {
       return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
