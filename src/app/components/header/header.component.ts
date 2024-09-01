@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit {
     userService.profile$.subscribe({
 
       next: (user) => {
-        debugger;
         this.user = user;
       }
     })
