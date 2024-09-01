@@ -1,5 +1,47 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "77858809-ee0d-4fba-b454-aa13d146d750",
+      "name": "oksana",
+      "surname": "karpyn",
+      "email": "oksana@test.it",
+      "password": "$2a$08$BgD1tyLD2NgqZY.E3tSIbeLfa5NPZ02TSr8BMISmBsauZVjLzIPri",
+      "role": "admin"
+    },
+    {
+      "id": "46c5f011-cb6e-46b6-8e78-a10669ff5f03",
+      "name": "lidia",
+      "surname": "karpyn",
+      "role": "operator",
+      "email": "lidia@test.it",
+      "password": "$2a$08$fKk6CrCFQbIKi7sEZqfdkeGN5QBc9eKYOHWzlAxV6NvygeGAyjpZW"
+    },
+    {
+      "id": "135ad631-7aec-474e-a3ca-4d5b6df205b5",
+      "name": "romana edit",
+      "surname": "karpyn",
+      "role": "standard",
+      "email": "romana@test.it",
+      "password": "$2a$08$6/wn/pmURfHf3i5OQMIoOuJ.VrEIEZa.oO1OO3CqcWrO8Mg/GnD6u"
+    },
+    {
+      "id": "95f2971a-c1c2-4594-8d05-71d651299aa8",
+      "name": "oksana",
+      "surname": "karpyn",
+      "role": "admin",
+      "email": "oksana1@test.it",
+      "password": "$2a$08$sMJU0iZ7.6laP9oufLaBq.NUx0rqMT.lFjhMwyzRGUc1phuH8stw6"
+    },
+    {
+      "id": "4ef2afba-1eb9-458b-8e73-b12d93c5f0cb",
+      "name": "marco",
+      "surname": "de bon",
+      "role": "operator",
+      "email": "marco.debon@anitia.it",
+      "password": "$2a$08$RKUZ4RTcSbJnABPx9cytyuidMBeRAmVJ/OiT1qvLOGHhNwkloFRqq"
+    }
+
+  ],
   "products": [],
   "sales": [
     {

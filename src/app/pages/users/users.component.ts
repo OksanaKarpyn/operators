@@ -117,8 +117,5 @@ export class UsersComponent implements OnInit{
     }else{
       console.warn('Non puoi cancellare te stesso non hai permesso');
     }
-  //   // users find by index
-  //   //if index exist
-  //   //user.splice(idx,1);
   }
 }
