@@ -25,21 +25,16 @@ export class SidebarComponent implements OnInit {
   user?: User |undefined;
   isDarkTheme = false;
 
-
-  canViewRegisterButton = false;
-  canViewEditButton = false;
-  canViewDeleteButton = false;
-
   constructor(
     private authService:AuthService,
     private userService:UserService,
     private themeService :ThemeService
   ){
+
     userService.profile$.subscribe({
         
       next:(user)=>{
         this.user = user;
-        this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
       }
     })
   }
@@ -58,15 +53,6 @@ export class SidebarComponent implements OnInit {
     const newTheme = this.isDarkTheme ? 'light-theme' : 'dark-theme';
     this.themeService.setTheme(newTheme);
   }
-  //------------------------------
-  updateButtonVisibility():void {
-    if(this.user){
-      const visibility = this.userService.getButtonVisibility(this.user.role);
-      this.canViewRegisterButton = visibility.canViewRegisterButton;
-      this.canViewEditButton = visibility.canViewEditButton;
-      this.canViewDeleteButton = visibility.canViewDeleteButton;
-    }
-   }
 
    logout(): void {
     this.authService.logout();

@@ -10,7 +10,7 @@
                     [routerLink]="['/dashboard']"><i class="fa-solid fa-house me-3"></i>Home</a>
                 </li>
                 <!-- Bottone Register User -->
-                <li class="nav-item w-100" *ngIf="canViewRegisterButton">
+                <li class="nav-item w-100" *ngIf="['admin', 'operator'] | role">
                     <a class="nav-link ml-2 my-2 text-reset"
                     routerLinkActive="active"
                     

@@ -3,11 +3,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterOperatorComponent } from './pages/register-operator/register-operator.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsersComponent } from './pages/users/users.component';
-import { DetailsUserComponent } from './pages/details-user/details-user.component';
-// import { LoginOperatorComponent } from './pages/login-operator/login-operator.component';
+//import { DetailsUserComponent } from './pages/details-user/details-user.component';
+import { LoginOperatorComponent } from './pages/login-operator/login-operator.component';
 import { ChartsComponent } from './pages/charts/charts.component';
 import { AuthGuard } from './guards/auth.guard';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+//import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ProfileResolver } from './resolvers/profile.resolver';
 
 export const routes: Routes = [
@@ -20,8 +20,8 @@ export const routes: Routes = [
     {
         path: 'login',
         pathMatch: 'full',
-        // component: LoginOperatorComponent,
-        loadComponent: () => import('./pages/login-operator/login-operator.component').then(c => c.LoginOperatorComponent),// lazy loaded component
+        component: LoginOperatorComponent,
+        //loadComponent: () => import('./pages/login-operator/login-operator.component').then(c => c.LoginOperatorComponent),// lazy loaded component
         title: 'Login Page',
         canActivate: [AuthGuard]
     },
@@ -53,7 +53,8 @@ export const routes: Routes = [
             },
             {
                 path: 'users/:id',
-                component: DetailsUserComponent,
+                //component: DetailsUserComponent,
+                loadComponent: () => import('./pages/details-user/details-user.component').then(c => c.DetailsUserComponent),// lazy loaded component
                 title: 'User Details'
             },
             {
@@ -67,7 +68,8 @@ export const routes: Routes = [
 
     {
         path: '**',
-        component: PageNotFoundComponent,
+       // component: PageNotFoundComponent,
+        loadComponent: () => import('./pages/page-not-found/page-not-found.component').then(c => c.PageNotFoundComponent),// lazy loaded component
         title: 'Not Found Page',
     }
 
