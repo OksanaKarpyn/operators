@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { BehaviorSubject} from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { RolePipe } from '../../pipes/role.pipe';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     RouterLink,
     CommonModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    RolePipe
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
@@ -27,21 +29,15 @@ export class UsersComponent implements OnInit{
 
   filteredUsers: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   searchValueInput = '';
-
-  canViewRegisterButton = false;
-  canViewEditButton = false;
-  canViewDeleteButton = false;
   user?: User |undefined;
-  // isDarkTheme: boolean = false;
 
-
+  //paginations
   totalRecords?:number;
 
   constructor(
     private userService: UserService,
-  ) {
+  ) {}
 
-  }
   ngOnInit():void{
     this.userService.getAllUsers().subscribe({
       next: (data) => {
@@ -54,19 +50,14 @@ export class UsersComponent implements OnInit{
       },
     });
   
-    this.userService.profile$.subscribe({
-        
+    this.userService.profile$.subscribe({ 
       next:(user)=>{
         this.user = user;
-        this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
-        
       },
       error:(err)=>{
         console.error(err.message);
       }
     });
-
-
   }
   
   //bottone search users
@@ -82,16 +73,6 @@ export class UsersComponent implements OnInit{
       user.name.toLowerCase().includes(term.toLowerCase())
     );
   }
-
-
-  updateButtonVisibility():void {
-    if(this.user){
-      const visibility = this.userService.getButtonVisibility(this.user.role);
-      this.canViewRegisterButton = visibility.canViewRegisterButton;
-      this.canViewEditButton = visibility.canViewEditButton;
-      this.canViewDeleteButton = visibility.canViewDeleteButton;
-    }
-   }
 
    // mi serve per acedere  al userService.canDeleteUser xke userServicee private  
    canDeleteUser(id: string): boolean {
