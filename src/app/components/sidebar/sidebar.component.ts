@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { JsonPipe,CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { ThemeService } from '../../services/theme.service';
+import { RolePipe } from '../../pipes/role.pipe';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,6 +16,7 @@ import { ThemeService } from '../../services/theme.service';
     RouterModule,
     RouterLinkActive,
     CommonModule,
+    RolePipe
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
@@ -45,8 +46,6 @@ export class SidebarComponent implements OnInit {
     this.themeService.theme$.subscribe(theme => {
       this.isDarkTheme = theme === 'dark-theme';
     });
-  
-
   }
   //------function-theme------
   toggleTheme(){
