@@ -2,9 +2,9 @@
 <div class="container">
     <div class="register-content">
     
-        <div class="register-box border border-primary-subtle  myVar-background-side-color myVar-box-shadow rounded-4 p-4 m-0 text-center">
+        <div class="register-box border border-primary-subtle  myVar-background-side-color myVar-box-shadow rounded-4 p-4 m-0">
             
-            <h2>{{ isEditing ? 'Edit form' : 'Register form' }}<i class="fa-solid fa-user ms-3"></i></h2>
+            <h2 class="text-center">{{ isEditing ? 'Edit form' : 'Register form' }}<i class="fa-solid fa-user ms-3"></i></h2>
             
     
             <form class="row g-3 my-5 p-4 bg-body-tertiary rounded-3"[formGroup]="form" (ngSubmit)="submit()">
@@ -44,6 +44,7 @@
                     </button>
                 </div>
             </form>
+            <p><span class="text-danger fs-4 fw-bold">*</span><em>The form fields are mandatory</em></p>
         </div>
         <!-- <button class="btn btn-primary mr-2" [routerLink]="['/users']">Go Back</button> -->
     </div>
