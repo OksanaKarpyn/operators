@@ -21,7 +21,6 @@ export const routes: Routes = [
         path: 'login',
         pathMatch: 'full',
         component: LoginOperatorComponent,
-        //loadComponent: () => import('./pages/login-operator/login-operator.component').then(c => c.LoginOperatorComponent),// lazy loaded component
         title: 'Login Page',
         canActivate: [AuthGuard]
     },
