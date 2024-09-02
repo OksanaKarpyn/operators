@@ -37,7 +37,10 @@
               <td>{{user.role }}</td>
               <td>{{user.email }}</td>
               <td>
-                <a class="btn btn-outline-warning me-2" [routerLink]="['/register/add-edit', user.id]" *ngIf="['admin','operator'] | role"><i class="fa-regular fa-pen-to-square"></i></a>
+                <button class="btn btn-outline-warning me-2" [disabled]="!(['admin'] | role) && user.role === 'admin'">
+                  <!-- [disabled]="!(['admin'] | role) && user.role === 'admin'" significe se e role e diverso da admin non puo modificare admin -->
+                  <a [routerLink]="['/register/add-edit', user.id]" *ngIf="['admin','operator'] | role"><i class="fa-regular fa-pen-to-square"></i></a>
+                </button>
                 <button class="btn btn-outline-danger me-2" (click)="deleteUser(user.id)" *ngIf="user.id && canDeleteUser(user.id)">
                   <i class="fa-solid fa-trash"></i>
                 </button>
