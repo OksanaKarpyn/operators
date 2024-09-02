@@ -50,6 +50,7 @@ export class RegisterOperatorComponent implements OnInit {
         console.log(user,'sono io');
         if(user){
           if(this.userId){
+            // this.userId trovato id da modificare
           console.log(this.userId,'id user che va modificato');
           this.userService.getUserById(this.userId!).subscribe({
             next:(userData)=>{
