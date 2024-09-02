@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -18,7 +18,7 @@ import { RolePipe } from '../../pipes/role.pipe';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent{
 
   user?: User | undefined;
 
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private router: Router) {
+   ) {
     userService.profile$.subscribe({
 
       next: (user) => {
@@ -37,9 +37,6 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-
-  }
   //closenavBar
   closeNavBar() {
     const navbarCollapse = document.querySelector('#navbarNav');
@@ -47,16 +44,6 @@ export class HeaderComponent implements OnInit {
       return navbarCollapse.classList.remove('show');
     }
   }
-
-
-  // updateButtonVisibility(): void {
-  //   if (this.user) {
-  //     const visibility = this.userService.getButtonVisibility(this.user.role);
-  //     this.canViewRegisterButton = visibility.canViewRegisterButton;
-  //     this.canViewEditButton = visibility.canViewEditButton;
-  //     this.canViewDeleteButton = visibility.canViewDeleteButton;
-  //   }
-  // }
 
   logout(): void {
     this.authService.logout();

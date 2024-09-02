@@ -17,8 +17,9 @@ import { CommonModule, JsonPipe, UpperCasePipe } from '@angular/common';
   styleUrl: './details-user.component.scss'
 })
 export class DetailsUserComponent {
+  
   user!:User;
-  // isDarkTheme :boolean = false;
+
   constructor(
     private route:ActivatedRoute,
     private userService:UserService

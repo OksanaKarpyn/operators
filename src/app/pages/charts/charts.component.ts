@@ -6,6 +6,7 @@ Chart.register(...registerables);
 import { SalesData } from '../../models/salesdata';
 import { ChartService } from '../../services/chart.service';
 
+
 @Component({
   selector: 'app-charts',
   standalone: true,
@@ -44,28 +45,28 @@ export class ChartsComponent implements OnInit {
   }
 
 //------------barchart----------
-  renderBarChart (labeldata:any,realdata:any,colordata:any){
+  renderBarChart (labeldata:number[],realdata:number[],colordata:string[]){
     this.renderChart(labeldata,realdata,colordata,'barchartId', 'bar')
    }
 //------------piechart------------
-   renderPieChart (labeldata:any,realdata:any,colordata:any){
+   renderPieChart (labeldata:number[],realdata:number[],colordata:string[]){
     this.renderChart(labeldata,realdata,colordata,'piechartId', 'pie')
    }
 
 //--------doughnutchart-----------
 
-renderDoughnutChart(labeldata:any,realdata:any,colordata:any ){
+renderDoughnutChart(labeldata:number[],realdata:number[],colordata:string[]){
   this.renderChart(labeldata,realdata,colordata,'doughnutchartId', 'doughnut');
 }
 
 //------------linechart-------------------
- renderLineChart( labeldata:any,realdata:any,colordata:any ){
+ renderLineChart( labeldata:number[],realdata:number[],colordata:string[] ){
   this.renderChart(labeldata,realdata,colordata,'linechartId', 'line')
  }
 
 
  //------------radarchart---------------------
- renderRadarChart ( labeldata:any,realdata:any,colordata:any) {
+ renderRadarChart ( labeldata:number[],realdata:number[],colordata:string[]) {
   this.renderChart(labeldata,realdata,colordata,'radarChartId','radar')
  }
 
@@ -73,7 +74,7 @@ renderDoughnutChart(labeldata:any,realdata:any,colordata:any ){
 
   //function for rendering chart
 
-  renderChart(labeldata:any,realdata:any,colordata:any,chartid:string,charttype:any){
+  renderChart(labeldata:any,realdata:any,colordata:any,chartid:string, charttype:string | any ){
     const myChart = new Chart(chartid,{
       type: charttype,
         data:{
@@ -106,6 +107,7 @@ renderDoughnutChart(labeldata:any,realdata:any,colordata:any ){
         }
       }
     })
+    console.log(myChart);
 
   }
 }

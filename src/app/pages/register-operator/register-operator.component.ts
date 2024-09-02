@@ -22,7 +22,6 @@ import { RolePipe } from '../../pipes/role.pipe';
 export class RegisterOperatorComponent implements OnInit {
   form: FormGroup;
   userId!: string | null;
-  //currentRole = '';
   isEditing = false;
 
   constructor(

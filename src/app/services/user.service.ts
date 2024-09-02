@@ -4,7 +4,6 @@ import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -50,46 +49,6 @@ export class UserService {
     }));
 
   }
-
-  // updateFormVisibility(form: FormGroup, currentRole: string): void {
-
-  //   if (currentRole === 'admin') {
-  //     // Mostra tutto per admin
-  //     form.get('role')?.enable();
-  //     form.get('name')?.enable();
-  //     form.get('surname')?.enable();
-  //     form.get('email')?.enable();
-  //     form.get('password')?.enable();
-  //   } else if (currentRole === 'operator') {
-  //     // Nascondi il campo role per l'administrator
-  //     form.get('role')?.disable();
-  //   } else {
-  //     // Nascondi tutto per standard
-  //     form.disable();
-  //   }
-  // }
-
-  // getButtonVisibility(currentRole: string) {
-
-  //   const visibility = {
-  //     canViewRegisterButton: false,
-  //     canViewEditButton: false,
-  //     canViewDeleteButton: false
-
-  //   }
-  //   if (currentRole === 'admin') {
-  //     visibility.canViewRegisterButton = true;
-  //     visibility.canViewEditButton = true;
-  //     visibility.canViewDeleteButton = true;
-
-  //   } else if (currentRole === 'operator') {
-  //     visibility.canViewRegisterButton = false;
-  //     visibility.canViewEditButton = true;
-  //     visibility.canViewDeleteButton = false;
-  //   }
-  //   return visibility;
-  // }
-
   canDeleteUser(id: string, currentUser?: User): boolean {
     if (currentUser && currentUser.role === 'admin') {
       return currentUser.id !== id; // L'admin può cancellare chiunque tranne se stesso
