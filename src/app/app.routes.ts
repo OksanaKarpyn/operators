@@ -27,6 +27,8 @@ export const routes: Routes = [
     },
     {
         path: '',
+        //resolve meccanismo che permette di caricare i dati prima
+        // che componente viene visualizzato
         resolve: {
             profile: ProfileResolver
         },

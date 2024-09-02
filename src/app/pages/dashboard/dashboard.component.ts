@@ -34,7 +34,9 @@ export class DashboardComponent implements OnInit {
    ) {
 
     route.data.subscribe(data=>{
-      this.user = data['profile'];// profile si refersce al mio resovler dento le rotte
+      this.user = data['profile'];
+      // ['profile'] si refersce al mio resovler dento le rotte
+      //  grazie a quello ottiene i dati da user service
     })
    }
 
