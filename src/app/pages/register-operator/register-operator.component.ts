@@ -69,6 +69,7 @@ export class RegisterOperatorComponent implements OnInit {
 
   }
 
+
   submit(): void {
     if (this.form.valid) {
       if (this.userId) {
@@ -109,5 +110,20 @@ export class RegisterOperatorComponent implements OnInit {
         });
       }
     }
+  }
+  get name() {
+    return this.form.get('name');
+  };
+  get surname() {
+    return this.form.get('surname');
+  }
+  get role() {
+    return this.form.get('role');
+  }
+  get email() {
+    return this.form.get('email');
+  }
+  get password() {
+    return this.form.get('password');
   }
 }

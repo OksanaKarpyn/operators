@@ -10,17 +10,17 @@
             <form class="row g-3 my-5 p-4 bg-body-tertiary rounded-3"[formGroup]="form" (ngSubmit)="submit()">
                 <!-- [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' "  -->
                 <div class="col-md-6 ">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" formControlName="name" required />
+                    <label for="name" class="form-label"><span class="text-danger mx-1 fs-6">*</span>Name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{'border border-danger': name?.invalid && (name?.dirty || name?.touched), 'border border-success': name?.valid}" required />
                 </div>
     
                 <div class="col-md-6">
-                    <label for="surname" class="form-label">Surname</label>
-                    <input type="text" class="form-control" id="surname" formControlName="surname" required />
+                    <label for="surname" class="form-label"><span class="text-danger mx-1 fs-6">*</span>Surname</label>
+                    <input type="text" class="form-control" id="surname" formControlName="surname" [ngClass]="{'border border-danger': surname?.invalid && (surname?.dirty || surname?.touched), 'border border-success': surname?.valid}"  required />
                 </div>
                 <div class="col-12"*ngIf="['admin'] | role">
-                    <label for="role" class="form-label">State</label>
-                    <select for="role" class="form-select" aria-label="Default select example" id="role" formControlName="role">
+                    <label for="role" class="form-label"><span class="text-danger mx-1 fs-5">*</span>State</label>
+                    <select for="role" class="form-select" aria-label="Default select example" id="role" formControlName="role" [ngClass]="{'border border-danger': role?.invalid && (role?.dirty || role?.touched), 'border border-success': role?.valid}">
                         <option  value="" disabled selected>Choise role</option>
                         <option value="admin">Admin</option>
                         <option value="operator">Operator</option>
@@ -28,12 +28,12 @@
                       </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" formControlName="email" required>
+                    <label for="email" class="form-label"><span class="text-danger mx-1 fs-6">*</span>Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{'border border-danger': email?.invalid && (email?.dirty || email?.touched), 'border border-success': email?.valid}" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" formControlName="password" required>
+                    <label for="password" class="form-label"><span class="text-danger mx-1 fs-6">*</span>Password</label>
+                    <input type="password" class="form-control" id="password" formControlName="password"  [ngClass]="{'border border-danger': password?.invalid && (password?.dirty || password?.touched), 'border border-success': password?.valid}" required>
                 </div>
                 <!-- <div class="col-12">
                     <button type="submit" class="btn button" [disabled]="!form.valid">Sign in</button>
