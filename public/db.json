@@ -18,11 +18,11 @@
     },
     {
       "id": "135ad631-7aec-474e-a3ca-4d5b6df205b5",
-      "name": "romana edit",
+      "name": "romana modifica",
       "surname": "karpyn",
-      "role": "standard",
+      "role": "operator",
       "email": "romana@test.it",
-      "password": "$2a$08$6/wn/pmURfHf3i5OQMIoOuJ.VrEIEZa.oO1OO3CqcWrO8Mg/GnD6u"
+      "password": "$2a$08$JvgYI/1Zs81OHhRD5oQ.fOFBfKXRNaRMAFTl88nQiQF6zL.W4OfUm"
     },
     {
       "id": "95f2971a-c1c2-4594-8d05-71d651299aa8",
@@ -47,6 +47,14 @@
       "role": "standard",
       "email": "alex@test.it",
       "password": "$2a$08$HuoVrWEDqBjZ6Z7ANhY3guzYZxwWkz6Ck9N9ri/rs1.hBtTylAqtO"
+    },
+    {
+      "id": "bfbdee3f-1494-4c72-b95d-999d8bbf278e",
+      "name": "fabian",
+      "surname": "rossi",
+      "role": "operator",
+      "email": "fabian@test.it",
+      "password": "$2a$08$nVHm6Me0vrBc5LDpzSMfC.oFWLWP1UIy7TF4dd8ERevYzn.lEWnQO"
     }
   ],
   "products": [],

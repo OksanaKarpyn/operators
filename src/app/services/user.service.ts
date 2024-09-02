@@ -51,44 +51,44 @@ export class UserService {
 
   }
 
-  updateFormVisibility(form: FormGroup, currentRole: string): void {
+  // updateFormVisibility(form: FormGroup, currentRole: string): void {
 
-    if (currentRole === 'admin') {
-      // Mostra tutto per admin
-      form.get('role')?.enable();
-      form.get('name')?.enable();
-      form.get('surname')?.enable();
-      form.get('email')?.enable();
-      form.get('password')?.enable();
-    } else if (currentRole === 'operator') {
-      // Nascondi il campo role per l'administrator
-      form.get('role')?.disable();
-    } else {
-      // Nascondi tutto per standard
-      form.disable();
-    }
-  }
+  //   if (currentRole === 'admin') {
+  //     // Mostra tutto per admin
+  //     form.get('role')?.enable();
+  //     form.get('name')?.enable();
+  //     form.get('surname')?.enable();
+  //     form.get('email')?.enable();
+  //     form.get('password')?.enable();
+  //   } else if (currentRole === 'operator') {
+  //     // Nascondi il campo role per l'administrator
+  //     form.get('role')?.disable();
+  //   } else {
+  //     // Nascondi tutto per standard
+  //     form.disable();
+  //   }
+  // }
 
-  getButtonVisibility(currentRole: string) {
+  // getButtonVisibility(currentRole: string) {
 
-    const visibility = {
-      canViewRegisterButton: false,
-      canViewEditButton: false,
-      canViewDeleteButton: false
+  //   const visibility = {
+  //     canViewRegisterButton: false,
+  //     canViewEditButton: false,
+  //     canViewDeleteButton: false
 
-    }
-    if (currentRole === 'admin') {
-      visibility.canViewRegisterButton = true;
-      visibility.canViewEditButton = true;
-      visibility.canViewDeleteButton = true;
+  //   }
+  //   if (currentRole === 'admin') {
+  //     visibility.canViewRegisterButton = true;
+  //     visibility.canViewEditButton = true;
+  //     visibility.canViewDeleteButton = true;
 
-    } else if (currentRole === 'operator') {
-      visibility.canViewRegisterButton = false;
-      visibility.canViewEditButton = true;
-      visibility.canViewDeleteButton = false;
-    }
-    return visibility;
-  }
+  //   } else if (currentRole === 'operator') {
+  //     visibility.canViewRegisterButton = false;
+  //     visibility.canViewEditButton = true;
+  //     visibility.canViewDeleteButton = false;
+  //   }
+  //   return visibility;
+  // }
 
   canDeleteUser(id: string, currentUser?: User): boolean {
     if (currentUser && currentUser.role === 'admin') {

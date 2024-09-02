@@ -5,13 +5,15 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { RolePipe } from '../../pipes/role.pipe';
 @Component({
   selector: 'app-register-operator',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    RolePipe
 
   ],
   templateUrl: './register-operator.component.html',
@@ -20,7 +22,7 @@ import { User } from '../../models/user';
 export class RegisterOperatorComponent implements OnInit {
   form: FormGroup;
   userId!: string | null;
-  currentRole = '';
+  //currentRole = '';
   isEditing = false;
 
   constructor(
@@ -32,30 +34,27 @@ export class RegisterOperatorComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
-      role: [{ value: '', disabled: true }, Validators.required],
+      role: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    // Ottieni l'ID dell'utente dalla rotta (se presente)
+    // Ottieni l'ID dati dell'utente dalla rotta (se presente) edit form quando premi bottone edit
+    // ti carica i dati di quei utente che voi modificare  
     this.userId = this.route.snapshot.paramMap.get('id');
+
     this.userService.profile$.subscribe(user => {
       if (user) {
-        this.currentRole = user.role;
+        //this.currentRole = user.role;
         if (this.userId) {
           this.isEditing = true;
-          // Modalità di modifica: carica i dati dell'utente
+          // Modalità di modifica: carica i dati dei utenti per id
           this.userService.getUserById(this.userId).subscribe(userData => {
             this.form.patchValue(userData);
           });
-          // Disabilita il campo password durante l'editing
-          this.form.get('password')?.clearValidators();
-          this.form.get('password')?.updateValueAndValidity();
-        }
-        // Adatta la visibilità dei campi in base al ruolo
-        this.userService.updateFormVisibility(this.form, this.currentRole);
+        } 
       }
     });
 
@@ -65,13 +64,14 @@ export class RegisterOperatorComponent implements OnInit {
   submit(): void {
     if (this.form.valid) {
       if (this.userId) {
+
         // Modalità di modifica: aggiorna l'utente esistente
         const updatedUser: User = { ...this.form.value, id: this.userId };
         this.userService.updateUser(updatedUser).subscribe({
           next: () => {
             alert('User updated successfully');
 
-            // Esegui una nuova richiesta GET per aggiornare i dati nel form
+            // Esegui una nuova richiesta GET per aggiornare/modificare i dati nel form
             this.userService.getUserById(this.userId!).subscribe({
               next: (updatedUserData: User) => {
                 this.form.patchValue(updatedUserData);
@@ -96,7 +96,7 @@ export class RegisterOperatorComponent implements OnInit {
           },
           error: (res) => {
             console.error('Error registering user:', res.error.message);
-            alert('Error registering user.');
+            alert('Error registering user user already exist.');
           }
         });
       }

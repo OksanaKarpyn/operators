@@ -9,16 +9,16 @@
     
             <form class="row g-3 my-5 p-4 bg-body-tertiary rounded-3"[formGroup]="form" (ngSubmit)="submit()">
                 <!-- [attr.data-bs-theme]="isDarkTheme ? 'dark': 'light' "  -->
-                <div class="col-md-6 " *ngIf="form.get('name')?.enabled">
+                <div class="col-md-6 ">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" formControlName="name" required />
                 </div>
     
-                <div class="col-md-6" *ngIf="form.get('surname')?.enabled">
+                <div class="col-md-6">
                     <label for="surname" class="form-label">Surname</label>
                     <input type="text" class="form-control" id="surname" formControlName="surname" required />
                 </div>
-                <div class="col-12" *ngIf="form.get('role')?.enabled">
+                <div class="col-12"*ngIf="['admin'] | role">
                     <label for="role" class="form-label">State</label>
                     <select for="role" class="form-select" aria-label="Default select example" id="role" formControlName="role">
                         <option  value="" disabled selected>Choise role</option>
@@ -27,11 +27,11 @@
                         <option value="standard">Standard</option>
                       </select>
                 </div>
-                <div class="col-md-6" *ngIf="form.get('email')?.enabled">
+                <div class="col-md-6">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" formControlName="email" required>
                 </div>
-                <div class="col-md-6" *ngIf="form.get('password')?.enabled">
+                <div class="col-md-6">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" formControlName="password" required>
                 </div>
