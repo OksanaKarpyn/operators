@@ -45,19 +45,27 @@ export class RegisterOperatorComponent implements OnInit {
     // ti carica i dati di quei utente che voi modificare  
     this.userId = this.route.snapshot.paramMap.get('id');
 
-    this.userService.profile$.subscribe(user => {
-      if (user) {
-        //this.currentRole = user.role;
-        if (this.userId) {
-          this.isEditing = true;
-          // Modalità di modifica: carica i dati dei utenti per id
-          this.userService.getUserById(this.userId).subscribe(userData => {
-            this.form.patchValue(userData);
-          });
-        } 
-      }
-    });
-
+     this.userService.profile$.subscribe({
+      next:(user)=>{
+        console.log(user,'sono io');
+        if(user){
+          if(this.userId){
+          console.log(this.userId,'id user che va modificato');
+          this.userService.getUserById(this.userId!).subscribe({
+            next:(userData)=>{
+              this.form.patchValue(userData);
+            },
+            error:(err)=>{
+              console.log(err,'Error user not found');
+            }
+          })
+          }
+        }
+      }, 
+      error:(err) =>{
+        console.error('Error reloading user data profile:', err);
+      },
+     })
 
   }
 
