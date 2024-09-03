@@ -26,13 +26,16 @@ export class UsersComponent implements OnInit{
   users: User[] = [];
   //---pagination-----
     page = 1;
+    totalRecords?:number;
 
   filteredUsers: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   searchValueInput = '';
   user?: User |undefined;
 
-  //paginations
-  totalRecords?:number;
+//---role---
+isAdmin = false;
+canEdit = false;
+userRole = false;
 
   constructor(
     private userService: UserService,
@@ -57,7 +60,12 @@ export class UsersComponent implements OnInit{
       error:(err)=>{
         console.error(err.message);
       }
-    });
+    }); 
+
+    //-------role------
+    this.isAdmin = this.userService.hasRole('admin');
+    this.canEdit = this.userService.hasAnyRole(['admin','operator']);
+    this.userRole = this.userService.adminUserRole();
   }
   
   //bottone search users

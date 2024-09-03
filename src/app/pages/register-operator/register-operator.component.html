@@ -18,7 +18,7 @@
                     <label for="surname" class="form-label"><span class="text-danger mx-1 fs-6">*</span>Surname</label>
                     <input type="text" class="form-control" id="surname" formControlName="surname" [ngClass]="{'border border-danger': surname?.invalid && (surname?.dirty || surname?.touched), 'border border-success': surname?.valid}"  required />
                 </div>
-                <div class="col-12"*ngIf="['admin'] | role">
+                <div class="col-12"*ngIf="isAdmin">
                     <label for="role" class="form-label"><span class="text-danger mx-1 fs-5">*</span>State</label>
                     <select for="role" class="form-select" aria-label="Default select example" id="role" formControlName="role" [ngClass]="{'border border-danger': role?.invalid && (role?.dirty || role?.touched), 'border border-success': role?.valid}">
                         <option  value="" disabled selected>Choise role</option>

@@ -24,6 +24,10 @@ export class RegisterOperatorComponent implements OnInit {
   userId!: string | null;
   isEditing = false;
 
+  //---role-----
+  isAdmin = false;
+  canEdit = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -66,7 +70,9 @@ export class RegisterOperatorComponent implements OnInit {
         console.error('Error reloading user data profile:', err);
       },
      })
-
+     // -----role-------
+     this.isAdmin = this.userService.hasRole('admin');
+     this.canEdit = this.userService.hasAnyRole(['admin','operator']);
   }
 
 

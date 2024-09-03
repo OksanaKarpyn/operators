@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { User } from '../models/user';
+import { Role, User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
@@ -55,4 +55,20 @@ export class UserService {
     }
     return false; // Gli altri utenti non possono cancellare nessuno
   }
+
+  //--------role--------
+  // verifica se utente ha un ruolo
+  hasRole(role:Role){
+   const user = this.profile$.value;
+   return user ? user.role === role :false;
+  }
+  //se user ha dei ruoli consentiti
+  hasAnyRole(roles:Role[]): boolean {
+    const user = this.profile$.value;
+    return user ? roles.includes(user.role) : false;
+  }
+ adminUserRole (){
+  const userRole =  this.profile$.getValue();
+  return userRole?.role === 'admin';
+ }
 }

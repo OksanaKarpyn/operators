@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -18,10 +18,12 @@ import { RolePipe } from '../../pipes/role.pipe';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit{
 
   user?: User | undefined;
-
+  //----role----
+  isAdmin = false;
+  canEdit = false;
 
   isNavbarShown = document.querySelector('.navbar-collapse.show');
   constructor(
@@ -35,7 +37,12 @@ export class HeaderComponent{
       }
     })
   }
+ngOnInit(){
+   //-------role------
+   this.isAdmin = this.userService.hasRole('admin');
+   this.canEdit =this.userService.hasAnyRole(['admin','operator']);
 
+}
 
   //closenavBar
   closeNavBar() {
