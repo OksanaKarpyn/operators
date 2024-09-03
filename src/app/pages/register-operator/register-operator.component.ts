@@ -72,25 +72,26 @@ export class RegisterOperatorComponent implements OnInit {
      })
       //-------role------
 
-      this.userService.hasRole(['admin']).subscribe({
-        next:(admin)=>{
-          this.isAdmin= admin;
-        },
-        error:(err)=>{
-          console.error(err);
-          this.canEdit= false;
-        }
-      });
+    //   this.userService.hasRole(['admin']).subscribe({
+    //     next:(admin)=>{
+    //       this.isAdmin= admin;
+    //     },
+    //     error:(err)=>{
+    //       console.error(err);
+    //       this.canEdit= false;
+    //     }
+    //   });
      
-    this.userService.hasRole(['admin','operator']).subscribe({
-      next:(canEdit)=>{
-        this.canEdit= canEdit;
-      },
-      error:(err)=>{
-        console.error(err);
-        this.canEdit= false;
-      }
-    });
+    // this.userService.hasRole(['admin','operator']).subscribe({
+    //   next:(canEdit)=>{
+    //     this.canEdit= canEdit;
+    //   },
+    //   error:(err)=>{
+    //     console.error(err);
+    //     this.canEdit= false;
+    //   }
+    // });
+    
   }
 
 

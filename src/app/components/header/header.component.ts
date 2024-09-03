@@ -59,8 +59,10 @@ ngOnInit(){
   //     this.canEdit= false;
   //   }
   // }); 
-  this.canEdit = this.userService.hasRole1(['admin','operator'])
-  this.isAdmin = this.userService.hasRole1(['admin'])
+
+  
+  // this.canEdit = this.userService.hasRole1(['admin','operator'])
+  // this.isAdmin = this.userService.hasRole1(['admin'])
 
 }
 

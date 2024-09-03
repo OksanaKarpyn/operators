@@ -65,8 +65,9 @@ export class SidebarComponent implements OnInit {
   //     this.canEdit= false;
   //   }
   // });
-  this.canEdit = this.userService.hasRole1(['admin','operator'])
-  this.isAdmin = this.userService.hasRole1(['admin'])
+
+  // this.canEdit = this.userService.hasRole1(['admin','operator'])
+  // this.isAdmin = this.userService.hasRole1(['admin'])
 
     //--------theme---------
     this.themeService.theme$.subscribe(theme => {
