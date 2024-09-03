@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { Role, User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -57,18 +57,11 @@ export class UserService {
   }
 
   //--------role--------
-  // verifica se utente ha un ruolo
-  hasRole(role:Role){
-   const user = this.profile$.value;
-   return user ? user.role === role :false;
-  }
-  //se user ha dei ruoli consentiti
-  hasAnyRole(roles:Role[]): boolean {
-    const user = this.profile$.value;
-    return user ? roles.includes(user.role) : false;
-  }
- adminUserRole (){
-  const userRole =  this.profile$.getValue();
-  return userRole?.role === 'admin';
- }
+
+  //se user ha il ruolo
+ hasRole(roles: Role[]): Observable<boolean> {
+  return this.profile$.pipe(
+    map(user => user ? roles.includes(user.role) : false)
+  );
+}
 }

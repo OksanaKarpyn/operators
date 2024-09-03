@@ -63,9 +63,30 @@ userRole = false;
     }); 
 
     //-------role------
-    this.isAdmin = this.userService.hasRole('admin');
-    this.canEdit = this.userService.hasAnyRole(['admin','operator']);
-    this.userRole = this.userService.adminUserRole();
+    //-------role------
+
+    this.userService.hasRole(['admin']).subscribe({
+      next:(admin)=>{
+        this.isAdmin = admin;
+        this.userRole = admin;
+      },
+      error:(err)=>{
+        console.error(err);
+        this.canEdit= false;
+        this.userRole = false
+      }
+    });
+   
+  this.userService.hasRole(['admin','operator']).subscribe({
+    next:(canEdit)=>{
+      this.canEdit= canEdit;
+    },
+    error:(err)=>{
+      console.error(err);
+      this.canEdit= false;
+    }
+  });
+    // this.userRole = this.userService.adminUserRole();
   }
   
   //bottone search users

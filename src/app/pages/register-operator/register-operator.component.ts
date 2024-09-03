@@ -70,9 +70,27 @@ export class RegisterOperatorComponent implements OnInit {
         console.error('Error reloading user data profile:', err);
       },
      })
-     // -----role-------
-     this.isAdmin = this.userService.hasRole('admin');
-     this.canEdit = this.userService.hasAnyRole(['admin','operator']);
+      //-------role------
+
+      this.userService.hasRole(['admin']).subscribe({
+        next:(admin)=>{
+          this.isAdmin= admin;
+        },
+        error:(err)=>{
+          console.error(err);
+          this.canEdit= false;
+        }
+      });
+     
+    this.userService.hasRole(['admin','operator']).subscribe({
+      next:(canEdit)=>{
+        this.canEdit= canEdit;
+      },
+      error:(err)=>{
+        console.error(err);
+        this.canEdit= false;
+      }
+    });
   }
 
 

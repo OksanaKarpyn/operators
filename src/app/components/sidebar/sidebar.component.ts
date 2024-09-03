@@ -25,6 +25,9 @@ export class SidebarComponent implements OnInit {
   
   user?: User |undefined;
   isDarkTheme = false;
+  //---role---
+  isAdmin = false;
+  canEdit = false;
 
   constructor(
     private authService:AuthService,
@@ -41,7 +44,29 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit():void{     
-    
+    //-------role------
+
+    this.userService.hasRole(['admin']).subscribe({
+      next:(admin)=>{
+        this.isAdmin= admin;
+      },
+      error:(err)=>{
+        console.error(err);
+        this.canEdit= false;
+      }
+    });
+   
+  this.userService.hasRole(['admin','operator']).subscribe({
+    next:(canEdit)=>{
+      this.canEdit= canEdit;
+    },
+    error:(err)=>{
+      console.error(err);
+      this.canEdit= false;
+    }
+  });
+
+
     //--------theme---------
     this.themeService.theme$.subscribe(theme => {
       this.isDarkTheme = theme === 'dark-theme';
@@ -56,6 +81,7 @@ export class SidebarComponent implements OnInit {
    logout(): void {
     this.authService.logout();
   }
+
 
 }
 
