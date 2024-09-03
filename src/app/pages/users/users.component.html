@@ -37,7 +37,8 @@
               <td class="flex-sm-flex flex-md-column"><span class="fw-bold d-inline-block d-md-none me-2">Role:</span><span>{{user.role }}</span></td>
               <td class="flex-sm-flex flex-md-column"><span class="fw-bold d-inline-block d-md-none me-2">Email:</span><span>{{user.email }}</span></td>
               <td>
-                <button class="btn btn-outline-warning me-2" *ngIf="canEdit" [disabled]="!userRole && user.role === 'admin'">
+                <button class="btn btn-outline-warning me-2"  *ngIf="user.role === 'admin' ||  user.role === 'operator' " [disabled]="(currentUserRole?.role === 'operator') && (user.role === 'admin')" >
+                  <!-- [disabled]="user.role === 'admin' && currentUser.role === 'operator'" -->
                   <!-- [disabled]="!(['admin'] | role) && user.role === 'admin'" significe se e role e diverso da admin non puo modificare admin -->
                   <a  [routerLink]="['/register/add-edit', user.id]"><i class="fa-regular fa-pen-to-square"></i></a>
                 </button>

@@ -60,8 +60,17 @@ export class UserService {
 
   //se user ha il ruolo
  hasRole(roles: Role[]): Observable<boolean> {
+  console.log(this.profile$)
   return this.profile$.pipe(
     map(user => user ? roles.includes(user.role) : false)
   );
-}
+ }
+
+  hasRole1(roles: Role[]): boolean {
+   const user = this.profile$.getValue(); 
+   console.log(this.profile$)
+   return user ? roles.includes(user.role) : false;
+ }
+
+
 }

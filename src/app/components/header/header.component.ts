@@ -40,25 +40,27 @@ export class HeaderComponent implements OnInit{
 ngOnInit(){
      //-------role------
 
-     this.userService.hasRole(['admin']).subscribe({
-      next:(admin)=>{
-        this.isAdmin= admin;
-      },
-      error:(err)=>{
-        console.error(err);
-        this.canEdit= false;
-      }
-    });
+    //  this.userService.hasRole(['admin']).subscribe({
+    //   next:(admin)=>{
+    //     this.isAdmin= admin;
+    //   },
+    //   error:(err)=>{
+    //     console.error(err);
+    //     this.canEdit= false;
+    //   }
+    // });
    
-  this.userService.hasRole(['admin','operator']).subscribe({
-    next:(canEdit)=>{
-      this.canEdit= canEdit;
-    },
-    error:(err)=>{
-      console.error(err);
-      this.canEdit= false;
-    }
-  });
+  // this.userService.hasRole(['admin','operator']).subscribe({
+  //   next:(canEdit)=>{
+  //     this.canEdit= canEdit;
+  //   },
+  //   error:(err)=>{
+  //     console.error(err);
+  //     this.canEdit= false;
+  //   }
+  // }); 
+  this.canEdit = this.userService.hasRole1(['admin','operator'])
+  this.isAdmin = this.userService.hasRole1(['admin'])
 
 }
 

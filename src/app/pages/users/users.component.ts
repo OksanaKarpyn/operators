@@ -35,18 +35,22 @@ export class UsersComponent implements OnInit{
 //---role---
 isAdmin = false;
 canEdit = false;
-userRole = false;
+userRole = false; 
+
+currentUserRole?: User | undefined;
 
   constructor(
     private userService: UserService,
-  ) {}
+  ) {
+   
+  }
 
   ngOnInit():void{
     this.userService.getAllUsers().subscribe({
       next: (data) => {
         this.users = data;
         console.log(this.users);
-        this.filteredUsers.next(this.users);// inizializza la lista filtrata con tutti utenti 
+        this.filteredUsers.next(this.users);
               },
       error: (err) => {
         console.error(err.massege);
@@ -62,31 +66,39 @@ userRole = false;
       }
     }); 
 
-    //-------role------
-    //-------role------
 
-    this.userService.hasRole(['admin']).subscribe({
-      next:(admin)=>{
-        this.isAdmin = admin;
-        this.userRole = admin;
-      },
-      error:(err)=>{
-        console.error(err);
-        this.canEdit= false;
-        this.userRole = false
+    //-------role------
+    this.userService.profile$.subscribe({
+      next:(role)=>{
+        this.currentUserRole = role;
+      }, error: (err) => {
+        console.error('Error user role:', err);
       }
-    });
+    })
+
+  //   this.userService.hasRole(['admin']).subscribe({
+  //     next:(admin)=>{
+  //       this.isAdmin = admin;
+  //       this.userRole = admin;
+  //     },
+  //     error:(err)=>{
+  //       console.error(err);
+  //       this.canEdit= false;
+  //       this.userRole = false
+  //     }
+  //   });
    
-  this.userService.hasRole(['admin','operator']).subscribe({
-    next:(canEdit)=>{
-      this.canEdit= canEdit;
-    },
-    error:(err)=>{
-      console.error(err);
-      this.canEdit= false;
-    }
-  });
-    // this.userRole = this.userService.adminUserRole();
+  // this.userService.hasRole(['admin','operator']).subscribe({
+  //   next:(canEdit)=>{
+  //     this.canEdit= canEdit;
+  //   },
+  //   error:(err)=>{
+  //     console.error(err);
+  //     this.canEdit= false;
+  //   }
+  // });
+  this.canEdit = this.userService.hasRole1(['admin','operator'])
+  this.isAdmin = this.userService.hasRole1(['admin'])
   }
   
   //bottone search users
