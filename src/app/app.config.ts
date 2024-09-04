@@ -1,9 +1,9 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HttpStatusCode, provideHttpClient,withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode, provideHttpClient,withInterceptorsFromDi } from '@angular/common/http';
 import { routes } from './app.routes';
 import { CookieService } from 'ngx-cookie-service';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from './services/auth.service';
 
 export class ConfigFactory implements HttpInterceptor{

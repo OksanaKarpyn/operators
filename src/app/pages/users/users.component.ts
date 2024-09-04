@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { ThemeService } from '../../services/theme.service';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { RolePipe } from '../../pipes/role.pipe';
 
 @Component({
   selector: 'app-users',
@@ -16,62 +16,95 @@ import {NgxPaginationModule} from 'ngx-pagination';
     RouterLink,
     CommonModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    RolePipe
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent {
-  users: Array<User> = [];
+export class UsersComponent implements OnInit{
+  users: User[] = [];
   //---pagination-----
-    page: number = 1;
+    page = 1;
+    totalRecords?:number;
 
   filteredUsers: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
-  searchValueInput: string = '';
-
-  canViewRegisterButton: boolean = false;
-  canViewEditButton: boolean = false;
-  canViewDeleteButton : boolean = false;
+  searchValueInput = '';
   user?: User |undefined;
-  isDarkTheme: boolean = false;
 
+//---role---
 
-  totalRecords?:number;
+canEdit = false;
+userRole = false; 
+canRegister = false;
+canView = false
+currentUserRole?: User | undefined;
 
   constructor(
     private userService: UserService,
-    private themeService:ThemeService
   ) {
-
+   
   }
+
   ngOnInit():void{
     this.userService.getAllUsers().subscribe({
       next: (data) => {
         this.users = data;
         console.log(this.users);
-        this.filteredUsers.next(this.users);// inizializza la lista filtrata con tutti utenti 
+        this.filteredUsers.next(this.users);
               },
       error: (err) => {
         console.error(err.massege);
       },
     });
   
-    this.userService.profile$.subscribe({
-        
+    this.userService.profile$.subscribe({ 
       next:(user)=>{
         this.user = user;
-        this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
-        
+        if(user){
+          this.canRegister =  this.userService.hasRole1(['admin'])
+          this.canEdit = this.userService.hasRole1(['admin','operator'])
+        }
       },
       error:(err)=>{
         console.error(err.message);
       }
-    });
-   //---------------theme-------
-     this.themeService.theme$.subscribe(theme => {
-      this.isDarkTheme = theme === 'dark-theme';
-     });
+    }); 
 
+
+    //-------role------
+    this.userService.profile$.subscribe({
+      next:(role)=>{
+        this.currentUserRole = role;
+      }, error: (err) => {
+        console.error('Error user role:', err);
+      }
+    })
+
+  //   this.userService.hasRole(['admin']).subscribe({
+  //     next:(admin)=>{
+  //       this.isAdmin = admin;
+  //       this.userRole = admin;
+  //     },
+  //     error:(err)=>{
+  //       console.error(err);
+  //       this.canEdit= false;
+  //       this.userRole = false
+  //     }
+  //   });
+   
+  // this.userService.hasRole(['admin','operator']).subscribe({
+  //   next:(canEdit)=>{
+  //     this.canEdit= canEdit;
+  //   },
+  //   error:(err)=>{
+  //     console.error(err);
+  //     this.canEdit= false;
+  //   }
+  // });
+
+  // this.canEdit = this.userService.hasRole1(['admin','operator'])
+  // this.isAdmin = this.userService.hasRole1(['admin'])
   }
   
   //bottone search users
@@ -87,16 +120,6 @@ export class UsersComponent {
       user.name.toLowerCase().includes(term.toLowerCase())
     );
   }
-
-
-  updateButtonVisibility():void {
-    if(this.user){
-      const visibility = this.userService.getButtonVisibility(this.user.role);
-      this.canViewRegisterButton = visibility.canViewRegisterButton;
-      this.canViewEditButton = visibility.canViewEditButton;
-      this.canViewDeleteButton = visibility.canViewDeleteButton;
-    }
-   }
 
    // mi serve per acedere  al userService.canDeleteUser xke userServicee private  
    canDeleteUser(id: string): boolean {
@@ -122,8 +145,5 @@ export class UsersComponent {
     }else{
       console.warn('Non puoi cancellare te stesso non hai permesso');
     }
-  //   // users find by index
-  //   //if index exist
-  //   //user.splice(idx,1);
   }
 }

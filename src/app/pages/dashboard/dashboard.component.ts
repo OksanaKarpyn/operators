@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { CommonModule, JsonPipe } from '@angular/common';
-import { UserService } from '../../services/user.service';
 import { UpperCasePipe } from '@angular/common';
 import { UsersComponent } from '../users/users.component';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ChartsComponent } from '../charts/charts.component';
 import { ThemeService } from '../../services/theme.service';
 @Component({
@@ -26,19 +24,26 @@ import { ThemeService } from '../../services/theme.service';
 })
 export class DashboardComponent implements OnInit {
 
-  user: User | null = null;
-  isDarkTheme: boolean = false;
+  user: User | undefined;
+  isDarkTheme = false;
 
   constructor(
-    private authservice: AuthService,
-    private userSevice:UserService,
-    private themeService:ThemeService
-   ) {}
+    //private userSevice:UserService,
+    private themeService:ThemeService,
+    private route:ActivatedRoute
+   ) {
+
+    route.data.subscribe(data=>{
+      this.user = data['profile'];
+      // ['profile'] si refersce al mio resovler dento le rotte
+      //  grazie a quello ottiene i dati da user service
+    })
+   }
 
   ngOnInit(): void {
-    this.userSevice.getCurrentUser().subscribe(userData => {
-      this.user = userData;
-    });
+    // this.userSevice.profile$.subscribe(userData => {
+    //   this.user = userData;
+    // });
 
     //------theme-------
     this.themeService.theme$.subscribe(theme =>{
