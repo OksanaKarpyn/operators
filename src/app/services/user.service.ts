@@ -66,11 +66,14 @@ export class UserService {
 //   );
 //  }
 
-//   hasRole1(roles: Role[]): boolean {
-//    const user = this.profile$.getValue(); 
-//    console.log(this.profile$)
-//    return user ? roles.includes(user.role) : false;
-//  }
+  hasRole1(roles: Role[]): boolean {
+    if(this.profile$){
+      const user = this.profile$.getValue(); 
+      console.log(this.profile$)
+      return user ? roles.includes(user.role) : false;
+    }
+    return false;
+ }
 
 
 }

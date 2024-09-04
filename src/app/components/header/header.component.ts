@@ -22,8 +22,9 @@ export class HeaderComponent implements OnInit{
 
   user?: User | undefined;
   //----role----
-  isAdmin = false;
+  canRegister = false;
   canEdit = false;
+  canView = false;
 
   isNavbarShown = document.querySelector('.navbar-collapse.show');
   constructor(
@@ -34,6 +35,10 @@ export class HeaderComponent implements OnInit{
 
       next: (user) => {
         this.user = user;
+        if(user){
+          this.canRegister =  this.userService.hasRole1(['admin'])
+          this.canEdit = this.userService.hasRole1(['admin','operator'])
+        }
       }
     })
   }
@@ -60,7 +65,7 @@ ngOnInit(){
   //   }
   // }); 
 
-  
+
   // this.canEdit = this.userService.hasRole1(['admin','operator'])
   // this.isAdmin = this.userService.hasRole1(['admin'])
 

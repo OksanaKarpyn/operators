@@ -33,10 +33,11 @@ export class UsersComponent implements OnInit{
   user?: User |undefined;
 
 //---role---
-isAdmin = false;
+
 canEdit = false;
 userRole = false; 
-
+canRegister = false;
+canView = false
 currentUserRole?: User | undefined;
 
   constructor(
@@ -60,6 +61,10 @@ currentUserRole?: User | undefined;
     this.userService.profile$.subscribe({ 
       next:(user)=>{
         this.user = user;
+        if(user){
+          this.canRegister =  this.userService.hasRole1(['admin'])
+          this.canEdit = this.userService.hasRole1(['admin','operator'])
+        }
       },
       error:(err)=>{
         console.error(err.message);
@@ -97,7 +102,7 @@ currentUserRole?: User | undefined;
   //     this.canEdit= false;
   //   }
   // });
-  
+
   // this.canEdit = this.userService.hasRole1(['admin','operator'])
   // this.isAdmin = this.userService.hasRole1(['admin'])
   }

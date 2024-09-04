@@ -26,8 +26,9 @@ export class SidebarComponent implements OnInit {
   user?: User |undefined;
   isDarkTheme = false;
   //---role---
-  isAdmin = false;
+  canRegister = false;
   canEdit = false;
+  canView = false;
 
   constructor(
     private authService:AuthService,
@@ -39,6 +40,11 @@ export class SidebarComponent implements OnInit {
         
       next:(user)=>{
         this.user = user;
+        if(user){
+
+          this.canRegister =  this.userService.hasRole1(['admin'])
+          this.canEdit = this.userService.hasRole1(['admin','operator'])
+        }
       }
     })
   }
@@ -67,7 +73,7 @@ export class SidebarComponent implements OnInit {
   // });
 
   // this.canEdit = this.userService.hasRole1(['admin','operator'])
-  // this.isAdmin = this.userService.hasRole1(['admin'])
+   //this.isAdmin = this.userService.hasRole1(['admin'])
 
     //--------theme---------
     this.themeService.theme$.subscribe(theme => {
