@@ -5,7 +5,7 @@ import Chart, { registerables } from 'chart.js/auto';
 Chart.register(...registerables);
 import { SalesData } from '../../models/salesdata';
 import { ChartService } from '../../services/chart.service';
-import { ThemeService } from '../../services/theme.service';
+
 
 @Component({
   selector: 'app-charts',
@@ -15,14 +15,12 @@ import { ThemeService } from '../../services/theme.service';
   styleUrl: './charts.component.scss'
 })
 export class ChartsComponent implements OnInit {
-  chart: any = [];
   salesdata :SalesData[]=[];
   labeldata: number[]=[];
   realdata: number[]=[];
   colordata:string[]=[];
   constructor(
     private chartService:ChartService,
-    private themeService:ThemeService
   ){}
 
   ngOnInit(){
@@ -47,28 +45,28 @@ export class ChartsComponent implements OnInit {
   }
 
 //------------barchart----------
-  renderBarChart (labeldata:any,realdata:any,colordata:any){
+  renderBarChart (labeldata:number[],realdata:number[],colordata:string[]){
     this.renderChart(labeldata,realdata,colordata,'barchartId', 'bar')
    }
 //------------piechart------------
-   renderPieChart (labeldata:any,realdata:any,colordata:any){
+   renderPieChart (labeldata:number[],realdata:number[],colordata:string[]){
     this.renderChart(labeldata,realdata,colordata,'piechartId', 'pie')
    }
 
 //--------doughnutchart-----------
 
-renderDoughnutChart(labeldata:any,realdata:any,colordata:any ){
+renderDoughnutChart(labeldata:number[],realdata:number[],colordata:string[]){
   this.renderChart(labeldata,realdata,colordata,'doughnutchartId', 'doughnut');
 }
 
 //------------linechart-------------------
- renderLineChart( labeldata:any,realdata:any,colordata:any ){
+ renderLineChart( labeldata:number[],realdata:number[],colordata:string[] ){
   this.renderChart(labeldata,realdata,colordata,'linechartId', 'line')
  }
 
 
  //------------radarchart---------------------
- renderRadarChart ( labeldata:any,realdata:any,colordata:any) {
+ renderRadarChart ( labeldata:number[],realdata:number[],colordata:string[]) {
   this.renderChart(labeldata,realdata,colordata,'radarChartId','radar')
  }
 
@@ -76,7 +74,7 @@ renderDoughnutChart(labeldata:any,realdata:any,colordata:any ){
 
   //function for rendering chart
 
-  renderChart(labeldata:any,realdata:any,colordata:any,chartid:string,charttype:any){
+  renderChart(labeldata:any,realdata:any,colordata:any,chartid:string, charttype:string | any ){
     const myChart = new Chart(chartid,{
       type: charttype,
         data:{
@@ -109,30 +107,7 @@ renderDoughnutChart(labeldata:any,realdata:any,colordata:any ){
         }
       }
     })
+    console.log(myChart);
 
   }
-
-  // ngOnInit() {
-  //   this.chart = new Chart('canvas', {
-  //     type: 'bar',
-  //     data: {
-  //       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  //       datasets: [
-  //         {
-  //           label: '# of Votes',
-  //           data: [12, 19, 3, 5, 2, 3],
-  //           borderWidth: 1,
-  //         },
-  //       ],
-  //     },
-  //     options: {
-  //       scales: {
-  //         y: {
-  //           beginAtZero: true,
-  //         },
-  //       },
-  //     },
-  //   });
-  // }
-
 }

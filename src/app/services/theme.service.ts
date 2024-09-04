@@ -10,16 +10,15 @@ export class ThemeService {
 
   constructor() {
     const savedTheme = localStorage.getItem('app-theme') || 'light-theme';
+    this.applyTheme(savedTheme);
     this.themeSubject.next(savedTheme);
-    this.applyTheme(savedTheme)
   }
  
-
-
  setTheme(theme: string): void {
-    this.themeSubject.next(theme);
+   
     this.applyTheme(theme);
     localStorage.setItem('app-theme', theme);
+    this.themeSubject.next(theme);
   }
 
   getTheme(): string {

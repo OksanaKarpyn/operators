@@ -5,15 +5,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
-import { ThemeService } from '../../services/theme.service';
+import { RolePipe } from '../../pipes/role.pipe';
 @Component({
   selector: 'app-register-operator',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
-  
+    RouterModule,
+    RolePipe
+
   ],
   templateUrl: './register-operator.component.html',
   styleUrls: ['./register-operator.component.scss']
@@ -21,82 +22,90 @@ import { ThemeService } from '../../services/theme.service';
 export class RegisterOperatorComponent implements OnInit {
   form: FormGroup;
   userId!: string | null;
-  currentRole: string = '';
+  isEditing = false;
 
-  isEditing: boolean = false;
-  isDarkTheme: boolean = false;
+  //---role-----
+  isAdmin = false;
+  canEdit = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
     private route: ActivatedRoute,
-    private themeService:ThemeService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
-      role: [{ value: '', disabled: true }, Validators.required],
+      role: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    // Ottieni l'ID dell'utente dalla rotta (se presente)
+    // Ottieni l'ID dati dell'utente dalla rotta (se presente) edit form quando premi bottone edit
+    // ti carica i dati di quei utente che voi modificare  
     this.userId = this.route.snapshot.paramMap.get('id');
-    this.userService.getCurrentUser().subscribe(user => {
-      if (user) {
-        this.currentRole = user.role;
-        if (this.userId) {
-          this.isEditing = true;
-          // Modalità di modifica: carica i dati dell'utente
-          this.userService.getUserById(this.userId).subscribe(userData => {
-            this.form.patchValue(userData);
-          });
-          // Disabilita il campo password durante l'editing
-          this.form.get('password')?.clearValidators();
-          this.form.get('password')?.updateValueAndValidity();
+
+     this.userService.profile$.subscribe({
+      next:(user)=>{
+        console.log(user,'sono io');
+        if(user){
+          if(this.userId){
+            // this.userId trovato id da modificare
+          console.log(this.userId,'id user che va modificato');
+          this.userService.getUserById(this.userId!).subscribe({
+            next:(userData)=>{
+              this.form.patchValue(userData);
+            },
+            error:(err)=>{
+              console.log(err,'Error user not found');
+            }
+          })
+          }
         }
-        // Adatta la visibilità dei campi in base al ruolo
-        this.userService.updateFormVisibility(this.form,this.currentRole);
-      }
-    });
+      }, 
+      error:(err) =>{
+        console.error('Error reloading user data profile:', err);
+      },
+     })
+      //-------role------
 
-    //----theme---------
-   this.themeService.theme$.subscribe(theme=>{
-    this.isDarkTheme = theme === 'dark-theme';
-   })
+    //   this.userService.hasRole(['admin']).subscribe({
+    //     next:(admin)=>{
+    //       this.isAdmin= admin;
+    //     },
+    //     error:(err)=>{
+    //       console.error(err);
+    //       this.canEdit= false;
+    //     }
+    //   });
+     
+    // this.userService.hasRole(['admin','operator']).subscribe({
+    //   next:(canEdit)=>{
+    //     this.canEdit= canEdit;
+    //   },
+    //   error:(err)=>{
+    //     console.error(err);
+    //     this.canEdit= false;
+    //   }
+    // });
+    
   }
-
-  // updateFormVisibility(): void {
-  //   if (this.currentRole === 'admin') {
-  //     // Mostra tutto per admin
-  //     this.form.get('role')?.enable();
-  //     this.form.get('name')?.enable();
-  //     this.form.get('surname')?.enable();
-  //     this.form.get('email')?.enable();
-  //     this.form.get('password')?.enable();
-  //   } else if (this.currentRole === 'operator') {
-  //     // Nascondi il campo role per l'administrator
-  //     this.form.get('role')?.disable();
-  //   } else {
-  //     // Nascondi tutto per standard
-  //     this.form.disable();
-  //   }
-  // }
 
 
   submit(): void {
     if (this.form.valid) {
       if (this.userId) {
+
         // Modalità di modifica: aggiorna l'utente esistente
         const updatedUser: User = { ...this.form.value, id: this.userId };
         this.userService.updateUser(updatedUser).subscribe({
           next: () => {
             alert('User updated successfully');
 
-            // Esegui una nuova richiesta GET per aggiornare i dati nel form
+            // Esegui una nuova richiesta GET per aggiornare/modificare i dati nel form
             this.userService.getUserById(this.userId!).subscribe({
               next: (updatedUserData: User) => {
                 this.form.patchValue(updatedUserData);
@@ -121,10 +130,25 @@ export class RegisterOperatorComponent implements OnInit {
           },
           error: (res) => {
             console.error('Error registering user:', res.error.message);
-            alert('Error registering user.');
+            alert('Error registering user user already exist.');
           }
         });
       }
     }
+  }
+  get name() {
+    return this.form.get('name');
+  };
+  get surname() {
+    return this.form.get('surname');
+  }
+  get role() {
+    return this.form.get('role');
+  }
+  get email() {
+    return this.form.get('email');
+  }
+  get password() {
+    return this.form.get('password');
   }
 }

@@ -1,8 +1,10 @@
+export type Role =  'admin'|'operator'|'standard';
+
 export interface User {
     id?:string;
     name: string;
     surname: string;
-    role:'admin'|'operator'|'standard';
+    role:Role;
     email:string;
     password:string;
 }

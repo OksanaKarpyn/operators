@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '../../models/user';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CommonModule, JsonPipe, UpperCasePipe } from '@angular/common';
-import { ThemeService } from '../../services/theme.service';
+
 @Component({
   selector: 'app-details-user',
   standalone: true,
@@ -16,13 +16,13 @@ import { ThemeService } from '../../services/theme.service';
   templateUrl: './details-user.component.html',
   styleUrl: './details-user.component.scss'
 })
-export class DetailsUserComponent implements OnInit {
+export class DetailsUserComponent {
+  
   user!:User;
-  isDarkTheme :boolean = false;
+
   constructor(
     private route:ActivatedRoute,
-    private userService:UserService,
-    private themeService:ThemeService
+    private userService:UserService
   ){
     const id = route.snapshot.paramMap.get('id');
     if(id){
@@ -34,9 +34,5 @@ export class DetailsUserComponent implements OnInit {
       })
     }
   }
-  ngOnInit(): void {
-    this.themeService.theme$.subscribe(theme=>{
-      this.isDarkTheme = theme === 'dark-theme';
-    })
-  }
+
 }

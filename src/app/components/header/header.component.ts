@@ -1,70 +1,77 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { JsonPipe,CommonModule } from '@angular/common';
-import { Router, RouterLink, NavigationEnd } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
+
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { RolePipe } from '../../pipes/role.pipe';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
-    JsonPipe,
     RouterLink,
     CommonModule,
-   
+    RolePipe
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit {
-  isAuthenticated = false;
-  userId?: string | null = null;
-  sub?: Subscription;
-  user?: User |undefined;
-   
-  canViewRegisterButton: boolean = false;
-  canViewEditButton: boolean = false;
-  canViewDeleteButton : boolean = false;
+export class HeaderComponent implements OnInit{
 
+  user?: User | undefined;
+  //----role----
+  canRegister = false;
+  canEdit = false;
+  canView = false;
 
   isNavbarShown = document.querySelector('.navbar-collapse.show');
   constructor(
-    private authService:AuthService,
-    private userService:UserService,
-    private router: Router) {
-      userService.profile$.subscribe({
-        
-        next:(user)=>{
-          this.user = user;
-          this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
+    private authService: AuthService,
+    private userService: UserService,
+   ) {
+    userService.profile$.subscribe({
+
+      next: (user) => {
+        this.user = user;
+        if(user){
+          this.canRegister =  this.userService.hasRole1(['admin'])
+          this.canEdit = this.userService.hasRole1(['admin','operator'])
         }
-      })
-  }
-  
-  
-  ngOnInit():void{
-    this.isAuthenticated = this.userService.isAuthenticated();
-    
-
-    this.sub = this.userService.isAuthenticated$.subscribe((value) => {
-
-      this.isAuthenticated = value;
-
-      if (value) {
-        this.userService.getCurrentUser().subscribe(user => {
-          if (user) {
-            console.log(user.id,'header component');
-            this.userId= user.id// Memorizza l'ID dell'operatore loggato
-            this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
-          }
-        });
       }
     })
-   
   }
-//closenavBar
+ngOnInit(){
+     //-------role------
+
+    //  this.userService.hasRole(['admin']).subscribe({
+    //   next:(admin)=>{
+    //     this.isAdmin= admin;
+    //   },
+    //   error:(err)=>{
+    //     console.error(err);
+    //     this.canEdit= false;
+    //   }
+    // });
+   
+  // this.userService.hasRole(['admin','operator']).subscribe({
+  //   next:(canEdit)=>{
+  //     this.canEdit= canEdit;
+  //   },
+  //   error:(err)=>{
+  //     console.error(err);
+  //     this.canEdit= false;
+  //   }
+  // }); 
+
+
+  // this.canEdit = this.userService.hasRole1(['admin','operator'])
+  // this.isAdmin = this.userService.hasRole1(['admin'])
+
+}
+
+  //closenavBar
   closeNavBar() {
     const navbarCollapse = document.querySelector('#navbarNav');
     if (navbarCollapse?.classList.contains('show')) {
@@ -72,23 +79,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-
-  updateButtonVisibility():void {
-    if(this.user){
-      const visibility = this.userService.getButtonVisibility(this.user.role);
-      this.canViewRegisterButton = visibility.canViewRegisterButton;
-      this.canViewEditButton = visibility.canViewEditButton;
-      this.canViewDeleteButton = visibility.canViewDeleteButton;
-    }
-   }
   logout(): void {
     this.authService.logout();
   }
-
- ngOnDestroy(): void {
-   this.sub?.unsubscribe()
- }
-
-
-
 }

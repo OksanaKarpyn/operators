@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { Token } from '../models/token';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { DecodedToken } from '../models/decodeToken';
 
 
 @Injectable({
@@ -14,10 +14,9 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   readonly url = 'http://localhost:3000/auth';
+
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-
-
 
   constructor(
     private http: HttpClient,
@@ -28,7 +27,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<Token | null> {
-    return this.http.post<any>(`${this.url}/login`, { email, password }, { withCredentials: true }).pipe(
+    return this.http.post<Token>(`${this.url}/login`, { email, password }, { withCredentials: true }).pipe(
       map((response: Token) => {
         if (response.accessToken) {
           this.saveToken(response.accessToken);
@@ -64,15 +63,6 @@ export class AuthService {
     this.isAuthenticatedSubject.next(false);
     this.router.navigate(['/login']);
   }
-  // logout(): void {
-  // this.userService.profile$.next(undefined);  
-  // this.cookieService.delete('token','');         
-  // this.isAuthenticatedSubject.next(false);    
-  // this.router.navigate(['']); 
-  // }
-
-
-
 
   saveToken(token: string): void {
     const expireDate = new Date();
@@ -80,11 +70,11 @@ export class AuthService {
     this.cookieService.set('token', token, expireDate);
   }
 
-
-  decodeToken(token: string): any {
+  decodeToken(token: string): DecodedToken | null {
     try {
       return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
+      console.error(e);
       return null;
     }
   }

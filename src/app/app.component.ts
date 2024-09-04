@@ -23,7 +23,7 @@ import { ThemeService } from './services/theme.service';
 })
 export class AppComponent implements OnInit {
   isAuthenticated$: Observable<boolean>; 
-  isDarkTheme: boolean = false;
+  isDarkTheme = false;
   constructor(
     private authService: AuthService,
     private themeService:ThemeService

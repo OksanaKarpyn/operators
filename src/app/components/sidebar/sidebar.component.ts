@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JsonPipe,CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { ThemeService } from '../../services/theme.service';
+import { RolePipe } from '../../pipes/role.pipe';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,79 +16,80 @@ import { ThemeService } from '../../services/theme.service';
     RouterModule,
     RouterLinkActive,
     CommonModule,
+    RolePipe
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
-  isAuthenticated = false;
-  userId?: string | null = null;
-  sub?: Subscription;
+export class SidebarComponent implements OnInit {
+  
   user?: User |undefined;
-  isDarkTheme: boolean = false;
-
-
-  canViewRegisterButton: boolean = false;
-  canViewEditButton: boolean = false;
-  canViewDeleteButton : boolean = false;
+  isDarkTheme = false;
+  //---role---
+  canRegister = false;
+  canEdit = false;
+  canView = false;
 
   constructor(
     private authService:AuthService,
     private userService:UserService,
     private themeService :ThemeService
   ){
+
     userService.profile$.subscribe({
         
       next:(user)=>{
         this.user = user;
-        this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
+        if(user){
+
+          this.canRegister =  this.userService.hasRole1(['admin'])
+          this.canEdit = this.userService.hasRole1(['admin','operator'])
+        }
       }
     })
   }
 
-  ngOnInit():void{
-    this.isAuthenticated = this.userService.isAuthenticated();
-    this.sub = this.userService.isAuthenticated$.subscribe((value) => {
+  ngOnInit():void{     
+    //-------role------
 
-      this.isAuthenticated = value;
+  //   this.userService.hasRole(['admin']).subscribe({
+  //     next:(admin)=>{
+  //       this.isAdmin= admin;
+  //     },
+  //     error:(err)=>{
+  //       console.error(err);
+  //       this.canEdit= false;
+  //     }
+  //   });
+   
+  // this.userService.hasRole(['admin','operator']).subscribe({
+  //   next:(canEdit)=>{
+  //     this.canEdit= canEdit;
+  //   },
+  //   error:(err)=>{
+  //     console.error(err);
+  //     this.canEdit= false;
+  //   }
+  // });
 
-      if (value) {
-        this.userService.getCurrentUser().subscribe(user => {
-          if (user) {
-            console.log(user.id,'header component');
-            this.userId= user.id// Memorizza l'ID dell'operatore loggato
-            this.updateButtonVisibility(); // Aggiorna la visibilità dei pulsanti
-          }
-        });
-      }
-    })
-     
-    
+  // this.canEdit = this.userService.hasRole1(['admin','operator'])
+   //this.isAdmin = this.userService.hasRole1(['admin'])
+
     //--------theme---------
     this.themeService.theme$.subscribe(theme => {
       this.isDarkTheme = theme === 'dark-theme';
     });
-  
-
   }
   //------function-theme------
   toggleTheme(){
     const newTheme = this.isDarkTheme ? 'light-theme' : 'dark-theme';
     this.themeService.setTheme(newTheme);
   }
-  //------------------------------
-  updateButtonVisibility():void {
-    if(this.user){
-      const visibility = this.userService.getButtonVisibility(this.user.role);
-      this.canViewRegisterButton = visibility.canViewRegisterButton;
-      this.canViewEditButton = visibility.canViewEditButton;
-      this.canViewDeleteButton = visibility.canViewDeleteButton;
-    }
-   }
 
    logout(): void {
     this.authService.logout();
   }
+
 
 }
 
