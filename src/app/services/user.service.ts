@@ -55,25 +55,25 @@ export class UserService {
     }
     return false; // Gli altri utenti non possono cancellare nessuno
   }
-
+  //prova commmit
   //--------role--------
 
   //se user ha il ruolo
-//  hasRole(roles: Role[]): Observable<boolean> {
-//   console.log(this.profile$)
-//   return this.profile$.pipe(
-//     map(user => user ? roles.includes(user.role) : false)
-//   );
-//  }
+  //  hasRole(roles: Role[]): Observable<boolean> {
+  //   console.log(this.profile$)
+  //   return this.profile$.pipe(
+  //     map(user => user ? roles.includes(user.role) : false)
+  //   );
+  //  }
 
   hasRole1(roles: Role[]): boolean {
-    if(this.profile$){
-      const user = this.profile$.getValue(); 
+    if (this.profile$) {
+      const user = this.profile$.getValue();
       console.log(this.profile$)
       return user ? roles.includes(user.role) : false;
     }
     return false;
- }
+  }
 
 
 }
