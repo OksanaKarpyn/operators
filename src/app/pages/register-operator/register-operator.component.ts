@@ -14,7 +14,6 @@ import { RolePipe } from '../../pipes/role.pipe';
     ReactiveFormsModule,
     RouterModule,
     RolePipe
-
   ],
   templateUrl: './register-operator.component.html',
   styleUrls: ['./register-operator.component.scss']
@@ -48,29 +47,29 @@ export class RegisterOperatorComponent implements OnInit {
     // ti carica i dati di quei utente che voi modificare  
     this.userId = this.route.snapshot.paramMap.get('id');
 
-     this.userService.profile$.subscribe({
-      next:(user)=>{
-        console.log(user,'sono io');
-        if(user){
-          if(this.userId){
+    this.userService.profile$.subscribe({
+      next: (user) => {
+        console.log(user, 'sono io');
+        if (user) {
+          if (this.userId) {
             // this.userId trovato id da modificare
-          console.log(this.userId,'id user che va modificato');
-          this.userService.getUserById(this.userId!).subscribe({
-            next:(userData)=>{
-              this.form.patchValue(userData);
-            },
-            error:(err)=>{
-              console.log(err,'Error user not found');
-            }
-          })
+            console.log(this.userId, 'id user che va modificato');
+            this.userService.getUserById(this.userId!).subscribe({
+              next: (userData) => {
+                this.form.patchValue(userData);
+              },
+              error: (err) => {
+                console.log(err, 'Error user not found');
+              }
+            })
           }
         }
-      }, 
-      error:(err) =>{
+      },
+      error: (err) => {
         console.error('Error reloading user data profile:', err);
       },
-     })
-      //-------role------
+    })
+    //-------role------
 
     //   this.userService.hasRole(['admin']).subscribe({
     //     next:(admin)=>{
@@ -81,7 +80,7 @@ export class RegisterOperatorComponent implements OnInit {
     //       this.canEdit= false;
     //     }
     //   });
-     
+
     // this.userService.hasRole(['admin','operator']).subscribe({
     //   next:(canEdit)=>{
     //     this.canEdit= canEdit;
@@ -91,10 +90,8 @@ export class RegisterOperatorComponent implements OnInit {
     //     this.canEdit= false;
     //   }
     // });
-    
+
   }
-
-
   submit(): void {
     if (this.form.valid) {
       if (this.userId) {
