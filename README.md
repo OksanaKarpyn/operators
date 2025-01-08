@@ -1,11 +1,17 @@
 # Operators
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.3.
+per far partire progetto  serve 2 terminal
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+primo terminale  comandi da lanciare 
+npm i e
+ng serve
+secondo terminale
+npm run json-server
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
